@@ -774,25 +774,47 @@ input[type=range]::-webkit-slider-thumb{
     <div class="modal-title" id="detailTaskName">Task</div>
     <div style="font-size:14px;color:var(--text-mid);font-weight:600;margin-bottom:20px;" id="detailTaskMeta"></div>
     <button class="btn-primary" onclick="launchTimerFromDetail()" style="margin-bottom:8px;">⏱ Start Focus Timer</button>
+    <button class="btn-secondary" onclick="openEditTask()">✏️ Edit Task</button>
     <button class="btn-secondary" onclick="markDetailDone()">✓ Mark Complete</button>
     <button class="btn-secondary" onclick="deleteDetailTask()" style="color:#c05030;border-color:rgba(220,100,80,0.25);margin-top:4px;">Delete Task</button>
   </div>
 </div>
 
 <!-- Add Note -->
-<div class="modal-overlay" id="addNoteModal" onclick="closeModalOutside(event,'addNoteModal')">
+
+<div class="modal-overlay" id="editTaskModal" onclick="closeModalOutside(event,'editTaskModal')">
   <div class="modal-sheet">
     <div class="modal-handle"></div>
-    <div class="modal-title">New Note</div>
+    <div class="modal-title">Edit Task</div>
     <div class="form-group">
-      <label class="form-label">Title</label>
-      <input class="form-input" id="newNoteTitle" placeholder="Note title" type="text">
+      <label class="form-label">Task name</label>
+      <input class="form-input" id="editTaskName" type="text">
     </div>
     <div class="form-group">
-      <label class="form-label">Content</label>
-      <textarea class="form-input" id="newNoteContent" placeholder="Write your note here..." rows="5" style="resize:none;"></textarea>
+      <label class="form-label">Estimated time</label>
+      <div class="option-grid" id="editTimeOptions">
+        <div class="option-btn" onclick="selectOption(this,'editTimeOptions')">15 min</div>
+        <div class="option-btn" onclick="selectOption(this,'editTimeOptions')">30 min</div>
+        <div class="option-btn" onclick="selectOption(this,'editTimeOptions')">45 min</div>
+        <div class="option-btn" onclick="selectOption(this,'editTimeOptions')">1 hr</div>
+        <div class="option-btn" onclick="selectOption(this,'editTimeOptions')">1.5 hr</div>
+        <div class="option-btn" onclick="selectOption(this,'editTimeOptions')">2+ hr</div>
+      </div>
     </div>
-    <button class="btn-primary" onclick="addNote()">Save Note</button>
+    <div class="form-group">
+      <label class="form-label">Priority</label>
+      <div class="option-grid" id="editPriorityOptions">
+        <div class="option-btn" onclick="selectOption(this,'editPriorityOptions')">🔴 Urgent</div>
+        <div class="option-btn" onclick="selectOption(this,'editPriorityOptions')">🟠 Medium</div>
+        <div class="option-btn" onclick="selectOption(this,'editPriorityOptions')">🟢 Low</div>
+        <div class="option-btn" onclick="selectOption(this,'editPriorityOptions')">📚 Study</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Due date</label>
+      <input class="form-input" id="editTaskDue" type="date">
+    </div>
+    <button class="btn-primary" onclick="saveEditTask()">Save Changes ✓</button>
   </div>
 </div>
 
@@ -1435,6 +1457,34 @@ function openAddTask(){
   openModal('addTaskModal');
 }
 
+function openEditTask(){
+  const t=state.tasks.find(x=>x.id===detailTaskId);if(!t)return;
+  closeModal('taskDetailModal');
+  document.getElementById('editTaskName').value=t.name;
+  document.getElementById('editTaskDue').value=t.due||'';
+  document.querySelectorAll('#editTimeOptions .option-btn').forEach(b=>{
+    b.classList.toggle('selected',b.textContent===t.time);
+  });
+  document.querySelectorAll('#editPriorityOptions .option-btn').forEach(b=>{
+    b.classList.toggle('selected',b.textContent.replace(/[🔴🟠🟢📚]\s*/,'')===t.priority);
+  });
+  openModal('editTaskModal');
+}
+
+function saveEditTask(){
+  const t=state.tasks.find(x=>x.id===detailTaskId);if(!t)return;
+  t.name=document.getElementById('editTaskName').value.trim()||t.name;
+  t.due=document.getElementById('editTaskDue').value||t.due;
+  const timeEl=document.querySelector('#editTimeOptions .option-btn.selected');
+  const priEl=document.querySelector('#editPriorityOptions .option-btn.selected');
+  if(timeEl)t.time=timeEl.textContent;
+  if(priEl)t.priority=priEl.textContent.replace(/[🔴🟠🟢📚]\s*/,'');
+  closeModal('editTaskModal');
+  renderTodayTasks();renderAllTasks();
+  showToast('Task updated! ✓');
+  saveState();
+}
+
 function addTask(){
   const name=document.getElementById('newTaskName').value.trim();
   if(!name){showToast('Please enter a task name!');return;}
@@ -1689,14 +1739,19 @@ async function loadStateFromCloud(){
   if(!sb||!state.userId||SUPABASE_URL==='YOUR_SUPABASE_URL') return;
   try{
     const{data,error}=await sb.from('user_data').select('data').eq('user_id',state.userId).maybeSingle();
-    if(error) console.log('Load error:',error);
+    if(error){console.log('Load error:',error);return;}
     if(data?.data){
-      const loaded = data.data;
-      loaded.userId = state.userId;
-      loaded.email = state.email;
-      Object.assign(state, loaded);
+      const loaded=data.data;
+      const savedUserId=state.userId;
+      const savedEmail=state.email;
+      Object.assign(state,loaded);
+      state.userId=savedUserId;
+      state.email=savedEmail;
+      state.tasks=loaded.tasks||[];
+      state.notes=loaded.notes||[];
+      state.categories=loaded.categories||[];
     }
-  }catch(e){ console.log('Cloud load failed:',e); }
+  }catch(e){console.log('Cloud load failed:',e);}
 }
 
 // ─────────────────────────────────────────
