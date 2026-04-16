@@ -1237,16 +1237,6 @@ function startApp(){
   setupNotifications();
 }
 
-function loadSampleTasks(){
-  const today=new Date(),tmr=new Date(today),nxt=new Date(today);
-  tmr.setDate(today.getDate()+1);nxt.setDate(today.getDate()+5);
-  const fmt=d=>d.toISOString().split('T')[0];
-  state.tasks=[
-    {id:1,name:'Calculus Problem Set',catId:'academic',subcatName:'AP Calc BC',subcatType:'AP',time:'45 min',priority:'Urgent',due:fmt(tmr),done:false},
-    {id:2,name:'Read Ch. 7 — Cell Division',catId:'academic',subcatName:'AP Biology',subcatType:'AP',time:'25 min',priority:'Medium',due:fmt(today),done:false},
-    {id:3,name:'Submit College Essay Draft',catId:'colprep',subcatName:'College Prep',time:'1 hr',priority:'Urgent',due:fmt(nxt),done:false},
-  ];
-}
 
 function updateNimbusState(){
   const avg=(state.overwhelm+state.workload)/2;
