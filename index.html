@@ -1134,8 +1134,11 @@ function selectGrade(el){document.querySelectorAll('#gradeOpts .option-btn').for
 function toggleGoal(el){el.classList.toggle('selected');}
 function saveBurnout(){state.overwhelm=parseInt(document.getElementById('bStress').value);state.workload=parseInt(document.getElementById('bWork').value);nextStep();}
 function nextStep(){if(state.onboardStep<STEPS.length-1)renderStep(state.onboardStep+1);}
-function finishOnboarding(){saveState();document.getElementById('onboarding').classList.remove('active');startApp();}
-
+function finishOnboarding(){
+  saveState();
+  document.getElementById('onboarding').classList.remove('active');
+  setTimeout(startApp, 100);
+}
 // ─────────────────────────────────────────
 // NIMBUS SVG
 // ─────────────────────────────────────────
@@ -1223,8 +1226,7 @@ function startApp(){
   document.getElementById('app').classList.add('active');
   if(state.tasks.length===0) loadSampleTasks();
   updateNimbusState();
-  renderMainNimbus(state.nimbusState);
-  updateNimbusDisplay();
+  setTimeout(()=>renderMainNimbus(state.nimbusState), 50);  updateNimbusDisplay();
   updateHomeGreeting();
   renderStreak();
   renderPoints();
