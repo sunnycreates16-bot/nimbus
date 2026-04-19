@@ -1032,7 +1032,7 @@ function renderPoints() {
   const bn = document.getElementById('badgeName'); if (bn) bn.textContent = b.name;
 }
 
-function addPoints(n) { state.points = (state.points || 0) + n; renderPoints(); showToast(`+${n} points! ☁️`); }
+function addPoints(n) { state.points = (state.points || 0) + n; renderPoints(); showToast(`+${n} points! ☁️`); saveState(); }
 
 // ─── AFFIRMATIONS ──────────────────────────────────────────────────────────
 const AFFIRMATIONS = [
@@ -1530,38 +1530,59 @@ function updateAllSliders() {
 
 async function saveState() {
   saveStateLocal();
-  if (!sb || !state.userId || state.userId === 'demo' || state.userId.startsWith('demo-')) return;
+  if (!sb || !state.userId || state.userId === 'demo' || state.userId.startsWith('demo-')) {
+    showDebug('No Supabase / demo mode — saved locally only. userId=' + state.userId);
+    return;
+  }
+  showDebug('Saving to Supabase... userId=' + state.userId + ' tasks=' + state.tasks.length);
   try {
     const payload = {
-      tasks:          state.tasks,
-      notes:          state.notes,
-      categories:     state.categories,
-      points:         state.points,
-      streak:         state.streak,
-      mood:           state.mood,
-      workload:       state.workload,
-      overwhelm:      state.overwhelm,
-      nimbusState:    state.nimbusState,
-      name:           state.name,
-      phone:          state.phone,
-      grade:          state.grade,
-      notifs:         state.notifs,
-      lastCheckinDate:state.lastCheckinDate,
+      tasks:           state.tasks,
+      notes:           state.notes,
+      categories:      state.categories,
+      points:          state.points,
+      streak:          state.streak,
+      mood:            state.mood,
+      workload:        state.workload,
+      overwhelm:       state.overwhelm,
+      nimbusState:     state.nimbusState,
+      name:            state.name,
+      phone:           state.phone,
+      grade:           state.grade,
+      notifs:          state.notifs,
+      lastCheckinDate: state.lastCheckinDate,
       lastStreakDate:  state.lastStreakDate,
-      onboardStep:    state.onboardStep
+      onboardStep:     state.onboardStep
     };
-    const { error } = await sb.from('user_data').upsert(
+    const { data, error } = await sb.from('user_data').upsert(
       { user_id: state.userId, data: payload, updated_at: new Date().toISOString() },
       { onConflict: 'user_id' }
-    );
+    ).select();
     if (error) {
-      console.error('SAVE ERROR:', error);
-      showToast('⚠️ Could not save: ' + error.message);
+      showDebug('❌ SAVE FAILED: ' + error.message + ' | code=' + error.code);
+      showToast('⚠️ Save failed: ' + error.message);
+    } else {
+      showDebug('✅ Saved OK — ' + (data ? data.length : 0) + ' row(s)');
     }
   } catch(e) {
-    console.error('SAVE EXCEPTION:', e);
-    showToast('⚠️ Save failed — check your connection');
+    showDebug('❌ SAVE EXCEPTION: ' + e.message);
+    showToast('⚠️ Save failed — check connection');
   }
+}
+
+// Visible debug panel — shows last status at bottom of screen
+function showDebug(msg) {
+  console.log('[Nimbus]', msg);
+  let el = document.getElementById('nimbus-debug');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'nimbus-debug';
+    el.style.cssText = 'position:fixed;bottom:80px;left:0;right:0;background:rgba(0,0,0,0.85);color:#0f0;font-size:11px;font-family:monospace;padding:6px 10px;z-index:9999;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;';
+    document.body.appendChild(el);
+  }
+  el.textContent = msg;
+  clearTimeout(el._t);
+  el._t = setTimeout(() => { if (el) el.remove(); }, 8000);
 }
 
 function saveStateLocal() {
@@ -1590,39 +1611,39 @@ function loadStateLocal() {
 
 async function loadStateFromCloud() {
   if (!sb || !state.userId || state.userId === 'demo' || state.userId.startsWith('demo-')) return;
+  showDebug('Loading from Supabase... userId=' + state.userId);
   try {
     const { data, error } = await sb
       .from('user_data')
       .select('data')
       .eq('user_id', state.userId)
       .maybeSingle();
-    if (error) { console.error('LOAD ERROR:', error); return; }
-    if (data && data.data) {
-      const d = data.data;
-      const savedUserId = state.userId;
-      const savedEmail  = state.email;
-      // Restore every field one by one — no Object.assign so nothing overwrites auth
-      if (Array.isArray(d.tasks))      state.tasks      = d.tasks;
-      if (Array.isArray(d.notes))      state.notes      = d.notes;
-      if (Array.isArray(d.categories)) state.categories = d.categories;
-      if (d.points      != null) state.points      = d.points;
-      if (d.streak      != null) state.streak      = d.streak;
-      if (d.mood        != null) state.mood        = d.mood;
-      if (d.workload    != null) state.workload    = d.workload;
-      if (d.overwhelm   != null) state.overwhelm   = d.overwhelm;
-      if (d.nimbusState)         state.nimbusState = d.nimbusState;
-      if (d.name)                state.name        = d.name;
-      if (d.phone       != null) state.phone       = d.phone;
-      if (d.grade       != null) state.grade       = d.grade;
-      if (d.notifs)              state.notifs      = d.notifs;
-      if (d.lastCheckinDate != null) state.lastCheckinDate = d.lastCheckinDate;
-      if (d.lastStreakDate  != null) state.lastStreakDate  = d.lastStreakDate;
-      if (d.onboardStep != null) state.onboardStep = d.onboardStep;
-      state.userId = savedUserId;
-      state.email  = savedEmail;
-      saveStateLocal();
-    }
-  } catch(e) { console.error('LOAD EXCEPTION:', e); }
+    if (error) { showDebug('❌ LOAD FAILED: ' + error.message); return; }
+    if (!data || !data.data) { showDebug('⚠️ No data found in DB for this user'); return; }
+    const d = data.data;
+    showDebug('✅ Loaded — tasks=' + (d.tasks||[]).length + ' points=' + d.points + ' name=' + d.name);
+    const savedUserId = state.userId;
+    const savedEmail  = state.email;
+    if (Array.isArray(d.tasks))      state.tasks      = d.tasks;
+    if (Array.isArray(d.notes))      state.notes      = d.notes;
+    if (Array.isArray(d.categories)) state.categories = d.categories;
+    if (d.points      != null) state.points      = d.points;
+    if (d.streak      != null) state.streak      = d.streak;
+    if (d.mood        != null) state.mood        = d.mood;
+    if (d.workload    != null) state.workload    = d.workload;
+    if (d.overwhelm   != null) state.overwhelm   = d.overwhelm;
+    if (d.nimbusState)         state.nimbusState = d.nimbusState;
+    if (d.name)                state.name        = d.name;
+    if (d.phone       != null) state.phone       = d.phone;
+    if (d.grade       != null) state.grade       = d.grade;
+    if (d.notifs)              state.notifs      = d.notifs;
+    if (d.lastCheckinDate != null) state.lastCheckinDate = d.lastCheckinDate;
+    if (d.lastStreakDate  != null) state.lastStreakDate  = d.lastStreakDate;
+    if (d.onboardStep != null) state.onboardStep = d.onboardStep;
+    state.userId = savedUserId;
+    state.email  = savedEmail;
+    saveStateLocal();
+  } catch(e) { showDebug('❌ LOAD EXCEPTION: ' + e.message); }
 }
 
 // ─── RESEND CONFIRMATION (unused but kept for future) ──────────────────────
