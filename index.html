@@ -1530,18 +1530,37 @@ function updateAllSliders() {
 
 async function saveState() {
   saveStateLocal();
-  if (sb && state.userId && state.userId !== 'demo' && !state.userId.startsWith('demo-')) {
-    try {
-      // Strip auth fields from the data blob — they live in the Supabase auth system,
-      // not in user_data.data. Storing them here causes corruption on restore.
-      const { userId, email, ...dataToSave } = state;
-      const { error } = await sb.from('user_data').upsert({
-        user_id: state.userId,
-        data: dataToSave,
-        updated_at: new Date().toISOString()
-      }, { onConflict: 'user_id' });
-      if (error) console.warn('Supabase save error:', error);
-    } catch(e) { console.warn('Cloud save failed:', e); }
+  if (!sb || !state.userId || state.userId === 'demo' || state.userId.startsWith('demo-')) return;
+  try {
+    const payload = {
+      tasks:          state.tasks,
+      notes:          state.notes,
+      categories:     state.categories,
+      points:         state.points,
+      streak:         state.streak,
+      mood:           state.mood,
+      workload:       state.workload,
+      overwhelm:      state.overwhelm,
+      nimbusState:    state.nimbusState,
+      name:           state.name,
+      phone:          state.phone,
+      grade:          state.grade,
+      notifs:         state.notifs,
+      lastCheckinDate:state.lastCheckinDate,
+      lastStreakDate:  state.lastStreakDate,
+      onboardStep:    state.onboardStep
+    };
+    const { error } = await sb.from('user_data').upsert(
+      { user_id: state.userId, data: payload, updated_at: new Date().toISOString() },
+      { onConflict: 'user_id' }
+    );
+    if (error) {
+      console.error('SAVE ERROR:', error);
+      showToast('⚠️ Could not save: ' + error.message);
+    }
+  } catch(e) {
+    console.error('SAVE EXCEPTION:', e);
+    showToast('⚠️ Save failed — check your connection');
   }
 }
 
@@ -1552,52 +1571,58 @@ function saveStateLocal() {
 function loadStateLocal() {
   try {
     const s = localStorage.getItem('nimbus_v3');
-    if (s) {
-      const parsed = JSON.parse(s);
-      // Preserve auth fields that come from Supabase session, not localStorage
-      const savedUserId = state.userId;
-      const savedEmail = state.email;
-      Object.assign(state, parsed);
-      // Always restore auth from the live session, not localStorage
-      if (savedUserId) state.userId = savedUserId;
-      if (savedEmail) state.email = savedEmail;
-      // Ensure nested structures exist
-      if (!state.notifs) state.notifs = { break:false, breakFreq:60, tasks:false, checkin:false, checkinTime:'08:00' };
-      if (!Array.isArray(state.tasks)) state.tasks = [];
-      if (!Array.isArray(state.notes)) state.notes = [];
-      if (!Array.isArray(state.categories)) state.categories = [];
-      if (state.lastCheckinDate === undefined) state.lastCheckinDate = null;
-      if (state.lastStreakDate === undefined) state.lastStreakDate = null;
-      return true;
-    }
-  } catch(e) {}
-  return false;
+    if (!s) return false;
+    const parsed = JSON.parse(s);
+    const savedUserId = state.userId;
+    const savedEmail = state.email;
+    Object.assign(state, parsed);
+    if (savedUserId) state.userId = savedUserId;
+    if (savedEmail) state.email = savedEmail;
+    if (!state.notifs) state.notifs = { break:false, breakFreq:60, tasks:false, checkin:false, checkinTime:'08:00' };
+    if (!Array.isArray(state.tasks)) state.tasks = [];
+    if (!Array.isArray(state.notes)) state.notes = [];
+    if (!Array.isArray(state.categories)) state.categories = [];
+    if (!state.lastCheckinDate) state.lastCheckinDate = null;
+    if (!state.lastStreakDate) state.lastStreakDate = null;
+    return true;
+  } catch(e) { return false; }
 }
 
 async function loadStateFromCloud() {
-  if (!sb || !state.userId) return;
+  if (!sb || !state.userId || state.userId === 'demo' || state.userId.startsWith('demo-')) return;
   try {
-    const { data, error } = await sb.from('user_data').select('data').eq('user_id', state.userId).maybeSingle();
-    if (error) { console.warn('Cloud load error:', error); return; }
+    const { data, error } = await sb
+      .from('user_data')
+      .select('data')
+      .eq('user_id', state.userId)
+      .maybeSingle();
+    if (error) { console.error('LOAD ERROR:', error); return; }
     if (data && data.data) {
-      const loaded = data.data;
-      // Auth fields are never stored in data blob — preserve them from live session
+      const d = data.data;
       const savedUserId = state.userId;
-      const savedEmail = state.email;
-      Object.assign(state, loaded);
+      const savedEmail  = state.email;
+      // Restore every field one by one — no Object.assign so nothing overwrites auth
+      if (Array.isArray(d.tasks))      state.tasks      = d.tasks;
+      if (Array.isArray(d.notes))      state.notes      = d.notes;
+      if (Array.isArray(d.categories)) state.categories = d.categories;
+      if (d.points      != null) state.points      = d.points;
+      if (d.streak      != null) state.streak      = d.streak;
+      if (d.mood        != null) state.mood        = d.mood;
+      if (d.workload    != null) state.workload    = d.workload;
+      if (d.overwhelm   != null) state.overwhelm   = d.overwhelm;
+      if (d.nimbusState)         state.nimbusState = d.nimbusState;
+      if (d.name)                state.name        = d.name;
+      if (d.phone       != null) state.phone       = d.phone;
+      if (d.grade       != null) state.grade       = d.grade;
+      if (d.notifs)              state.notifs      = d.notifs;
+      if (d.lastCheckinDate != null) state.lastCheckinDate = d.lastCheckinDate;
+      if (d.lastStreakDate  != null) state.lastStreakDate  = d.lastStreakDate;
+      if (d.onboardStep != null) state.onboardStep = d.onboardStep;
       state.userId = savedUserId;
-      state.email = savedEmail;
-      // Ensure arrays and nested objects are properly typed
-      if (!Array.isArray(state.tasks)) state.tasks = [];
-      if (!Array.isArray(state.notes)) state.notes = [];
-      if (!Array.isArray(state.categories)) state.categories = [];
-      if (!state.notifs) state.notifs = { break:false, breakFreq:60, tasks:false, checkin:false, checkinTime:'08:00' };
-      if (state.lastCheckinDate === undefined) state.lastCheckinDate = null;
-      if (state.lastStreakDate === undefined) state.lastStreakDate = null;
-      // Sync to localStorage so next page load is instant
+      state.email  = savedEmail;
       saveStateLocal();
     }
-  } catch(e) { console.warn('Cloud load failed:', e); }
+  } catch(e) { console.error('LOAD EXCEPTION:', e); }
 }
 
 // ─── RESEND CONFIRMATION (unused but kept for future) ──────────────────────
