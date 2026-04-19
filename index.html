@@ -8,14 +8,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root {
-  /* PRIMARY: pastel orange */
   --orange:       #f5a96a;
   --orange-light: #fcd5b0;
   --orange-pale:  #feecd8;
   --orange-deep:  #e8874a;
   --orange-btn:   linear-gradient(135deg,#f5b87a,#e8874a);
-
-  /* SECONDARY accent pastels */
   --peach:        #fad4c0;
   --peach-deep:   #e8a888;
   --blush:        #f7cdc8;
@@ -30,20 +27,14 @@
   --sky-dark:     #5898d8;
   --yellow:       #fdefc8;
   --yellow-mid:   #f8d880;
-
-  /* Text */
+  --mint-dark:    #58b088;
   --text-dark:  #3a2818;
   --text-mid:   #8a6848;
   --text-light: #c0a888;
-
-  /* Cards */
   --card-bg:     rgba(255,252,248,0.85);
   --card-border: rgba(240,200,170,0.35);
-
-  /* Radii */
   --r-sm: 12px; --r-md: 18px; --r-lg: 24px; --r-xl: 32px;
 }
-
 *{box-sizing:border-box;margin:0;padding:0;}
 body{
   font-family:'Nunito',sans-serif;
@@ -53,7 +44,6 @@ body{
 .screen{display:none;min-height:100vh;flex-direction:column;}
 .screen.active{display:flex;}
 
-/* ── SLIDERS ── */
 input[type=range]{
   width:100%;-webkit-appearance:none;height:6px;border-radius:3px;outline:none;
   background:linear-gradient(90deg,var(--orange) var(--pct,50%),var(--orange-pale) var(--pct,50%));
@@ -67,7 +57,6 @@ input[type=range]::-webkit-slider-thumb{
 .slider-track{flex:1;}
 .slider-val{font-size:16px;font-weight:900;color:var(--orange-deep);min-width:26px;text-align:right;}
 
-/* ── BUTTONS ── */
 .btn-primary{
   width:100%;padding:16px;border-radius:var(--r-lg);border:none;
   background:var(--orange-btn);color:white;
@@ -81,8 +70,6 @@ input[type=range]::-webkit-slider-thumb{
   border:1.5px solid rgba(240,190,150,0.4);background:transparent;
   color:var(--text-mid);font-family:'Nunito',sans-serif;font-size:15px;font-weight:700;cursor:pointer;margin-top:8px;
 }
-
-/* ── FORMS ── */
 .form-group{margin-bottom:16px;}
 .form-label{font-size:12px;font-weight:800;color:var(--text-light);letter-spacing:0.6px;text-transform:uppercase;margin-bottom:8px;display:block;}
 .form-input{
@@ -92,8 +79,6 @@ input[type=range]::-webkit-slider-thumb{
   outline:none;transition:border-color 0.2s;font-weight:600;
 }
 .form-input:focus{border-color:var(--orange);}
-
-/* ── OPTION CHIPS ── */
 .option-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
 .option-btn{
   padding:12px 10px;border-radius:var(--r-md);border:1.5px solid rgba(240,200,160,0.35);
@@ -109,28 +94,15 @@ input[type=range]::-webkit-slider-thumb{
   font-size:13px;font-weight:700;color:var(--text-mid);cursor:pointer;transition:all 0.2s;
 }
 .tag-btn.selected{border-color:var(--orange);background:rgba(245,169,106,0.14);color:var(--orange-deep);}
-
-/* ── STEP DOTS ── */
 .step-indicator{display:flex;gap:8px;justify-content:center;margin-bottom:22px;}
 .step-dot{width:8px;height:8px;border-radius:50%;background:var(--orange-light);transition:all 0.3s;}
 .step-dot.active{background:var(--orange);width:24px;border-radius:4px;}
 .step-dot.done{background:var(--mint-dark);}
 
-/* ────────────────────────────────────────────
-   AUTH SCREENS
-──────────────────────────────────────────── */
-#auth-screen{
-  align-items:center;justify-content:center;padding:24px;
-  background:linear-gradient(150deg,#feecd8 0%,#fde8f0 40%,#ece8fc 100%);
-}
-.auth-card{
-  background:rgba(255,252,248,0.92);backdrop-filter:blur(16px);
-  border:1.5px solid rgba(240,200,160,0.4);border-radius:var(--r-xl);
-  padding:32px 26px;max-width:400px;width:100%;
-  box-shadow:0 12px 48px rgba(232,135,74,0.12);
-}
+/* AUTH */
+#auth-screen{align-items:center;justify-content:center;padding:24px;background:linear-gradient(150deg,#feecd8 0%,#fde8f0 40%,#ece8fc 100%);}
+.auth-card{background:rgba(255,252,248,0.92);backdrop-filter:blur(16px);border:1.5px solid rgba(240,200,160,0.4);border-radius:var(--r-xl);padding:32px 26px;max-width:400px;width:100%;box-shadow:0 12px 48px rgba(232,135,74,0.12);}
 .auth-logo{text-align:center;margin-bottom:20px;}
-.auth-logo svg{filter:drop-shadow(0 4px 12px rgba(232,135,74,0.18));}
 .auth-title{font-size:24px;font-weight:900;color:var(--text-dark);margin-bottom:6px;text-align:center;}
 .auth-sub{font-size:14px;color:var(--text-mid);font-weight:600;text-align:center;margin-bottom:22px;}
 .auth-switch{font-size:13px;color:var(--text-mid);text-align:center;margin-top:14px;font-weight:700;}
@@ -138,31 +110,18 @@ input[type=range]::-webkit-slider-thumb{
 .auth-err{font-size:13px;color:#c05030;font-weight:700;text-align:center;margin-bottom:10px;display:none;}
 .auth-err.show{display:block;}
 
-/* ────────────────────────────────────────────
-   ONBOARDING
-──────────────────────────────────────────── */
-#onboarding{
-  align-items:center;justify-content:center;padding:24px;
-  background:linear-gradient(150deg,#feecd8 0%,#fde8f0 40%,#ece8fc 100%);
-}
-.onboard-card{
-  background:rgba(255,252,248,0.92);backdrop-filter:blur(16px);
-  border:1.5px solid rgba(240,200,160,0.4);border-radius:var(--r-xl);
-  padding:30px 26px;max-width:420px;width:100%;
-  box-shadow:0 12px 48px rgba(232,135,74,0.12);
-}
+/* LOADING */
+#loading-screen{align-items:center;justify-content:center;background:linear-gradient(150deg,#feecd8 0%,#fde8f0 40%,#ece8fc 100%);}
+.loading-text{font-size:16px;font-weight:700;color:var(--text-mid);margin-top:16px;}
+
+/* ONBOARDING */
+#onboarding{align-items:center;justify-content:center;padding:24px;background:linear-gradient(150deg,#feecd8 0%,#fde8f0 40%,#ece8fc 100%);}
+.onboard-card{background:rgba(255,252,248,0.92);backdrop-filter:blur(16px);border:1.5px solid rgba(240,200,160,0.4);border-radius:var(--r-xl);padding:30px 26px;max-width:420px;width:100%;box-shadow:0 12px 48px rgba(232,135,74,0.12);}
 .onboard-title{font-size:25px;font-weight:900;color:var(--text-dark);margin-bottom:6px;line-height:1.2;}
 .onboard-sub{font-size:14px;color:var(--text-mid);margin-bottom:20px;line-height:1.5;font-weight:600;}
 .cloud-container{text-align:center;margin:8px 0 14px;}
 
-/* ── CATEGORY BUILDER ── */
-.cat-section{margin-bottom:18px;}
-.cat-header{
-  display:flex;align-items:center;justify-content:space-between;
-  background:rgba(255,255,255,0.7);border:1.5px solid rgba(240,200,160,0.35);
-  border-radius:var(--r-md);padding:12px 14px;cursor:pointer;transition:all 0.2s;
-  margin-bottom:8px;
-}
+.cat-header{display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,0.7);border:1.5px solid rgba(240,200,160,0.35);border-radius:var(--r-md);padding:12px 14px;cursor:pointer;transition:all 0.2s;margin-bottom:8px;}
 .cat-header:hover{border-color:var(--orange);}
 .cat-header-left{display:flex;align-items:center;gap:10px;}
 .cat-icon{font-size:20px;}
@@ -172,83 +131,35 @@ input[type=range]::-webkit-slider-thumb{
 .cat-chevron.open{transform:rotate(90deg);}
 .cat-body{display:none;padding:0 4px 4px;}
 .cat-body.open{display:block;}
-.cat-subcats{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:10px;}
-.subcat-chip{
-  padding:6px 14px;border-radius:999px;font-size:12px;font-weight:700;cursor:pointer;
-  border:1.5px solid rgba(240,200,160,0.4);background:rgba(255,255,255,0.6);color:var(--text-mid);
-  transition:all 0.2s;
-}
-.subcat-chip.sel-orange{border-color:var(--orange);background:rgba(245,169,106,0.14);color:var(--orange-deep);}
-.subcat-chip.sel-lavender{border-color:var(--lavender-dark);background:rgba(186,175,240,0.14);color:var(--lavender-dark);}
-.subcat-chip.sel-mint{border-color:var(--mint-dark);background:rgba(88,176,136,0.12);color:var(--mint-dark);}
-.subcat-chip.sel-sky{border-color:var(--sky-dark);background:rgba(88,152,216,0.12);color:var(--sky-dark);}
-
 .item-list{display:flex;flex-direction:column;gap:6px;margin-bottom:8px;}
-.item-row{
-  display:flex;align-items:center;gap:8px;
-  background:rgba(255,255,255,0.6);border:1.5px solid rgba(240,200,160,0.3);
-  border-radius:var(--r-sm);padding:8px 12px;
-}
+.item-row{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.6);border:1.5px solid rgba(240,200,160,0.3);border-radius:var(--r-sm);padding:8px 12px;}
 .item-row-text{flex:1;font-size:13px;font-weight:700;color:var(--text-dark);}
 .item-row-sub{font-size:11px;color:var(--text-light);font-weight:600;margin-top:1px;}
 .item-remove{font-size:16px;color:var(--text-light);cursor:pointer;padding:0 4px;transition:color 0.2s;background:none;border:none;}
 .item-remove:hover{color:#d06040;}
 .add-item-row{display:flex;gap:8px;align-items:center;}
-.add-item-input{
-  flex:1;padding:10px 14px;border-radius:var(--r-sm);
-  border:1.5px solid rgba(240,200,160,0.35);background:rgba(255,255,255,0.8);
-  font-family:'Nunito',sans-serif;font-size:13px;color:var(--text-dark);
-  outline:none;font-weight:600;
-}
+.add-item-input{flex:1;padding:10px 14px;border-radius:var(--r-sm);border:1.5px solid rgba(240,200,160,0.35);background:rgba(255,255,255,0.8);font-family:'Nunito',sans-serif;font-size:13px;color:var(--text-dark);outline:none;font-weight:600;}
 .add-item-input:focus{border-color:var(--orange);}
-.add-item-btn{
-  padding:10px 16px;border-radius:var(--r-sm);border:none;
-  background:var(--orange-btn);color:white;font-family:'Nunito',sans-serif;
-  font-size:13px;font-weight:800;cursor:pointer;white-space:nowrap;flex-shrink:0;
-}
-.add-item-select{
-  padding:10px 12px;border-radius:var(--r-sm);
-  border:1.5px solid rgba(240,200,160,0.35);background:rgba(255,255,255,0.8);
-  font-family:'Nunito',sans-serif;font-size:12px;font-weight:700;color:var(--text-mid);
-  outline:none;flex-shrink:0;max-width:110px;
-}
+.add-item-btn{padding:10px 16px;border-radius:var(--r-sm);border:none;background:var(--orange-btn);color:white;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;cursor:pointer;white-space:nowrap;flex-shrink:0;}
+.add-item-select{padding:10px 12px;border-radius:var(--r-sm);border:1.5px solid rgba(240,200,160,0.35);background:rgba(255,255,255,0.8);font-family:'Nunito',sans-serif;font-size:12px;font-weight:700;color:var(--text-mid);outline:none;flex-shrink:0;max-width:110px;}
 
-/* ────────────────────────────────────────────
-   MAIN APP
-──────────────────────────────────────────── */
-.app-header{
-  padding:52px 22px 14px;
-  background:linear-gradient(180deg,rgba(254,236,216,0.85) 0%,transparent 100%);
-}
+/* MAIN APP */
+.app-header{padding:52px 22px 14px;background:linear-gradient(180deg,rgba(254,236,216,0.85) 0%,transparent 100%);}
 .app-greeting{font-size:27px;font-weight:900;color:var(--text-dark);}
 .app-date{font-size:13px;color:var(--text-mid);margin-top:2px;font-weight:600;}
 .app-scroll{flex:1;overflow-y:auto;padding:0 14px 100px;}
 
-/* ── CARDS ── */
-.card{
-  background:var(--card-bg);backdrop-filter:blur(10px);
-  border:1.5px solid var(--card-border);border-radius:var(--r-lg);
-  padding:16px 17px;margin-bottom:10px;
-}
-.points-card{
-  display:flex;align-items:center;justify-content:space-between;
-  background:linear-gradient(135deg,rgba(255,248,240,0.96),rgba(252,238,228,0.96));
-  border-color:rgba(245,185,140,0.3);
-}
+.card{background:var(--card-bg);backdrop-filter:blur(10px);border:1.5px solid var(--card-border);border-radius:var(--r-lg);padding:16px 17px;margin-bottom:10px;}
+.points-card{display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg,rgba(255,248,240,0.96),rgba(252,238,228,0.96));border-color:rgba(245,185,140,0.3);}
 .points-label{font-size:11px;font-weight:800;color:var(--text-light);text-transform:uppercase;letter-spacing:0.6px;}
 .points-val{font-size:32px;font-weight:900;color:var(--orange-deep);display:flex;align-items:center;gap:6px;}
 .badge-box{background:white;border-radius:var(--r-md);padding:10px 14px;text-align:center;border:1.5px solid rgba(245,185,140,0.3);min-width:100px;}
 .badge-icon{font-size:26px;}
 .badge-name{font-size:11px;font-weight:700;color:var(--text-mid);margin-top:3px;}
 
-/* STREAK */
 .streak-header{font-size:12px;font-weight:800;color:var(--text-mid);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:12px;display:flex;align-items:center;gap:5px;}
 .streak-dots{display:flex;gap:7px;}
-.streak-dot{
-  flex:1;border-radius:10px;padding:10px 0;
-  display:flex;flex-direction:column;align-items:center;gap:4px;
-  font-size:11px;font-weight:800;color:rgba(200,160,120,0.5);background:rgba(245,185,140,0.15);
-}
+.streak-dot{flex:1;border-radius:10px;padding:10px 0;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:11px;font-weight:800;color:rgba(200,160,120,0.5);background:rgba(245,185,140,0.15);}
 .streak-dot .sl{font-size:12px;font-weight:900;}
 .streak-dot .sd{font-size:9px;font-weight:700;color:var(--text-light);}
 .streak-dot.done{background:linear-gradient(135deg,var(--orange-light),var(--orange));color:white;}
@@ -256,41 +167,23 @@ input[type=range]::-webkit-slider-thumb{
 .streak-dot.today{background:linear-gradient(135deg,var(--lavender),var(--lavender-dark));color:white;}
 .streak-dot.today .sd{color:rgba(255,255,255,0.7);}
 
-/* AFFIRMATION */
-.affirmation-card{
-  background:linear-gradient(135deg,rgba(252,213,176,0.45),rgba(216,208,248,0.35));
-  border:1.5px solid rgba(245,185,140,0.28);
-  border-radius:var(--r-lg);padding:16px 18px;margin-bottom:10px;text-align:center;
-}
+.affirmation-card{background:linear-gradient(135deg,rgba(252,213,176,0.45),rgba(216,208,248,0.35));border:1.5px solid rgba(245,185,140,0.28);border-radius:var(--r-lg);padding:16px 18px;margin-bottom:10px;text-align:center;}
 .affirmation-quote{font-size:15px;font-weight:700;color:var(--text-dark);line-height:1.5;font-style:italic;}
 .affirmation-author{font-size:12px;font-weight:700;color:var(--text-light);margin-top:6px;}
-
 .section-header{font-size:11px;font-weight:800;color:var(--text-light);text-transform:uppercase;letter-spacing:0.8px;margin:18px 0 8px;}
 
-/* CHECKIN BANNER */
-.checkin-banner{
-  background:linear-gradient(135deg,rgba(252,213,176,0.5),rgba(216,208,248,0.35));
-  border:1.5px solid rgba(245,185,140,0.35);
-  border-radius:var(--r-lg);padding:14px 16px;margin-bottom:10px;
-  display:flex;align-items:center;gap:12px;cursor:pointer;transition:all 0.2s;
-}
+/* DAILY CHECK-IN BANNER */
+.checkin-banner{background:linear-gradient(135deg,rgba(252,213,176,0.5),rgba(216,208,248,0.35));border:1.5px solid rgba(245,185,140,0.35);border-radius:var(--r-lg);padding:14px 16px;margin-bottom:10px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:all 0.2s;}
 .checkin-banner:hover{background:linear-gradient(135deg,rgba(252,213,176,0.65),rgba(216,208,248,0.48));}
+.checkin-banner.done-today{opacity:0.5;cursor:default;}
 .checkin-arrow{margin-left:auto;color:var(--orange-deep);font-size:20px;}
 
 /* TASK CARDS */
-.task-card{
-  background:var(--card-bg);border:1.5px solid var(--card-border);
-  border-radius:var(--r-md);padding:13px 15px;margin-bottom:7px;
-  display:flex;align-items:center;gap:11px;cursor:pointer;
-  transition:all 0.2s;position:relative;overflow:hidden;
-}
+.task-card{background:var(--card-bg);border:1.5px solid var(--card-border);border-radius:var(--r-md);padding:13px 15px;margin-bottom:7px;display:flex;align-items:center;gap:11px;cursor:pointer;transition:all 0.2s;position:relative;overflow:hidden;}
 .task-card:hover{border-color:var(--orange-light);}
 .task-card.done-card{background:rgba(88,176,136,0.07);border-color:rgba(88,176,136,0.25);opacity:0.7;}
 .task-card.done-card .task-title{text-decoration:line-through;color:var(--text-light);}
-.task-check{
-  width:26px;height:26px;border-radius:8px;border:2px solid rgba(245,185,140,0.5);
-  background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s;
-}
+.task-check{width:26px;height:26px;border-radius:8px;border:2px solid rgba(245,185,140,0.5);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s;}
 .task-check.checked{background:var(--mint-dark);border-color:var(--mint-dark);}
 .task-check.checked::after{content:'✓';color:white;font-size:13px;font-weight:900;}
 .task-info{flex:1;}
@@ -301,30 +194,18 @@ input[type=range]::-webkit-slider-thumb{
 .priority-medium{background:rgba(186,175,240,0.25);color:#6858b0;}
 .priority-low{background:rgba(88,176,136,0.15);color:#388060;}
 .task-subject-dot{width:4px;height:100%;position:absolute;left:0;top:0;border-radius:3px 0 0 3px;}
-.all-done-banner{
-  background:linear-gradient(135deg,rgba(88,176,136,0.12),rgba(252,213,176,0.2));
-  border:1.5px solid rgba(88,176,136,0.3);border-radius:var(--r-md);
-  padding:14px 18px;text-align:center;font-size:15px;font-weight:800;color:var(--mint-dark);margin-bottom:7px;
-}
+.all-done-banner{background:linear-gradient(135deg,rgba(88,176,136,0.12),rgba(252,213,176,0.2));border:1.5px solid rgba(88,176,136,0.3);border-radius:var(--r-md);padding:14px 18px;text-align:center;font-size:15px;font-weight:800;color:var(--mint-dark);margin-bottom:7px;}
 
 /* BOTTOM NAV */
-.bottom-nav{
-  position:fixed;bottom:0;left:0;right:0;
-  background:rgba(255,252,248,0.95);backdrop-filter:blur(20px);
-  border-top:1px solid rgba(240,200,160,0.3);
-  display:flex;padding:8px 0 20px;z-index:100;
-}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(255,252,248,0.95);backdrop-filter:blur(20px);border-top:1px solid rgba(240,200,160,0.3);display:flex;padding:8px 0 20px;z-index:100;}
 .nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;cursor:pointer;padding:6px 0;transition:all 0.2s;}
 .nav-icon{font-size:22px;}
 .nav-label{font-size:10px;font-weight:700;color:var(--text-light);text-transform:uppercase;letter-spacing:0.3px;}
 .nav-btn.active .nav-label{color:var(--orange-deep);}
 .nav-btn.active .nav-icon{transform:scale(1.1);}
 
-/* ── TIMER SCREEN ── */
-#timer-screen{
-  background:linear-gradient(160deg,#2a1808 0%,#3a1e10 40%,#1a2018 100%);
-  color:white;align-items:center;justify-content:center;padding:40px 24px;
-}
+/* TIMER */
+#timer-screen{background:linear-gradient(160deg,#2a1808 0%,#3a1e10 40%,#1a2018 100%);color:white;align-items:center;justify-content:center;padding:40px 24px;}
 .timer-task-name{font-size:19px;font-weight:800;color:rgba(255,255,255,0.9);margin-bottom:5px;text-align:center;}
 .timer-phase{font-size:12px;font-weight:700;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:42px;}
 .timer-circle-wrap{position:relative;width:252px;height:252px;margin-bottom:42px;}
@@ -347,34 +228,19 @@ input[type=range]::-webkit-slider-thumb{
 .break-option{padding:8px 16px;border-radius:999px;border:1.5px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.1);color:white;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all 0.2s;}
 .break-option:hover{background:rgba(255,255,255,0.2);}
 
-/* ── TASKS TAB ── */
+/* TABS */
 #tasks-screen{padding:52px 14px 100px;overflow-y:auto;}
 .tab-header{font-size:26px;font-weight:900;color:var(--text-dark);margin-bottom:4px;}
 .tab-sub{font-size:14px;color:var(--text-mid);font-weight:600;margin-bottom:16px;}
-.add-task-btn{
-  width:100%;padding:14px;border-radius:var(--r-md);
-  border:2px dashed rgba(245,185,140,0.55);background:rgba(245,185,140,0.06);
-  color:var(--orange-deep);font-family:'Nunito',sans-serif;font-size:15px;font-weight:700;
-  cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:13px;
-}
+.add-task-btn{width:100%;padding:14px;border-radius:var(--r-md);border:2px dashed rgba(245,185,140,0.55);background:rgba(245,185,140,0.06);color:var(--orange-deep);font-family:'Nunito',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:13px;}
 .add-task-btn:hover{background:rgba(245,185,140,0.12);}
 .filter-row{display:flex;gap:7px;margin-bottom:13px;flex-wrap:wrap;}
-.filter-chip{
-  padding:7px 14px;border-radius:999px;border:1.5px solid rgba(240,200,160,0.35);
-  background:rgba(255,255,255,0.6);font-family:'Nunito',sans-serif;
-  font-size:12px;font-weight:700;color:var(--text-mid);cursor:pointer;transition:all 0.2s;
-}
+.filter-chip{padding:7px 14px;border-radius:999px;border:1.5px solid rgba(240,200,160,0.35);background:rgba(255,255,255,0.6);font-family:'Nunito',sans-serif;font-size:12px;font-weight:700;color:var(--text-mid);cursor:pointer;transition:all 0.2s;}
 .filter-chip.active{background:var(--orange-deep);color:white;border-color:var(--orange-deep);}
-
-/* ── CATEGORIES IN TASKS ── */
-.cat-group-header{
-  display:flex;align-items:center;gap:8px;margin:16px 0 8px;
-  font-size:13px;font-weight:800;color:var(--text-mid);
-}
+.cat-group-header{display:flex;align-items:center;gap:8px;margin:16px 0 8px;font-size:13px;font-weight:800;color:var(--text-mid);}
 .cat-group-icon{font-size:16px;}
 .cat-group-line{flex:1;height:1px;background:rgba(240,200,160,0.3);}
 
-/* ── CALENDAR TAB ── */
 #calendar-screen{padding:52px 14px 100px;overflow-y:auto;}
 .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:4px;}
 .cal-day-label{font-size:10px;font-weight:800;color:var(--text-light);text-align:center;padding:4px 0;text-transform:uppercase;}
@@ -391,7 +257,6 @@ input[type=range]::-webkit-slider-thumb{
 .upcoming-title{font-size:15px;font-weight:700;color:var(--text-dark);}
 .upcoming-meta{font-size:12px;color:var(--text-light);font-weight:600;margin-top:2px;}
 
-/* ── NOTES TAB ── */
 #notes-screen{padding:52px 14px 100px;overflow-y:auto;}
 .note-card{background:var(--card-bg);border:1.5px solid var(--card-border);border-radius:var(--r-md);padding:15px;margin-bottom:10px;cursor:pointer;transition:all 0.2s;}
 .note-card:hover{border-color:var(--orange-light);}
@@ -399,49 +264,25 @@ input[type=range]::-webkit-slider-thumb{
 .note-preview{font-size:13px;color:var(--text-mid);font-weight:600;}
 .note-date{font-size:11px;color:var(--text-light);font-weight:700;margin-top:7px;}
 
-/* ── SETTINGS TAB ── */
 #settings-screen{padding:52px 14px 100px;overflow-y:auto;}
 .settings-section{margin-bottom:20px;}
 .settings-section-label{font-size:12px;font-weight:800;color:var(--text-light);text-transform:uppercase;letter-spacing:0.7px;margin-bottom:10px;}
-.settings-row{
-  display:flex;align-items:center;justify-content:space-between;
-  background:var(--card-bg);border:1.5px solid var(--card-border);
-  border-radius:var(--r-md);padding:14px 16px;margin-bottom:7px;
-}
+.settings-row{display:flex;align-items:center;justify-content:space-between;background:var(--card-bg);border:1.5px solid var(--card-border);border-radius:var(--r-md);padding:14px 16px;margin-bottom:7px;}
 .settings-row-left .sr-title{font-size:15px;font-weight:700;color:var(--text-dark);}
 .settings-row-left .sr-sub{font-size:12px;color:var(--text-light);font-weight:600;margin-top:2px;}
-/* Toggle switch */
 .toggle{position:relative;width:46px;height:26px;flex-shrink:0;}
 .toggle input{opacity:0;width:0;height:0;}
-.toggle-slider{
-  position:absolute;inset:0;border-radius:999px;background:rgba(200,180,160,0.3);cursor:pointer;transition:0.3s;
-}
-.toggle-slider::before{
-  content:'';position:absolute;width:20px;height:20px;border-radius:50%;
-  background:white;bottom:3px;left:3px;transition:0.3s;
-  box-shadow:0 1px 4px rgba(0,0,0,0.15);
-}
+.toggle-slider{position:absolute;inset:0;border-radius:999px;background:rgba(200,180,160,0.3);cursor:pointer;transition:0.3s;}
+.toggle-slider::before{content:'';position:absolute;width:20px;height:20px;border-radius:50%;background:white;bottom:3px;left:3px;transition:0.3s;box-shadow:0 1px 4px rgba(0,0,0,0.15);}
 .toggle input:checked+.toggle-slider{background:var(--orange);}
 .toggle input:checked+.toggle-slider::before{transform:translateX(20px);}
-.settings-select{
-  padding:8px 12px;border-radius:var(--r-sm);border:1.5px solid rgba(240,200,160,0.4);
-  background:rgba(255,255,255,0.8);font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;color:var(--text-dark);outline:none;
-}
-.logout-btn{
-  width:100%;padding:14px;border-radius:var(--r-md);border:1.5px solid rgba(220,100,80,0.25);
-  background:rgba(220,100,80,0.06);color:#c05030;font-family:'Nunito',sans-serif;font-size:15px;font-weight:700;cursor:pointer;margin-top:4px;
-}
+.settings-select{padding:8px 12px;border-radius:var(--r-sm);border:1.5px solid rgba(240,200,160,0.4);background:rgba(255,255,255,0.8);font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;color:var(--text-dark);outline:none;}
+.logout-btn{width:100%;padding:14px;border-radius:var(--r-md);border:1.5px solid rgba(220,100,80,0.25);background:rgba(220,100,80,0.06);color:#c05030;font-family:'Nunito',sans-serif;font-size:15px;font-weight:700;cursor:pointer;margin-top:4px;}
 
-/* ── MODALS ── */
-.modal-overlay{
-  position:fixed;inset:0;background:rgba(40,20,10,0.45);backdrop-filter:blur(5px);
-  z-index:200;display:none;align-items:flex-end;justify-content:center;
-}
+/* MODALS */
+.modal-overlay{position:fixed;inset:0;background:rgba(40,20,10,0.45);backdrop-filter:blur(5px);z-index:200;display:none;align-items:flex-end;justify-content:center;}
 .modal-overlay.show{display:flex;}
-.modal-sheet{
-  background:#fff9f5;border-radius:28px 28px 0 0;padding:24px 22px 44px;
-  width:100%;max-width:480px;max-height:90vh;overflow-y:auto;animation:slideUp 0.3s ease;
-}
+.modal-sheet{background:#fff9f5;border-radius:28px 28px 0 0;padding:24px 22px 44px;width:100%;max-width:480px;max-height:90vh;overflow-y:auto;animation:slideUp 0.3s ease;}
 @keyframes slideUp{from{transform:translateY(100%);}to{transform:translateY(0);}}
 .modal-handle{width:38px;height:4px;border-radius:2px;background:rgba(200,170,140,0.3);margin:0 auto 18px;}
 .modal-title{font-size:22px;font-weight:900;color:var(--text-dark);margin-bottom:16px;}
@@ -454,28 +295,27 @@ input[type=range]::-webkit-slider-thumb{
 .mood-option.selected .mood-label{color:var(--orange-deep);font-weight:800;}
 .checkin-q{font-size:14px;font-weight:700;color:var(--text-mid);margin-bottom:9px;}
 
-/* TOAST */
-.toast{
-  position:fixed;bottom:88px;left:50%;transform:translateX(-50%) translateY(16px);
-  background:var(--text-dark);color:white;padding:11px 20px;border-radius:999px;
-  font-size:14px;font-weight:700;z-index:500;opacity:0;transition:all 0.3s;white-space:nowrap;pointer-events:none;
-}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+/* DAILY CHECKIN NUDGE */
+.checkin-nudge{background:linear-gradient(135deg,rgba(216,208,248,0.6),rgba(252,213,176,0.45));border:1.5px solid rgba(186,175,240,0.4);border-radius:var(--r-lg);padding:16px 18px;margin-bottom:12px;text-align:center;}
+.checkin-nudge-title{font-size:16px;font-weight:900;color:var(--lavender-dark);margin-bottom:6px;}
+.checkin-nudge-sub{font-size:13px;color:var(--text-mid);font-weight:600;margin-bottom:12px;}
 
-/* ── NOTIFICATION PERMISSION BANNER ── */
-.notif-banner{
-  background:linear-gradient(135deg,rgba(252,213,176,0.6),rgba(216,208,248,0.45));
-  border:1.5px solid rgba(245,185,140,0.4);border-radius:var(--r-md);
-  padding:13px 16px;margin-bottom:10px;display:flex;align-items:center;gap:12px;cursor:pointer;
-}
-.notif-banner-text .nbt{font-size:14px;font-weight:800;color:var(--text-dark);}
-.notif-banner-text .nbs{font-size:12px;color:var(--text-mid);font-weight:600;}
+.toast{position:fixed;bottom:88px;left:50%;transform:translateX(-50%) translateY(16px);background:var(--text-dark);color:white;padding:11px 20px;border-radius:999px;font-size:14px;font-weight:700;z-index:500;opacity:0;transition:all 0.3s;white-space:nowrap;pointer-events:none;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 </style>
 </head>
 <body>
 
-<!-- ══════════ AUTH SCREEN ══════════ -->
-<div id="auth-screen" class="screen active">
+<!-- LOADING -->
+<div id="loading-screen" class="screen active">
+  <div style="text-align:center;">
+    <svg width="110" height="92" viewBox="0 0 110 92" id="loadingCloud"></svg>
+    <div class="loading-text">Loading Nimbus...</div>
+  </div>
+</div>
+
+<!-- AUTH -->
+<div id="auth-screen" class="screen">
   <div class="auth-card">
     <div class="auth-logo">
       <svg width="90" height="76" viewBox="0 0 90 76" xmlns="http://www.w3.org/2000/svg">
@@ -501,7 +341,25 @@ input[type=range]::-webkit-slider-thumb{
   </div>
 </div>
 
-<!-- ══════════ ONBOARDING ══════════ -->
+<!-- CONFIRM EMAIL -->
+<div id="confirm-email-screen" class="screen" style="align-items:center;justify-content:center;padding:24px;background:linear-gradient(150deg,#feecd8 0%,#fde8f0 40%,#ece8fc 100%);">
+  <div class="auth-card" style="text-align:center;">
+    <div style="font-size:56px;margin-bottom:12px;">📬</div>
+    <div class="auth-title">Check your inbox!</div>
+    <div class="auth-sub" style="margin-bottom:8px;">We sent a confirmation email to:</div>
+    <div style="font-size:15px;font-weight:800;color:var(--orange-deep);margin-bottom:18px;word-break:break-all;" id="confirmEmailAddr"></div>
+    <div style="font-size:13px;color:var(--text-mid);font-weight:600;line-height:1.6;margin-bottom:20px;">
+      Click the link in that email to confirm your account. Once confirmed, you'll be taken straight into Nimbus to complete setup. ☁️
+    </div>
+    <div style="background:rgba(245,185,140,0.12);border:1.5px solid rgba(245,185,140,0.3);border-radius:var(--r-md);padding:12px 16px;margin-bottom:18px;font-size:13px;color:var(--text-mid);font-weight:600;">
+      💡 <strong>Tip:</strong> Check your spam folder if you don't see it within a minute.
+    </div>
+    <button class="btn-primary" onclick="resendConfirmation()" id="resendBtn" style="margin-bottom:8px;">Resend Email</button>
+    <button class="btn-secondary" onclick="showScreen('auth-screen');renderAuth('login')">← Back to Sign In</button>
+  </div>
+</div>
+
+
 <div id="onboarding" class="screen">
   <div class="onboard-card" style="margin:auto;">
     <div class="step-indicator" id="stepDots"></div>
@@ -509,7 +367,7 @@ input[type=range]::-webkit-slider-thumb{
   </div>
 </div>
 
-<!-- ══════════ MAIN APP ══════════ -->
+<!-- MAIN APP -->
 <div id="app" class="screen">
   <!-- HOME -->
   <div id="home-screen">
@@ -518,13 +376,21 @@ input[type=range]::-webkit-slider-thumb{
       <div class="app-date" id="homeDate"></div>
     </div>
     <div class="app-scroll">
-      <div class="checkin-banner" onclick="openCheckin()">
+      <!-- Daily check-in nudge (shown when not done today) -->
+      <div id="checkinNudge" style="display:none;">
+        <div class="checkin-nudge">
+          <div class="checkin-nudge-title">☁️ Good morning! How are you feeling?</div>
+          <div class="checkin-nudge-sub">Nimbus wants to check in with you before the day starts.</div>
+          <button class="btn-primary" style="margin-top:0;" onclick="openCheckin()">Do Daily Check-In</button>
+        </div>
+      </div>
+
+      <div class="checkin-banner" id="checkinBanner" onclick="openCheckinIfAllowed()">
         <div style="font-size:26px;">🌤️</div>
-        <div><div style="font-size:15px;font-weight:800;color:var(--text-dark);">Daily Check-In</div><div style="font-size:12px;color:var(--text-mid);font-weight:600;">How's Nimbus feeling today?</div></div>
+        <div><div style="font-size:15px;font-weight:800;color:var(--text-dark);">Daily Check-In</div><div style="font-size:12px;color:var(--text-mid);font-weight:600;" id="checkinBannerSub">How's Nimbus feeling today?</div></div>
         <div class="checkin-arrow">›</div>
       </div>
 
-      <!-- Nimbus -->
       <div style="text-align:center;padding:14px 0 4px;">
         <div style="display:inline-block;cursor:pointer;transition:transform 0.3s;" onclick="nimbusClicked()" id="nimbusWrap">
           <svg id="nimbusSVG" width="200" height="170" viewBox="0 0 200 170" xmlns="http://www.w3.org/2000/svg"></svg>
@@ -583,7 +449,6 @@ input[type=range]::-webkit-slider-thumb{
     <div class="tab-header">Notes & Resources</div>
     <button class="add-task-btn" onclick="openAddNote()"><span>＋</span> New Note</button>
     <div class="section-header">Stress Resources</div>
-    
     <div class="card" style="margin-bottom:10px;background:linear-gradient(135deg,rgba(252,213,176,0.5),rgba(216,208,248,0.4));border-color:rgba(245,185,140,0.25);">
       <div style="font-size:14px;font-weight:800;color:var(--text-dark);margin-bottom:6px;">💜 Burnout Signs</div>
       <div style="font-size:13px;color:var(--text-mid);line-height:1.6;font-weight:600;">Exhausted after rest · Can't concentrate · Detached · Nothing feels rewarding · Irritable easily</div>
@@ -604,7 +469,6 @@ input[type=range]::-webkit-slider-thumb{
   <div id="settings-screen" class="screen" style="display:none;">
     <div class="tab-header">Settings</div>
     <div class="tab-sub" id="settingsUserSub">Your account</div>
-
     <div class="settings-section">
       <div class="settings-section-label">Notifications</div>
       <div class="settings-row">
@@ -614,11 +478,7 @@ input[type=range]::-webkit-slider-thumb{
       <div class="settings-row" id="breakFreqRow" style="display:none;">
         <div class="settings-row-left"><div class="sr-title">Break every</div></div>
         <select class="settings-select" id="breakFreq" onchange="saveNotifSettings()">
-          <option value="30">30 min</option>
-          <option value="45">45 min</option>
-          <option value="60" selected>1 hour</option>
-          <option value="90">1.5 hours</option>
-          <option value="120">2 hours</option>
+          <option value="30">30 min</option><option value="45">45 min</option><option value="60" selected>1 hour</option><option value="90">1.5 hours</option><option value="120">2 hours</option>
         </select>
       </div>
       <div class="settings-row">
@@ -626,7 +486,7 @@ input[type=range]::-webkit-slider-thumb{
         <label class="toggle"><input type="checkbox" id="notifTasks" onchange="saveNotifSettings()"><div class="toggle-slider"></div></label>
       </div>
       <div class="settings-row">
-        <div class="settings-row-left"><div class="sr-title">Daily Check-In</div><div class="sr-sub">Remind me to check in with Nimbus</div></div>
+        <div class="settings-row-left"><div class="sr-title">Daily Check-In Reminder</div><div class="sr-sub">Prompt me each morning</div></div>
         <label class="toggle"><input type="checkbox" id="notifCheckin" onchange="saveNotifSettings()"><div class="toggle-slider"></div></label>
       </div>
       <div class="settings-row" id="checkinTimeRow" style="display:none;">
@@ -634,7 +494,6 @@ input[type=range]::-webkit-slider-thumb{
         <input type="time" class="settings-select" id="checkinTime" value="08:00" onchange="saveNotifSettings()">
       </div>
     </div>
-
     <div class="settings-section">
       <div class="settings-section-label">Account</div>
       <div class="settings-row">
@@ -642,16 +501,12 @@ input[type=range]::-webkit-slider-thumb{
       </div>
       <button class="logout-btn" onclick="logOut()">Log Out</button>
     </div>
-
     <div class="settings-section">
       <div class="settings-section-label">About</div>
-      <div class="settings-row">
-        <div class="settings-row-left"><div class="sr-title">Nimbus</div><div class="sr-sub">Version 1.0 beta</div></div>
-      </div>
+      <div class="settings-row"><div class="settings-row-left"><div class="sr-title">Nimbus</div><div class="sr-sub">Version 1.0 beta</div></div></div>
     </div>
   </div>
 
-  <!-- BOTTOM NAV -->
   <div class="bottom-nav">
     <button class="nav-btn active" onclick="switchTab('home',this)"><span class="nav-icon">🏠</span><span class="nav-label">Home</span></button>
     <button class="nav-btn" onclick="switchTab('tasks',this)"><span class="nav-icon">✅</span><span class="nav-label">Tasks</span></button>
@@ -693,11 +548,11 @@ input[type=range]::-webkit-slider-thumb{
 </div>
 
 <!-- MODALS -->
-<!-- Check-in -->
 <div class="modal-overlay" id="checkinModal" onclick="closeModalOutside(event,'checkinModal')">
   <div class="modal-sheet">
     <div class="modal-handle"></div>
     <div class="modal-title">Daily Check-In ☁️</div>
+    <div style="font-size:13px;color:var(--text-light);font-weight:600;margin-bottom:14px;" id="checkinDateLabel"></div>
     <div class="checkin-q">How are you feeling right now?</div>
     <div class="mood-row" id="moodRow">
       <div class="mood-option" onclick="selectMood(0)"><span class="mood-emoji">😰</span><span class="mood-label">Stressed</span></div>
@@ -720,54 +575,20 @@ input[type=range]::-webkit-slider-thumb{
   </div>
 </div>
 
-<!-- Add Task -->
 <div class="modal-overlay" id="addTaskModal" onclick="closeModalOutside(event,'addTaskModal')">
   <div class="modal-sheet">
     <div class="modal-handle"></div>
     <div class="modal-title">Add Task</div>
-    <div class="form-group">
-      <label class="form-label">Task name</label>
-      <input class="form-input" id="newTaskName" placeholder="What do you need to do?" type="text">
-    </div>
-    <div class="form-group">
-      <label class="form-label">Category</label>
-      <select class="form-input" id="newTaskCat" onchange="updateTaskSubcats()">
-        <option value="">Choose a category</option>
-      </select>
-    </div>
-    <div class="form-group" id="subcatGroup" style="display:none;">
-      <label class="form-label">Subject / Activity</label>
-      <select class="form-input" id="newTaskSubcat"></select>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Estimated time</label>
-      <div class="option-grid" id="timeOptions">
-        <div class="option-btn" onclick="selectOption(this,'timeOptions')">15 min</div>
-        <div class="option-btn" onclick="selectOption(this,'timeOptions')">30 min</div>
-        <div class="option-btn" onclick="selectOption(this,'timeOptions')">45 min</div>
-        <div class="option-btn" onclick="selectOption(this,'timeOptions')">1 hr</div>
-        <div class="option-btn" onclick="selectOption(this,'timeOptions')">1.5 hr</div>
-        <div class="option-btn" onclick="selectOption(this,'timeOptions')">2+ hr</div>
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Priority</label>
-      <div class="option-grid" id="priorityOptions">
-        <div class="option-btn" onclick="selectOption(this,'priorityOptions')">🔴 Urgent</div>
-        <div class="option-btn" onclick="selectOption(this,'priorityOptions')">🟠 Medium</div>
-        <div class="option-btn" onclick="selectOption(this,'priorityOptions')">🟢 Low</div>
-        <div class="option-btn" onclick="selectOption(this,'priorityOptions')">📚 Study</div>
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Due date</label>
-      <input class="form-input" id="newTaskDue" type="date">
-    </div>
+    <div class="form-group"><label class="form-label">Task name</label><input class="form-input" id="newTaskName" placeholder="What do you need to do?" type="text"></div>
+    <div class="form-group"><label class="form-label">Category</label><select class="form-input" id="newTaskCat" onchange="updateTaskSubcats()"><option value="">Choose a category</option></select></div>
+    <div class="form-group" id="subcatGroup" style="display:none;"><label class="form-label">Subject / Activity</label><select class="form-input" id="newTaskSubcat"></select></div>
+    <div class="form-group"><label class="form-label">Estimated time</label><div class="option-grid" id="timeOptions"><div class="option-btn" onclick="selectOption(this,'timeOptions')">15 min</div><div class="option-btn" onclick="selectOption(this,'timeOptions')">30 min</div><div class="option-btn" onclick="selectOption(this,'timeOptions')">45 min</div><div class="option-btn" onclick="selectOption(this,'timeOptions')">1 hr</div><div class="option-btn" onclick="selectOption(this,'timeOptions')">1.5 hr</div><div class="option-btn" onclick="selectOption(this,'timeOptions')">2+ hr</div></div></div>
+    <div class="form-group"><label class="form-label">Priority</label><div class="option-grid" id="priorityOptions"><div class="option-btn" onclick="selectOption(this,'priorityOptions')">🔴 Urgent</div><div class="option-btn" onclick="selectOption(this,'priorityOptions')">🟠 Medium</div><div class="option-btn" onclick="selectOption(this,'priorityOptions')">🟢 Low</div><div class="option-btn" onclick="selectOption(this,'priorityOptions')">📚 Study</div></div></div>
+    <div class="form-group"><label class="form-label">Due date</label><input class="form-input" id="newTaskDue" type="date"></div>
     <button class="btn-primary" onclick="addTask()">Add Task ✓</button>
   </div>
 </div>
 
-<!-- Task Detail -->
 <div class="modal-overlay" id="taskDetailModal" onclick="closeModalOutside(event,'taskDetailModal')">
   <div class="modal-sheet">
     <div class="modal-handle"></div>
@@ -780,73 +601,53 @@ input[type=range]::-webkit-slider-thumb{
   </div>
 </div>
 
-<!-- Add Note -->
-
 <div class="modal-overlay" id="editTaskModal" onclick="closeModalOutside(event,'editTaskModal')">
   <div class="modal-sheet">
     <div class="modal-handle"></div>
     <div class="modal-title">Edit Task</div>
-    <div class="form-group">
-      <label class="form-label">Task name</label>
-      <input class="form-input" id="editTaskName" type="text">
-    </div>
-    <div class="form-group">
-      <label class="form-label">Estimated time</label>
-      <div class="option-grid" id="editTimeOptions">
-        <div class="option-btn" onclick="selectOption(this,'editTimeOptions')">15 min</div>
-        <div class="option-btn" onclick="selectOption(this,'editTimeOptions')">30 min</div>
-        <div class="option-btn" onclick="selectOption(this,'editTimeOptions')">45 min</div>
-        <div class="option-btn" onclick="selectOption(this,'editTimeOptions')">1 hr</div>
-        <div class="option-btn" onclick="selectOption(this,'editTimeOptions')">1.5 hr</div>
-        <div class="option-btn" onclick="selectOption(this,'editTimeOptions')">2+ hr</div>
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Priority</label>
-      <div class="option-grid" id="editPriorityOptions">
-        <div class="option-btn" onclick="selectOption(this,'editPriorityOptions')">🔴 Urgent</div>
-        <div class="option-btn" onclick="selectOption(this,'editPriorityOptions')">🟠 Medium</div>
-        <div class="option-btn" onclick="selectOption(this,'editPriorityOptions')">🟢 Low</div>
-        <div class="option-btn" onclick="selectOption(this,'editPriorityOptions')">📚 Study</div>
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Due date</label>
-      <input class="form-input" id="editTaskDue" type="date">
-    </div>
+    <div class="form-group"><label class="form-label">Task name</label><input class="form-input" id="editTaskName" type="text"></div>
+    <div class="form-group"><label class="form-label">Estimated time</label><div class="option-grid" id="editTimeOptions"><div class="option-btn" onclick="selectOption(this,'editTimeOptions')">15 min</div><div class="option-btn" onclick="selectOption(this,'editTimeOptions')">30 min</div><div class="option-btn" onclick="selectOption(this,'editTimeOptions')">45 min</div><div class="option-btn" onclick="selectOption(this,'editTimeOptions')">1 hr</div><div class="option-btn" onclick="selectOption(this,'editTimeOptions')">1.5 hr</div><div class="option-btn" onclick="selectOption(this,'editTimeOptions')">2+ hr</div></div></div>
+    <div class="form-group"><label class="form-label">Priority</label><div class="option-grid" id="editPriorityOptions"><div class="option-btn" onclick="selectOption(this,'editPriorityOptions')">🔴 Urgent</div><div class="option-btn" onclick="selectOption(this,'editPriorityOptions')">🟠 Medium</div><div class="option-btn" onclick="selectOption(this,'editPriorityOptions')">🟢 Low</div><div class="option-btn" onclick="selectOption(this,'editPriorityOptions')">📚 Study</div></div></div>
+    <div class="form-group"><label class="form-label">Due date</label><input class="form-input" id="editTaskDue" type="date"></div>
     <button class="btn-primary" onclick="saveEditTask()">Save Changes ✓</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="addNoteModal" onclick="closeModalOutside(event,'addNoteModal')">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-title">New Note</div>
+    <div class="form-group"><label class="form-label">Title</label><input class="form-input" id="newNoteTitle" placeholder="Note title..." type="text"></div>
+    <div class="form-group"><label class="form-label">Content</label><textarea class="form-input" id="newNoteContent" placeholder="Write your note..." rows="5" style="resize:vertical;"></textarea></div>
+    <button class="btn-primary" onclick="addNote()">Save Note 📝</button>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
-<!-- ══════════════════════════════════════════
-     SUPABASE + APP SCRIPT
-══════════════════════════════════════════ -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-// ─────────────────────────────────────────
-// SUPABASE CONFIG — replace these two values
-// after creating your project at supabase.com
-// ─────────────────────────────────────────
-const SUPABASE_URL = 'https://azvetdzjvfacuhvwztgm.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF6dmV0ZHpqdmZhY3Vodnd6dGdtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYyOTg2OTYsImV4cCI6MjA5MTg3NDY5Nn0.mdIM8jmvtVWkHPHoZA_eZqfZ56RkNpe3SS2Np9fohIY';
+// ─── SUPABASE CONFIG ───────────────────────────────────────────────────────
+const SUPABASE_URL = 'https://wvamqqjfrhinrxwzkotq.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind2YW1xcWpmcmhpbnJ4d3prb3RxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYxMjc1NjgsImV4cCI6MjA5MTcwMzU2OH0.csQLzheMj_7XhP53Ukl5pcX0PgBeTr3plan1wE29CWo';
 let sb = null;
-try { sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY); } catch(e) {}
+try { sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY); } catch(e) { console.warn('Supabase init failed', e); }
 
-// ─────────────────────────────────────────
-// STATE
-// ─────────────────────────────────────────
+// ─── STATE ─────────────────────────────────────────────────────────────────
+// IMPORTANT: every field here is what gets saved & loaded from Supabase/localStorage.
+// Never add temporary UI-only fields here.
 let state = {
   userId: null, email: '', phone: '',
   name: '', grade: '',
-  // Two-level category structure
-  // categories: [ { id, name, icon, color, type, subcats: [{id, name, type}] } ]
   categories: [],
   points: 0, streak: 0, mood: 2, workload: 5, overwhelm: 5,
   tasks: [], notes: [],
   nimbusState: 'neutral', onboardStep: 0,
-  notifs: { break: false, breakFreq: 60, tasks: false, checkin: false, checkinTime: '08:00' }
+  notifs: { break: false, breakFreq: 60, tasks: false, checkin: false, checkinTime: '08:00' },
+  // FIX: track last check-in date so we can prompt again each new day
+  lastCheckinDate: null,
+  // FIX: track streak by last-completed date
+  lastStreakDate: null,
 };
 
 let timer = { active:false, interval:null, remaining:1500, total:1500, phase:'focus', taskId:null, taskName:'', breakCount:0 };
@@ -855,115 +656,110 @@ let detailTaskId = null;
 let currentFilter = 'all';
 let selectedMood = 2;
 
-// ─────────────────────────────────────────
-// CATEGORY DEFINITIONS
-// ─────────────────────────────────────────
-const CAT_TEMPLATES = {
-  academic: {
-    name:'Academic', icon:'📚', color:'orange',
-    subcatTypes: ['Regular','Honors','AP','IB','Dual Enrollment'],
-    hint: 'e.g. Calculus, English 11, AP US History'
-  },
-  ec_sports: {
-    name:'Sports & Athletics', icon:'⚽', color:'pink',
-    hint: 'e.g. Varsity Soccer, Track & Field, Swimming'
-  },
-  ec_arts: {
-    name:'Arts & Performance', icon:'🎨', color:'lavender',
-    hint: 'e.g. Concert Band, Theater, Media, Journalism'
-  },
-  ec_clubs: {
-    name:'Clubs & Orgs', icon:'🏛️', color:'sky',
-    hint: 'e.g. NHS, Model UN, Key Club, DECA'
-  },
-  ec_gov: {
-    name:'Student Gov & Leadership', icon:'🌟', color:'orange',
-    hint: 'e.g. ASB, SGA, Honor Council'
-  },
-  work: {
-    name:'Work & Jobs', icon:'💼', color:'pink',
-    hint: 'e.g. Program/Internship, Part-time at Target, Tutoring, Research'
-  },
-  personal: {
-    name:'Personal & Family', icon:'🏠', color:'peach',
-    hint: 'e.g. Family responsibilities, College apps, Health'
-  },
-  colprep: {
-    name:'College Prep', icon:'🎓', color:'lavender',
-    hint: 'e.g. College Essays, Campus Visits'
-  },
-  examprep: {
-    name:'Exam Prep', icon:'📝', color:'sky',
-    hint: 'e.g. SAT Prep, AP Prep, ACT Prep'
-  }
-};
+// ─── HELPERS ───────────────────────────────────────────────────────────────
+// Returns "YYYY-MM-DD" for today in local time
+function todayStr() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
 
-const colorMap = {
-  orange: { chip:'sel-orange', dot:'#e8874a' },
-  mint:   { chip:'sel-pink',   dot:'#58b088' },
-  lavender: { chip:'sel-lavender', dot:'#8878d0' },
-  sky:    { chip:'sel-sky',    dot:'#5898d8' },
-  peach:  { chip:'sel-orange', dot:'#e8a888' },
-};
+function hasCheckedInToday() {
+  return state.lastCheckinDate === todayStr();
+}
 
-// ─────────────────────────────────────────
-// AUTH
-// ─────────────────────────────────────────
+// ─── AUTH ──────────────────────────────────────────────────────────────────
 function renderAuth(mode='login') {
-  const isLogin = mode==='login';
+  const isLogin = mode === 'login';
   document.getElementById('authSub').textContent = isLogin ? 'Sign in to your account ☁️' : 'Create your account ☁️';
   document.getElementById('authErr').classList.remove('show');
   document.getElementById('authForm').innerHTML = `
     ${!isLogin ? `<div class="form-group"><label class="form-label">Your Name</label><input class="form-input" id="authName" placeholder="First name" type="text"></div>` : ''}
     <div class="form-group"><label class="form-label">Email</label><input class="form-input" id="authEmail" placeholder="you@email.com" type="email"></div>
     ${!isLogin ? `<div class="form-group"><label class="form-label">Phone (optional)</label><input class="form-input" id="authPhone" placeholder="+1 555 000 0000" type="tel"></div>` : ''}
-    <div class="form-group"><label class="form-label">Password</label><input class="form-input" id="authPass" placeholder="Password" type="password"></div>
-    <button class="btn-primary" onclick="${isLogin?'doLogin()':'doSignup()'}">
+    <div class="form-group"><label class="form-label">Password</label><input class="form-input" id="authPass" placeholder="Password" type="password" onkeydown="if(event.key==='Enter')${isLogin?'doLogin()':'doSignup()'}"></div>
+    <button class="btn-primary" onclick="${isLogin ? 'doLogin()' : 'doSignup()'}">
       ${isLogin ? 'Sign In →' : 'Create Account →'}
     </button>
-    <div class="auth-switch">${isLogin ? "Don't have an account? <span onclick=\"renderAuth('signup')\">Sign up</span>" : "Already have an account? <span onclick=\"renderAuth('login')\">Sign in</span>"}</div>
+    <div class="auth-switch">${isLogin
+      ? "Don't have an account? <span onclick=\"renderAuth('signup')\">Sign up</span>"
+      : "Already have an account? <span onclick=\"renderAuth('login')\">Sign in</span>"}</div>
     <div style="text-align:center;margin-top:12px;">
       <span style="font-size:13px;font-weight:700;color:var(--orange-deep);cursor:pointer;" onclick="skipAuth()">Continue without account (demo)</span>
     </div>
   `;
 }
 
+function showLoading() {
+  document.getElementById('loading-screen').classList.add('active');
+  document.getElementById('auth-screen').classList.remove('active');
+  document.getElementById('app').classList.remove('active');
+  document.getElementById('onboarding').classList.remove('active');
+}
+
+function hideLoading() {
+  document.getElementById('loading-screen').classList.remove('active');
+}
+
+// Temp store for signup data before confirmation
+let pendingSignup = { name:'', email:'', phone:'' };
+
 async function doLogin() {
   const email = document.getElementById('authEmail').value.trim();
   const pass = document.getElementById('authPass').value;
-  if (!email||!pass) { showAuthErr('Please fill in all fields.'); return; }
-
-  if (!sb || SUPABASE_URL==='YOUR_SUPABASE_URL') {
-    // Demo mode — skip real auth
-    state.email = email; state.userId = 'demo-'+Date.now();
-    afterAuth();
+  if (!email || !pass) { showAuthErr('Please fill in all fields.'); return; }
+  if (!sb) { state.email = email; state.userId = 'demo-'+Date.now(); afterAuth(); return; }
+  showLoading();
+  const { data, error } = await sb.auth.signInWithPassword({ email, password: pass });
+  if (error) {
+    hideLoading(); showScreen('auth-screen');
+    // Give user-friendly messages
+    if (error.message.toLowerCase().includes('confirm')) {
+      showAuthErr('Please confirm your email first — check your inbox!');
+    } else if (error.message.toLowerCase().includes('invalid')) {
+      showAuthErr('Wrong email or password. Try again.');
+    } else {
+      showAuthErr(error.message);
+    }
     return;
   }
-  const { data, error } = await sb.auth.signInWithPassword({ email, password: pass });
-  if (error) { showAuthErr(error.message); return; }
-  state.userId = data.user.id; state.email = email;
+  state.userId = data.user.id;
+  state.email = data.user.email;
   await loadStateFromCloud();
   afterAuth();
 }
 
 async function doSignup() {
-  const name = (document.getElementById('authName')||{}).value?.trim();
+  const nameEl = document.getElementById('authName');
+  const name = nameEl ? nameEl.value.trim() : '';
   const email = document.getElementById('authEmail').value.trim();
-  const phone = (document.getElementById('authPhone')||{}).value?.trim()||'';
+  const phoneEl = document.getElementById('authPhone');
+  const phone = phoneEl ? phoneEl.value.trim() : '';
   const pass = document.getElementById('authPass').value;
-  if (!email||!pass) { showAuthErr('Please fill in email and password.'); return; }
+  if (!name) { showAuthErr('Please enter your name.'); return; }
+  if (!email || !pass) { showAuthErr('Please fill in email and password.'); return; }
   if (pass.length < 6) { showAuthErr('Password must be at least 6 characters.'); return; }
+  if (!sb) { state.name = name; state.email = email; state.phone = phone; state.userId = 'demo-'+Date.now(); startOnboarding(); return; }
 
-  if (!sb || SUPABASE_URL==='YOUR_SUPABASE_URL') {
-    state.name = name||''; state.email = email; state.phone = phone; state.userId = 'demo-'+Date.now();
-    startOnboarding();
-    return;
-  }
-  const { data, error } = await sb.auth.signUp({ email, password: pass, options: { data: { name, phone } } });
-  if (error) { showAuthErr(error.message); return; }
-  state.userId = data.user.id; state.name = name||''; state.email = email; state.phone = phone;
-  showToast('Check your email to confirm your account!');
-  startOnboarding();
+  showLoading();
+  const { data, error } = await sb.auth.signUp({
+    email, password: pass,
+    options: { data: { name, phone } }
+  });
+  if (error) { hideLoading(); showScreen('auth-screen'); showAuthErr(error.message); return; }
+
+  // Store signup info — user hasn't confirmed yet so we can't save to Supabase
+  // We save to localStorage so when they confirm + return, we resume onboarding
+  pendingSignup = { name, email, phone };
+  localStorage.setItem('nimbus_pending_signup', JSON.stringify(pendingSignup));
+
+  hideLoading();
+  showConfirmEmailScreen(email);
+}
+
+function showConfirmEmailScreen(email) {
+  showScreen('confirm-email-screen');
+  const el = document.getElementById('confirmEmailAddr');
+  if (el) el.textContent = email || '';
 }
 
 function skipAuth() {
@@ -972,261 +768,214 @@ function skipAuth() {
   else startOnboarding();
 }
 
-function showAuthErr(msg) { const e=document.getElementById('authErr'); e.textContent=msg; e.classList.add('show'); }
+function showAuthErr(msg) { const e = document.getElementById('authErr'); e.textContent = msg; e.classList.add('show'); }
 
 function afterAuth() {
-  if (state.name) startApp();
-  else startOnboarding();
+  hideLoading();
+  // Clear any pending signup since we're fully authenticated
+  localStorage.removeItem('nimbus_pending_signup');
+  if (state.name) { startApp(); }
+  else {
+    // Restore pending signup name/phone if it was stored before confirmation
+    try {
+      const p = JSON.parse(localStorage.getItem('nimbus_pending_signup') || 'null');
+      if (p && p.name) { state.name = p.name; state.phone = p.phone || ''; }
+    } catch(e) {}
+    startOnboarding();
+  }
 }
 
 function logOut() {
   if (sb) sb.auth.signOut();
-  state = { userId:null, email:'', phone:'', name:'', grade:'', categories:[], points:0, streak:0, mood:2, workload:5, overwhelm:5, tasks:[], notes:[], nimbusState:'neutral', onboardStep:0, notifs:{break:false,breakFreq:60,tasks:false,checkin:false,checkinTime:'08:00'} };
-  localStorage.removeItem('nimbus_v3');
   stopAllNotifs();
-  document.getElementById('app').classList.remove('active');
-  document.getElementById('onboarding').style.display='none';
-  document.getElementById('auth-screen').classList.add('active');
+  clearInterval(timer.interval);
+  state = {
+    userId:null, email:'', phone:'', name:'', grade:'',
+    categories:[], points:0, streak:0, mood:2, workload:5, overwhelm:5,
+    tasks:[], notes:[], nimbusState:'neutral', onboardStep:0,
+    notifs:{break:false,breakFreq:60,tasks:false,checkin:false,checkinTime:'08:00'},
+    lastCheckinDate:null, lastStreakDate:null
+  };
+  localStorage.removeItem('nimbus_v3');
+  showScreen('auth-screen');
   renderAuth('login');
 }
 
-// ─────────────────────────────────────────
-// ONBOARDING
-// ─────────────────────────────────────────
+function showScreen(id) {
+  ['loading-screen','auth-screen','confirm-email-screen','onboarding','app','timer-screen'].forEach(s => {
+    const el = document.getElementById(s);
+    if (el) el.classList.remove('active');
+  });
+  const target = document.getElementById(id);
+  if (target) target.classList.add('active');
+}
+
+// ─── ONBOARDING ────────────────────────────────────────────────────────────
+const CAT_TEMPLATES = {
+  academic: { name:'Academic', icon:'📚', color:'orange', subcatTypes:['Regular','Honors','AP','IB','Dual Enrollment'], hint:'e.g. Calculus, English 11, AP US History' }
+};
+const EC_TYPES = ['Sports & Athletics','Arts & Performance','Clubs & Orgs','Student Gov','Work / Job','Volunteering','Community Service','Exam Prep','Other'];
+
 const STEPS = [
   { title:"Hey, I'm Nimbus! ☁️", sub:"Your personal study cloud. Let's set up your world so I can help you crush it.", type:"welcome" },
   { title:"What grade are you in?", sub:"Helps Nimbus understand your workload.", type:"grade", options:["9th Grade","10th Grade","11th Grade","12th Grade","Other"] },
-  { title:"Add your classes", sub:"Build your academic schedule. Add each course with its level.", type:"cat_academic" },
-  { title:"Add your extracurriculars", sub:"Add every club, sport, job, or org you're involved in. You can have as many as you want.", type:"cat_ec" },
+  { title:"Add your classes", sub:"Build your academic schedule.", type:"cat_academic" },
+  { title:"Add your extracurriculars", sub:"Add every club, sport, job, or org you're involved in.", type:"cat_ec" },
   { title:"Quick burnout check", sub:"Be honest — Nimbus won't judge.", type:"burnout" },
   { title:"What are your goals?", sub:"Choose what matters most this semester.", type:"tags", key:"goals", options:["Stop procrastinating","Manage stress better","Improve grades","Better habits","College applications","Work-life balance","Be more organized","Sleep more"] },
   { title:"You're all set! 🌈", sub:"Nimbus is ready. Let's build some momentum together.", type:"finish" }
 ];
 
 function startOnboarding() {
-  document.getElementById('auth-screen').classList.remove('active');
-  document.getElementById('onboarding').classList.add('active');
-  document.getElementById('stepDots').innerHTML = STEPS.map((_,i)=>`<div class="step-dot" id="dot${i}"></div>`).join('');
+  showScreen('onboarding');
+  document.getElementById('stepDots').innerHTML = STEPS.map((_,i) => `<div class="step-dot" id="dot${i}"></div>`).join('');
   renderStep(0);
 }
 
 function updateDots() {
-  STEPS.forEach((_,i)=>{
-    const d=document.getElementById('dot'+i);
-    d.className='step-dot'+(i<state.onboardStep?' done':i===state.onboardStep?' active':'');
+  STEPS.forEach((_,i) => {
+    const d = document.getElementById('dot'+i);
+    d.className = 'step-dot' + (i < state.onboardStep ? ' done' : i === state.onboardStep ? ' active' : '');
   });
 }
 
 function renderStep(step) {
-  state.onboardStep=step; updateDots();
-  const s=STEPS[step];
-  let html=`<div class="cloud-container">${smallCloudSVG(s.type==='finish'?'glowing':s.type==='welcome'?'happy':'neutral')}</div>
+  state.onboardStep = step; updateDots();
+  const s = STEPS[step];
+  let html = `<div class="cloud-container">${smallCloudSVG(s.type==='finish'?'glowing':s.type==='welcome'?'happy':'neutral')}</div>
   <div class="onboard-title">${s.title}</div><div class="onboard-sub">${s.sub}</div>`;
 
-  if (s.type==='welcome') {
-    html+=`<button class="btn-primary" onclick="nextStep()">Let's Go! 🌤️</button>`;
-  } else if (s.type==='grade') {
-    html+=`<div class="option-grid" id="gradeOpts">${s.options.map(o=>`<div class="option-btn" onclick="selectGrade(this)">${o}</div>`).join('')}</div><button class="btn-primary" onclick="nextStep()">Continue →</button>`;
-  } else if (s.type==='cat_academic') {
-    html+=renderAcademicBuilder()+`<button class="btn-primary" onclick="nextStep()">Continue →</button>`;
-  } else if (s.type==='cat_ec') {
-    html+=renderECBuilder()+`<button class="btn-primary" onclick="nextStep()">Continue →</button>`;
-  } else if (s.type==='burnout') {
-    html+=`<div class="checkin-q" style="margin-top:4px;">Overall stress this week (1–10):</div>
+  if (s.type === 'welcome') {
+    html += `<button class="btn-primary" onclick="nextStep()">Let's Go! 🌤️</button>`;
+  } else if (s.type === 'grade') {
+    html += `<div class="option-grid" id="gradeOpts">${s.options.map(o=>`<div class="option-btn" onclick="selectGrade(this)">${o}</div>`).join('')}</div><button class="btn-primary" onclick="nextStep()">Continue →</button>`;
+  } else if (s.type === 'cat_academic') {
+    html += renderAcademicBuilder() + `<button class="btn-primary" onclick="nextStep()">Continue →</button>`;
+  } else if (s.type === 'cat_ec') {
+    html += renderECBuilder() + `<button class="btn-primary" onclick="nextStep()">Continue →</button>`;
+  } else if (s.type === 'burnout') {
+    html += `<div class="checkin-q" style="margin-top:4px;">Overall stress this week (1–10):</div>
     <div class="slider-row" style="margin-bottom:14px;"><div class="slider-track"><input type="range" min="1" max="10" value="${state.overwhelm}" id="bStress" oninput="updateSlider(this,'bStressV')"></div><div class="slider-val" id="bStressV">${state.overwhelm}</div></div>
     <div class="checkin-q">Workload right now (1–10):</div>
     <div class="slider-row" style="margin-bottom:20px;"><div class="slider-track"><input type="range" min="1" max="10" value="${state.workload}" id="bWork" oninput="updateSlider(this,'bWorkV')"></div><div class="slider-val" id="bWorkV">${state.workload}</div></div>
     <button class="btn-primary" onclick="saveBurnout()">Continue →</button>`;
-  } else if (s.type==='tags') {
-    html+=`<div class="tag-grid" id="tagGrid">${s.options.map(o=>`<div class="tag-btn" onclick="toggleGoal(this)">${o}</div>`).join('')}</div><button class="btn-primary" onclick="nextStep()">Continue →</button>`;
-  } else if (s.type==='finish') {
-    html+=`<button class="btn-primary" onclick="finishOnboarding()">Meet Nimbus! 🌈</button>`;
+  } else if (s.type === 'tags') {
+    html += `<div class="tag-grid" id="tagGrid">${s.options.map(o=>`<div class="tag-btn" onclick="toggleGoal(this)">${o}</div>`).join('')}</div><button class="btn-primary" onclick="nextStep()">Continue →</button>`;
+  } else if (s.type === 'finish') {
+    html += `<button class="btn-primary" onclick="finishOnboarding()">Meet Nimbus! 🌈</button>`;
   }
-  document.getElementById('onboardContent').innerHTML=html;
+  document.getElementById('onboardContent').innerHTML = html;
   updateAllSliders();
 }
 
-// ACADEMIC BUILDER
 function renderAcademicBuilder() {
   const cat = getCat('academic') || addCatTemplate('academic');
-  return `<div style="margin-bottom:12px;">
-    <div class="add-item-row">
-      <input class="add-item-input" id="acInput" placeholder="${CAT_TEMPLATES.academic.hint}">
-      <select class="add-item-select" id="acType">
-        ${CAT_TEMPLATES.academic.subcatTypes.map(t=>`<option>${t}</option>`).join('')}
-      </select>
-      <button class="add-item-btn" onclick="addAcademicItem()">Add</button>
-    </div>
-  </div>
+  return `<div style="margin-bottom:12px;"><div class="add-item-row">
+    <input class="add-item-input" id="acInput" placeholder="${CAT_TEMPLATES.academic.hint}">
+    <select class="add-item-select" id="acType">${CAT_TEMPLATES.academic.subcatTypes.map(t=>`<option>${t}</option>`).join('')}</select>
+    <button class="add-item-btn" onclick="addAcademicItem()">Add</button>
+  </div></div>
   <div class="item-list" id="acList">${renderAcList(cat)}</div>`;
 }
 
 function renderAcList(cat) {
-  if (!cat||!cat.subcats||cat.subcats.length===0) return `<div style="font-size:13px;color:var(--text-light);font-weight:700;padding:8px 4px;">No classes added yet</div>`;
-  return cat.subcats.map(s=>`<div class="item-row"><div><div class="item-row-text">${s.name}</div><div class="item-row-sub">${s.type||''}</div></div><button class="item-remove" onclick="removeSubcat('academic','${s.id}')">×</button></div>`).join('');
+  if (!cat || !cat.subcats || cat.subcats.length === 0) return `<div style="font-size:13px;color:var(--text-light);font-weight:700;padding:8px 4px;">No classes added yet</div>`;
+  return cat.subcats.map(s => `<div class="item-row"><div><div class="item-row-text">${s.name}</div><div class="item-row-sub">${s.type||''}</div></div><button class="item-remove" onclick="removeSubcat('academic','${s.id}')">×</button></div>`).join('');
 }
 
 function addAcademicItem() {
-  const name=document.getElementById('acInput').value.trim();
-  const type=document.getElementById('acType').value;
+  const name = document.getElementById('acInput').value.trim();
+  const type = document.getElementById('acType').value;
   if (!name) return;
-  let cat=getCat('academic')||addCatTemplate('academic');
-  cat.subcats.push({id:'ac_'+Date.now(),name,type});
-  document.getElementById('acInput').value='';
-  document.getElementById('acList').innerHTML=renderAcList(cat);
+  let cat = getCat('academic') || addCatTemplate('academic');
+  cat.subcats.push({ id:'ac_'+Date.now(), name, type });
+  document.getElementById('acInput').value = '';
+  document.getElementById('acList').innerHTML = renderAcList(cat);
   saveState();
 }
 
-// EC BUILDER
-const EC_TYPES = ['Sports & Athletics','Arts & Performance','Clubs & Orgs','Student Gov','Work / Job','Volunteering','Community Service','Exam Prep', 'Other'];
-
 function renderECBuilder() {
-  return `<div style="margin-bottom:12px;">
-    <div class="add-item-row">
-      <input class="add-item-input" id="ecInput" placeholder="e.g. Varsity Soccer, NHS, Part-time Job">
-      <select class="add-item-select" id="ecType">${EC_TYPES.map(t=>`<option>${t}</option>`).join('')}</select>
-      <button class="add-item-btn" onclick="addECItem()">Add</button>
-    </div>
-  </div>
+  return `<div style="margin-bottom:12px;"><div class="add-item-row">
+    <input class="add-item-input" id="ecInput" placeholder="e.g. Varsity Soccer, NHS, Part-time Job">
+    <select class="add-item-select" id="ecType">${EC_TYPES.map(t=>`<option>${t}</option>`).join('')}</select>
+    <button class="add-item-btn" onclick="addECItem()">Add</button>
+  </div></div>
   <div class="item-list" id="ecList">${renderECList()}</div>`;
 }
 
 function renderECList() {
-  const ecs = state.categories.filter(c=>c.type==='ec');
+  const ecs = state.categories.filter(c => c.type === 'ec');
   if (!ecs.length) return `<div style="font-size:13px;color:var(--text-light);font-weight:700;padding:8px 4px;">No activities added yet</div>`;
-  return ecs.map(c=>`<div class="item-row"><div><div class="item-row-text">${c.name}</div><div class="item-row-sub">${c.ecType||''}</div></div><button class="item-remove" onclick="removeECCat('${c.id}')">×</button></div>`).join('');
+  return ecs.map(c => `<div class="item-row"><div><div class="item-row-text">${c.name}</div><div class="item-row-sub">${c.ecType||''}</div></div><button class="item-remove" onclick="removeECCat('${c.id}')">×</button></div>`).join('');
 }
 
 function addECItem() {
-  const name=document.getElementById('ecInput').value.trim();
-  const ecType=document.getElementById('ecType').value;
+  const name = document.getElementById('ecInput').value.trim();
+  const ecType = document.getElementById('ecType').value;
   if (!name) return;
-  state.categories.push({id:'ec_'+Date.now(),name,icon:ecIcon(ecType),color:'pink',type:'ec',ecType,subcats:[]});
-  document.getElementById('ecInput').value='';
-  document.getElementById('ecList').innerHTML=renderECList();
+  state.categories.push({ id:'ec_'+Date.now(), name, icon:ecIcon(ecType), color:'pink', type:'ec', ecType, subcats:[] });
+  document.getElementById('ecInput').value = '';
+  document.getElementById('ecList').innerHTML = renderECList();
   saveState();
 }
 
-function removeECCat(id) { state.categories=state.categories.filter(c=>c.id!==id); if(document.getElementById('ecList'))document.getElementById('ecList').innerHTML=renderECList(); saveState(); }
+function removeECCat(id) { state.categories = state.categories.filter(c => c.id !== id); if (document.getElementById('ecList')) document.getElementById('ecList').innerHTML = renderECList(); saveState(); }
+function ecIcon(t) { const m={'Sports & Athletics':'⚽','Arts & Performance':'🎨','Clubs & Orgs':'🏛️','Student Gov':'🌟','Work / Job':'💼','Volunteering':'🤝','Community Service':'🌱','Exam Prep':'📝','Other':'✨'}; return m[t]||'✨'; }
+function getCat(type) { return state.categories.find(c => c.type === type); }
+function addCatTemplate(type) { const t = CAT_TEMPLATES[type]; const cat = {id:type+'_'+Date.now(),name:t.name,icon:t.icon,color:t.color,type,subcats:[]}; state.categories.push(cat); return cat; }
+function removeSubcat(catType, subcatId) { const cat = getCat(catType); if (!cat) return; cat.subcats = cat.subcats.filter(s => s.id !== subcatId); const el = document.getElementById('acList'); if (el) el.innerHTML = renderAcList(cat); saveState(); }
+function selectGrade(el) { document.querySelectorAll('#gradeOpts .option-btn').forEach(b => b.classList.remove('selected')); el.classList.add('selected'); state.grade = el.textContent; }
+function toggleGoal(el) { el.classList.toggle('selected'); }
+function saveBurnout() { state.overwhelm = parseInt(document.getElementById('bStress').value); state.workload = parseInt(document.getElementById('bWork').value); nextStep(); }
+function nextStep() { if (state.onboardStep < STEPS.length-1) renderStep(state.onboardStep+1); }
+async function finishOnboarding() { await saveState(); showScreen('app'); startApp(); }
 
-function ecIcon(t) {
-  const m={'Sports & Athletics':'⚽','Arts & Performance':'🎨','Clubs & Orgs':'🏛️','Student Gov':'🌟','Work / Job':'💼','Volunteering':'🤝','Community Service':'🌱', 'Exam Prep':'📝', 'Other':'✨'};
-  return m[t]||'✨';
-}
-
-function getCat(type) { return state.categories.find(c=>c.type===type); }
-
-function addCatTemplate(type) {
-  const t=CAT_TEMPLATES[type];
-  const cat={id:type+'_'+Date.now(),name:t.name,icon:t.icon,color:t.color,type,subcats:[]};
-  state.categories.push(cat); return cat;
-}
-
-function removeSubcat(catType, subcatId) {
-  const cat=getCat(catType); if(!cat)return;
-  cat.subcats=cat.subcats.filter(s=>s.id!==subcatId);
-  const el=document.getElementById('acList');
-  if(el) el.innerHTML=renderAcList(cat);
-  saveState();
-}
-
-function selectGrade(el){document.querySelectorAll('#gradeOpts .option-btn').forEach(b=>b.classList.remove('selected'));el.classList.add('selected');state.grade=el.textContent;}
-function toggleGoal(el){el.classList.toggle('selected');}
-function saveBurnout(){state.overwhelm=parseInt(document.getElementById('bStress').value);state.workload=parseInt(document.getElementById('bWork').value);nextStep();}
-function nextStep(){if(state.onboardStep<STEPS.length-1)renderStep(state.onboardStep+1);}
-function finishOnboarding(){
-  saveState();
-  document.getElementById('onboarding').classList.remove('active');
-  setTimeout(startApp, 100);
-}
-// ─────────────────────────────────────────
-// NIMBUS SVG
-// ─────────────────────────────────────────
-function getNimbusColors(mood){
-  const m={
-    neutral: {c1:'rgba(255,252,248,1)',c2:'rgba(250,243,238,1)',c3:'rgba(255,255,255,0.9)',shadow:'rgba(245,185,140,0.18)',rim:'rgba(235,210,190,0.3)',eye:'#2a1808',blush:'rgba(232,135,74,0.3)'},
-    happy:   {c1:'rgba(255,248,238,1)',c2:'rgba(252,235,218,1)',c3:'rgba(255,252,245,0.9)',shadow:'rgba(245,185,140,0.22)',rim:'rgba(235,210,185,0.35)',eye:'#2a1808',blush:'rgba(225,120,60,0.32)'},
-    sad:     {c1:'rgba(210,225,248,1)',c2:'rgba(195,215,244,1)',c3:'rgba(222,235,252,0.9)',shadow:'rgba(120,165,232,0.3)',rim:'rgba(160,190,238,0.4)',eye:'#1e2a3a',blush:'rgba(120,160,220,0.28)'},
-    stressed:{c1:'rgba(182,192,220,1)',c2:'rgba(168,180,215,1)',c3:'rgba(198,208,228,0.9)',shadow:'rgba(100,120,185,0.38)',rim:'rgba(128,145,198,0.45)',eye:'#1a2038',blush:'rgba(100,118,185,0.24)'},
-    glowing: {c1:'rgba(255,253,218,1)',c2:'rgba(254,248,190,1)',c3:'rgba(255,255,232,0.9)',shadow:'rgba(245,215,70,0.28)',rim:'rgba(242,212,90,0.42)',eye:'#2a1e06',blush:'rgba(235,165,70,0.35)'},
+// ─── NIMBUS SVG ────────────────────────────────────────────────────────────
+function getNimbusColors(mood) {
+  const m = {
+    neutral:  {c1:'rgba(255,252,248,1)',c2:'rgba(250,243,238,1)',c3:'rgba(255,255,255,0.9)',shadow:'rgba(245,185,140,0.18)',rim:'rgba(235,210,190,0.3)',eye:'#2a1808',blush:'rgba(232,135,74,0.3)'},
+    happy:    {c1:'rgba(255,248,238,1)',c2:'rgba(252,235,218,1)',c3:'rgba(255,252,245,0.9)',shadow:'rgba(245,185,140,0.22)',rim:'rgba(235,210,185,0.35)',eye:'#2a1808',blush:'rgba(225,120,60,0.32)'},
+    sad:      {c1:'rgba(210,225,248,1)',c2:'rgba(195,215,244,1)',c3:'rgba(222,235,252,0.9)',shadow:'rgba(120,165,232,0.3)',rim:'rgba(160,190,238,0.4)',eye:'#1e2a3a',blush:'rgba(120,160,220,0.28)'},
+    stressed: {c1:'rgba(182,192,220,1)',c2:'rgba(168,180,215,1)',c3:'rgba(198,208,228,0.9)',shadow:'rgba(100,120,185,0.38)',rim:'rgba(128,145,198,0.45)',eye:'#1a2038',blush:'rgba(100,118,185,0.24)'},
+    glowing:  {c1:'rgba(255,253,218,1)',c2:'rgba(254,248,190,1)',c3:'rgba(255,255,232,0.9)',shadow:'rgba(245,215,70,0.28)',rim:'rgba(242,212,90,0.42)',eye:'#2a1e06',blush:'rgba(235,165,70,0.35)'},
   };
-  return m[mood]||m.neutral;
+  return m[mood] || m.neutral;
 }
 
-function buildCloud(mood,w,h,sc=1){
-  const c=getNimbusColors(mood),cx=w/2,cy=h*0.53;
-  const body=`
-    <ellipse cx="${cx}" cy="${cy+9*sc}" rx="${70*sc}" ry="${33*sc}" fill="${c.shadow}"/>
-    <ellipse cx="${cx-18*sc}" cy="${cy-10*sc}" rx="${33*sc}" ry="${29*sc}" fill="${c.c1}"/>
-    <ellipse cx="${cx+18*sc}" cy="${cy-14*sc}" rx="${37*sc}" ry="${33*sc}" fill="${c.c1}"/>
-    <ellipse cx="${cx+46*sc}" cy="${cy-2*sc}" rx="${25*sc}" ry="${23*sc}" fill="${c.c2}"/>
-    <ellipse cx="${cx-46*sc}" cy="${cy+2*sc}" rx="${21*sc}" ry="${19*sc}" fill="${c.c2}"/>
-    <ellipse cx="${cx}" cy="${cy+10*sc}" rx="${66*sc}" ry="${25*sc}" fill="${c.c3}"/>
-    <ellipse cx="${cx}" cy="${cy+4*sc}" rx="${56*sc}" ry="${27*sc}" fill="${c.c1}"/>
-    <ellipse cx="${cx-8*sc}" cy="${cy-5*sc}" rx="${42*sc}" ry="${31*sc}" fill="${c.c1}" opacity="0.65"/>
-  `;
-  const rim=`
-    <ellipse cx="${cx-15*sc}" cy="${cy-8*sc}" rx="${33*sc}" ry="${29*sc}" fill="none" stroke="${c.rim}" stroke-width="${1.4*sc}"/>
-    <ellipse cx="${cx+16*sc}" cy="${cy-12*sc}" rx="${35*sc}" ry="${31*sc}" fill="none" stroke="${c.rim}" stroke-width="${1.4*sc}"/>
-    <ellipse cx="${cx}" cy="${cy+6*sc}" rx="${58*sc}" ry="${21*sc}" fill="none" stroke="${c.rim}" stroke-width="${1.1*sc}"/>
-  `;
-  const eL=cx-14*sc,eR=cx+14*sc,eY=cy-2*sc,erx=7*sc,ery=8.5*sc;
-  const eyes=`
-    <ellipse cx="${eL}" cy="${eY}" rx="${erx}" ry="${ery}" fill="${c.eye}"/>
-    <ellipse cx="${eR}" cy="${eY}" rx="${erx}" ry="${ery}" fill="${c.eye}"/>
-    <ellipse cx="${eL+2*sc}" cy="${eY-2.5*sc}" rx="${2.5*sc}" ry="${3*sc}" fill="white"/>
-    <ellipse cx="${eR+2*sc}" cy="${eY-2.5*sc}" rx="${2.5*sc}" ry="${3*sc}" fill="white"/>
-  `;
-  const blush=`
-    <ellipse cx="${cx-30*sc}" cy="${cy+8*sc}" rx="${9*sc}" ry="${5*sc}" fill="${c.blush}"/>
-    <ellipse cx="${cx+30*sc}" cy="${cy+8*sc}" rx="${9*sc}" ry="${5*sc}" fill="${c.blush}"/>
-  `;
-  let mouth='';
-  if(mood==='stressed'){
-    mouth=`<path d="M${cx-11*sc} ${cy-7*sc} L${cx-7*sc} ${cy-9*sc}" stroke="${c.eye}" stroke-width="${2*sc}" stroke-linecap="round" opacity="0.65"/>
-    <path d="M${cx+7*sc} ${cy-9*sc} L${cx+11*sc} ${cy-7*sc}" stroke="${c.eye}" stroke-width="${2*sc}" stroke-linecap="round" opacity="0.65"/>
-    <path d="M${cx-10*sc} ${cy+12*sc} Q${cx} ${cy+8*sc} ${cx+10*sc} ${cy+12*sc}" stroke="${c.eye}" stroke-width="${2.5*sc}" fill="none" stroke-linecap="round"/>`;
-  } else if(mood==='sad'){
-    mouth=`<path d="M${cx-10*sc} ${cy+11*sc} Q${cx} ${cy+7*sc} ${cx+10*sc} ${cy+11*sc}" stroke="${c.eye}" stroke-width="${2.5*sc}" fill="none" stroke-linecap="round"/>`;
-  } else if(mood==='glowing'){
-    mouth=`<path d="M${cx-11*sc} ${cy+10*sc} Q${cx} ${cy+20*sc} ${cx+11*sc} ${cy+10*sc}" stroke="#c09020" stroke-width="${3*sc}" fill="none" stroke-linecap="round"/>`;
-  } else {
-    const sa=mood==='happy'?16:13;
-    mouth=`<path d="M${cx-10*sc} ${cy+10*sc} Q${cx} ${cy+sa*sc} ${cx+10*sc} ${cy+10*sc}" stroke="${c.eye}" stroke-width="${2.5*sc}" fill="none" stroke-linecap="round" opacity="0.75"/>`;
-  }
-  let rain='';
-  if(mood==='stressed'||mood==='sad'){
-    const ry2=cy+31*sc;
-    rain=`<ellipse cx="${cx-22*sc}" cy="${ry2}" rx="${2.8*sc}" ry="${6.5*sc}" fill="${c.shadow}" opacity="0.7"/>
-    <ellipse cx="${cx-6*sc}" cy="${ry2+5*sc}" rx="${2.8*sc}" ry="${7.5*sc}" fill="${c.shadow}" opacity="0.6"/>
-    <ellipse cx="${cx+10*sc}" cy="${ry2}" rx="${2.8*sc}" ry="${6.5*sc}" fill="${c.shadow}" opacity="0.75"/>
-    <ellipse cx="${cx+24*sc}" cy="${ry2+4*sc}" rx="${2.8*sc}" ry="${5.5*sc}" fill="${c.shadow}" opacity="0.5"/>`;
-  }
-  let glow='';
-  if(mood==='glowing'){
-    const gy=cy-39*sc;
-    glow=`<line x1="${cx}" y1="${gy}" x2="${cx}" y2="${gy-13*sc}" stroke="#f7d070" stroke-width="${3*sc}" stroke-linecap="round" opacity="0.8"/>
-    <line x1="${cx-27*sc}" y1="${gy+8*sc}" x2="${cx-37*sc}" y2="${gy}" stroke="#f7d070" stroke-width="${3*sc}" stroke-linecap="round" opacity="0.7"/>
-    <line x1="${cx+27*sc}" y1="${gy+8*sc}" x2="${cx+37*sc}" y2="${gy}" stroke="#f7d070" stroke-width="${3*sc}" stroke-linecap="round" opacity="0.7"/>
-    <line x1="${cx-17*sc}" y1="${gy-4*sc}" x2="${cx-23*sc}" y2="${gy-15*sc}" stroke="#f5e060" stroke-width="${2*sc}" stroke-linecap="round" opacity="0.6"/>
-    <line x1="${cx+17*sc}" y1="${gy-4*sc}" x2="${cx+23*sc}" y2="${gy-15*sc}" stroke="#f5e060" stroke-width="${2*sc}" stroke-linecap="round" opacity="0.6"/>`;
-  }
-  return glow+rain+body+rim+eyes+blush+mouth;
+function buildCloud(mood, w, h, sc=1) {
+  const c = getNimbusColors(mood), cx = w/2, cy = h*0.53;
+  const body = `<ellipse cx="${cx}" cy="${cy+9*sc}" rx="${70*sc}" ry="${33*sc}" fill="${c.shadow}"/><ellipse cx="${cx-18*sc}" cy="${cy-10*sc}" rx="${33*sc}" ry="${29*sc}" fill="${c.c1}"/><ellipse cx="${cx+18*sc}" cy="${cy-14*sc}" rx="${37*sc}" ry="${33*sc}" fill="${c.c1}"/><ellipse cx="${cx+46*sc}" cy="${cy-2*sc}" rx="${25*sc}" ry="${23*sc}" fill="${c.c2}"/><ellipse cx="${cx-46*sc}" cy="${cy+2*sc}" rx="${21*sc}" ry="${19*sc}" fill="${c.c2}"/><ellipse cx="${cx}" cy="${cy+10*sc}" rx="${66*sc}" ry="${25*sc}" fill="${c.c3}"/><ellipse cx="${cx}" cy="${cy+4*sc}" rx="${56*sc}" ry="${27*sc}" fill="${c.c1}"/><ellipse cx="${cx-8*sc}" cy="${cy-5*sc}" rx="${42*sc}" ry="${31*sc}" fill="${c.c1}" opacity="0.65"/>`;
+  const rim = `<ellipse cx="${cx-15*sc}" cy="${cy-8*sc}" rx="${33*sc}" ry="${29*sc}" fill="none" stroke="${c.rim}" stroke-width="${1.4*sc}"/><ellipse cx="${cx+16*sc}" cy="${cy-12*sc}" rx="${35*sc}" ry="${31*sc}" fill="none" stroke="${c.rim}" stroke-width="${1.4*sc}"/><ellipse cx="${cx}" cy="${cy+6*sc}" rx="${58*sc}" ry="${21*sc}" fill="none" stroke="${c.rim}" stroke-width="${1.1*sc}"/>`;
+  const eL=cx-14*sc, eR=cx+14*sc, eY=cy-2*sc, erx=7*sc, ery=8.5*sc;
+  const eyes = `<ellipse cx="${eL}" cy="${eY}" rx="${erx}" ry="${ery}" fill="${c.eye}"/><ellipse cx="${eR}" cy="${eY}" rx="${erx}" ry="${ery}" fill="${c.eye}"/><ellipse cx="${eL+2*sc}" cy="${eY-2.5*sc}" rx="${2.5*sc}" ry="${3*sc}" fill="white"/><ellipse cx="${eR+2*sc}" cy="${eY-2.5*sc}" rx="${2.5*sc}" ry="${3*sc}" fill="white"/>`;
+  const blush = `<ellipse cx="${cx-30*sc}" cy="${cy+8*sc}" rx="${9*sc}" ry="${5*sc}" fill="${c.blush}"/><ellipse cx="${cx+30*sc}" cy="${cy+8*sc}" rx="${9*sc}" ry="${5*sc}" fill="${c.blush}"/>`;
+  let mouth = '';
+  if (mood === 'stressed') { mouth = `<path d="M${cx-11*sc} ${cy-7*sc} L${cx-7*sc} ${cy-9*sc}" stroke="${c.eye}" stroke-width="${2*sc}" stroke-linecap="round" opacity="0.65"/><path d="M${cx+7*sc} ${cy-9*sc} L${cx+11*sc} ${cy-7*sc}" stroke="${c.eye}" stroke-width="${2*sc}" stroke-linecap="round" opacity="0.65"/><path d="M${cx-10*sc} ${cy+12*sc} Q${cx} ${cy+8*sc} ${cx+10*sc} ${cy+12*sc}" stroke="${c.eye}" stroke-width="${2.5*sc}" fill="none" stroke-linecap="round"/>`; }
+  else if (mood === 'sad') { mouth = `<path d="M${cx-10*sc} ${cy+11*sc} Q${cx} ${cy+7*sc} ${cx+10*sc} ${cy+11*sc}" stroke="${c.eye}" stroke-width="${2.5*sc}" fill="none" stroke-linecap="round"/>`; }
+  else if (mood === 'glowing') { mouth = `<path d="M${cx-11*sc} ${cy+10*sc} Q${cx} ${cy+20*sc} ${cx+11*sc} ${cy+10*sc}" stroke="#c09020" stroke-width="${3*sc}" fill="none" stroke-linecap="round"/>`; }
+  else { const sa = mood==='happy'?16:13; mouth = `<path d="M${cx-10*sc} ${cy+10*sc} Q${cx} ${cy+sa*sc} ${cx+10*sc} ${cy+10*sc}" stroke="${c.eye}" stroke-width="${2.5*sc}" fill="none" stroke-linecap="round" opacity="0.75"/>`; }
+  let rain = '';
+  if (mood === 'stressed' || mood === 'sad') { const ry2=cy+31*sc; rain=`<ellipse cx="${cx-22*sc}" cy="${ry2}" rx="${2.8*sc}" ry="${6.5*sc}" fill="${c.shadow}" opacity="0.7"/><ellipse cx="${cx-6*sc}" cy="${ry2+5*sc}" rx="${2.8*sc}" ry="${7.5*sc}" fill="${c.shadow}" opacity="0.6"/><ellipse cx="${cx+10*sc}" cy="${ry2}" rx="${2.8*sc}" ry="${6.5*sc}" fill="${c.shadow}" opacity="0.75"/><ellipse cx="${cx+24*sc}" cy="${ry2+4*sc}" rx="${2.8*sc}" ry="${5.5*sc}" fill="${c.shadow}" opacity="0.5"/>`; }
+  let glow = '';
+  if (mood === 'glowing') { const gy=cy-39*sc; glow=`<line x1="${cx}" y1="${gy}" x2="${cx}" y2="${gy-13*sc}" stroke="#f7d070" stroke-width="${3*sc}" stroke-linecap="round" opacity="0.8"/><line x1="${cx-27*sc}" y1="${gy+8*sc}" x2="${cx-37*sc}" y2="${gy}" stroke="#f7d070" stroke-width="${3*sc}" stroke-linecap="round" opacity="0.7"/><line x1="${cx+27*sc}" y1="${gy+8*sc}" x2="${cx+37*sc}" y2="${gy}" stroke="#f7d070" stroke-width="${3*sc}" stroke-linecap="round" opacity="0.7"/><line x1="${cx-17*sc}" y1="${gy-4*sc}" x2="${cx-23*sc}" y2="${gy-15*sc}" stroke="#f5e060" stroke-width="${2*sc}" stroke-linecap="round" opacity="0.6"/><line x1="${cx+17*sc}" y1="${gy-4*sc}" x2="${cx+23*sc}" y2="${gy-15*sc}" stroke="#f5e060" stroke-width="${2*sc}" stroke-linecap="round" opacity="0.6"/>`; }
+  return glow + rain + body + rim + eyes + blush + mouth;
 }
 
-function smallCloudSVG(mood){return `<svg width="110" height="92" viewBox="0 0 110 92" xmlns="http://www.w3.org/2000/svg">${buildCloud(mood,110,92,0.66)}</svg>`;}
-function renderMainNimbus(mood){document.getElementById('nimbusSVG').innerHTML=buildCloud(mood,200,170,1);}
+function smallCloudSVG(mood) { return `<svg width="110" height="92" viewBox="0 0 110 92" xmlns="http://www.w3.org/2000/svg">${buildCloud(mood,110,92,0.66)}</svg>`; }
+function renderMainNimbus(mood) { const el = document.getElementById('nimbusSVG'); if (el) el.innerHTML = buildCloud(mood,200,170,1); }
 
-// ─────────────────────────────────────────
-// APP INIT
-// ─────────────────────────────────────────
-function startApp(){
-  document.getElementById('onboarding').classList.remove('active');
-  document.getElementById('auth-screen').classList.remove('active');
-  document.getElementById('app').classList.add('active');
-  if(state.tasks.length===0) loadSampleTasks();
+// Loading cloud is initialized in the main boot DOMContentLoaded below
+
+// ─── APP START ─────────────────────────────────────────────────────────────
+function startApp() {
+  showScreen('app');
+  // FIX: show all sub-screens properly
+  ['tasks-screen','calendar-screen','notes-screen','settings-screen'].forEach(id => document.getElementById(id).style.display = 'none');
+  document.getElementById('home-screen').style.display = '';
+
   updateNimbusState();
-  setTimeout(()=>renderMainNimbus(state.nimbusState), 50);  updateNimbusDisplay();
+  renderMainNimbus(state.nimbusState);
+  updateNimbusDisplay();
   updateHomeGreeting();
   renderStreak();
   renderPoints();
@@ -1237,71 +986,103 @@ function startApp(){
   buildTaskCategoryDropdown();
   updateSettingsInfo();
   setupNotifications();
+  updateCheckinBanner();
+
+  // FIX: show daily check-in nudge if not done today
+  const nudge = document.getElementById('checkinNudge');
+  if (nudge) nudge.style.display = hasCheckedInToday() ? 'none' : 'block';
 }
 
-
-function updateNimbusState(){
-  const avg=(state.overwhelm+state.workload)/2;
-  const td=state.tasks.filter(t=>isToday(t.due));
-  const allDone=td.length>0&&td.every(t=>t.done);
-  if(allDone) state.nimbusState='glowing';
-  else if(avg>=8) state.nimbusState='stressed';
-  else if(avg>=6) state.nimbusState='sad';
-  else if(avg<=3) state.nimbusState='happy';
-  else state.nimbusState='neutral';
+function updateCheckinBanner() {
+  const banner = document.getElementById('checkinBanner');
+  const sub = document.getElementById('checkinBannerSub');
+  if (!banner || !sub) return;
+  if (hasCheckedInToday()) {
+    banner.classList.add('done-today');
+    sub.textContent = 'Already checked in today ✓';
+  } else {
+    banner.classList.remove('done-today');
+    sub.textContent = 'How\'s Nimbus feeling today?';
+  }
 }
 
-function updateNimbusDisplay(){
-  const m={stressed:'Nimbus is feeling stormy 🌩️',sad:'Nimbus is feeling rainy 🌧️',neutral:'Nimbus is okay ⛅',happy:'Nimbus is feeling sunny ☀️',glowing:'Nimbus is glowing! 🌈'};
-  document.getElementById('nimbusStatusText').textContent=m[state.nimbusState]||'Nimbus is here ☁️';
+function openCheckinIfAllowed() {
+  // Allow re-check-in anytime — the banner is just informational
+  openCheckin();
 }
 
-function updateHomeGreeting(){
-  document.getElementById('homeGreeting').textContent=`Hey ${state.name||'there'} ☁️`;
-  const days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-  const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  const n=new Date();
-  document.getElementById('homeDate').textContent=`${days[n.getDay()]}, ${months[n.getMonth()]} ${n.getDate()}`;
+function updateNimbusState() {
+  const avg = (state.overwhelm + state.workload) / 2;
+  const td = state.tasks.filter(t => isToday(t.due));
+  const allDone = td.length > 0 && td.every(t => t.done);
+  if (allDone) state.nimbusState = 'glowing';
+  else if (avg >= 8) state.nimbusState = 'stressed';
+  else if (avg >= 6) state.nimbusState = 'sad';
+  else if (avg <= 3) state.nimbusState = 'happy';
+  else state.nimbusState = 'neutral';
 }
 
-function updateSettingsInfo(){
-  const el=document.getElementById('settingsUserSub');
-  if(el) el.textContent=state.email||'Demo mode';
-  const em=document.getElementById('settingsEmail');
-  if(em) em.textContent=state.email||'—';
-  const ph=document.getElementById('settingsPhone');
-  if(ph) ph.textContent=state.phone||'No phone added';
+function updateNimbusDisplay() {
+  const m = { stressed:'Nimbus is feeling stormy 🌩️', sad:'Nimbus is feeling rainy 🌧️', neutral:'Nimbus is okay ⛅', happy:'Nimbus is feeling sunny ☀️', glowing:'Nimbus is glowing! 🌈' };
+  const el = document.getElementById('nimbusStatusText');
+  if (el) el.textContent = m[state.nimbusState] || 'Nimbus is here ☁️';
 }
 
-function isToday(s){if(!s)return false;const d=new Date(s+'T12:00:00'),n=new Date();return d.getDate()===n.getDate()&&d.getMonth()===n.getMonth()&&d.getFullYear()===n.getFullYear();}
+function updateHomeGreeting() {
+  const el = document.getElementById('homeGreeting');
+  if (el) el.textContent = `Hey ${state.name || 'there'} ☁️`;
+  const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const n = new Date();
+  const el2 = document.getElementById('homeDate');
+  if (el2) el2.textContent = `${days[n.getDay()]}, ${months[n.getMonth()]} ${n.getDate()}`;
+}
 
-// ─────────────────────────────────────────
-// STREAK + POINTS
-// ─────────────────────────────────────────
-function renderStreak(){
-  const days=['M','T','W','T','F','S','S'],labels=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
-  const today=new Date().getDay(),ti=today===0?6:today-1;
-  document.getElementById('streakCount').textContent=state.streak;
-  document.getElementById('streakDots').innerHTML=days.map((d,i)=>`
-    <div class="streak-dot${i<state.streak&&i<ti?' done':i===ti?' today':''}">
+function updateSettingsInfo() {
+  const el = document.getElementById('settingsUserSub'); if (el) el.textContent = state.email || 'Demo mode';
+  const em = document.getElementById('settingsEmail'); if (em) em.textContent = state.email || '—';
+  const ph = document.getElementById('settingsPhone'); if (ph) ph.textContent = state.phone || 'No phone added';
+}
+
+function isToday(s) {
+  if (!s) return false;
+  return s === todayStr();
+}
+
+// ─── STREAK ────────────────────────────────────────────────────────────────
+function renderStreak() {
+  const days = ['M','T','W','T','F','S','S'], labels = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  const today = new Date().getDay(), ti = today === 0 ? 6 : today-1;
+  const el = document.getElementById('streakCount'); if (el) el.textContent = state.streak;
+  const dotsEl = document.getElementById('streakDots'); if (!dotsEl) return;
+  dotsEl.innerHTML = days.map((d,i) => `
+    <div class="streak-dot${i < state.streak && i < ti ? ' done' : i === ti ? ' today' : ''}">
       <span class="sl">${d}</span><span class="sd">${labels[i]}</span>
     </div>`).join('');
 }
 
-function renderPoints(){
-  document.getElementById('pointsDisplay').textContent=state.points;
-  const badges=[{min:0,icon:'🌱',name:'Cloud Seedling'},{min:100,icon:'☁️',name:'Nimbus Sprout'},{min:250,icon:'🌤️',name:'Silver Liner'},{min:500,icon:'⛅',name:'Storm Chaser'},{min:1000,icon:'🌈',name:'Rainbow Rider'}];
-  let b=badges[0];for(const x of badges){if(state.points>=x.min)b=x;}
-  document.getElementById('badgeIcon').textContent=b.icon;
-  document.getElementById('badgeName').textContent=b.name;
+// FIX: streak only increments once per day
+function maybeIncrementStreak() {
+  const today = todayStr();
+  if (state.lastStreakDate === today) return; // already counted today
+  state.streak = Math.min((state.streak || 0) + 1, 7);
+  state.lastStreakDate = today;
+  renderStreak();
 }
 
-function addPoints(n){state.points+=n;renderPoints();showToast(`+${n} points! ☁️`);}
+// ─── POINTS ────────────────────────────────────────────────────────────────
+function renderPoints() {
+  const el = document.getElementById('pointsDisplay'); if (el) el.textContent = state.points;
+  const badges = [{min:0,icon:'🌱',name:'Cloud Seedling'},{min:100,icon:'☁️',name:'Nimbus Sprout'},{min:250,icon:'🌤️',name:'Silver Liner'},{min:500,icon:'⛅',name:'Storm Chaser'},{min:1000,icon:'🌈',name:'Rainbow Rider'}];
+  let b = badges[0]; for (const x of badges) { if (state.points >= x.min) b = x; }
+  const bi = document.getElementById('badgeIcon'); if (bi) bi.textContent = b.icon;
+  const bn = document.getElementById('badgeName'); if (bn) bn.textContent = b.name;
+}
 
-// ─────────────────────────────────────────
-// AFFIRMATIONS
-// ─────────────────────────────────────────
-const AFFIRMATIONS=[
+function addPoints(n) { state.points = (state.points || 0) + n; renderPoints(); showToast(`+${n} points! ☁️`); }
+
+// ─── AFFIRMATIONS ──────────────────────────────────────────────────────────
+const AFFIRMATIONS = [
   {t:"You don't have to be perfect. You just have to start.",a:"Nimbus"},
   {t:"Every expert was once a beginner. Keep going.",a:"Nimbus"},
   {t:"Small steps still move you forward. That counts.",a:"Nimbus"},
@@ -1313,45 +1094,55 @@ const AFFIRMATIONS=[
   {t:"One task at a time. You've got this.",a:"Nimbus"},
   {t:"Take a breath. You are doing better than you think.",a:"Nimbus"},
 ];
-function setAffirmation(){const a=AFFIRMATIONS[Math.floor(Math.random()*AFFIRMATIONS.length)];document.getElementById('affirmationText').textContent=`"${a.t}"`;document.getElementById('affirmationAuthor').textContent=`— ${a.a}`;}
+function setAffirmation() {
+  const a = AFFIRMATIONS[Math.floor(Math.random() * AFFIRMATIONS.length)];
+  const el = document.getElementById('affirmationText'); if (el) el.textContent = `"${a.t}"`;
+  const el2 = document.getElementById('affirmationAuthor'); if (el2) el2.textContent = `— ${a.a}`;
+}
 
-// ─────────────────────────────────────────
-// TASKS
-// ─────────────────────────────────────────
-function getCategoryForTask(t){
-  if(!t.catId) return null;
-  // check state.categories first
-  const found=state.categories.find(c=>c.id===t.catId||c.type===t.catId);
-  if(found) return found;
-  // check template types
-  if(t.catId==='academic') return {name:'Academic',icon:'📚',color:'orange'};
-  if(t.catId==='colprep') return {name:'College Prep',icon:'🎓',color:'lavender'};
+// ─── TASKS ─────────────────────────────────────────────────────────────────
+const colorMap = {
+  orange:   { dot:'#e8874a' },
+  mint:     { dot:'#58b088' },
+  lavender: { dot:'#8878d0' },
+  sky:      { dot:'#5898d8' },
+  peach:    { dot:'#e8a888' },
+  pink:     { dot:'#c785a9' },
+};
+
+function getCategoryForTask(t) {
+  if (!t.catId) return null;
+  const found = state.categories.find(c => c.id === t.catId || c.type === t.catId);
+  if (found) return found;
+  if (t.catId === 'academic') return { name:'Academic', icon:'📚', color:'orange' };
+  if (t.catId === 'colprep') return { name:'College Prep', icon:'🎓', color:'lavender' };
+  if (t.catId === 'personal') return { name:'Personal', icon:'🏠', color:'peach' };
   return null;
 }
 
-function taskDotColor(t){
-  const cat=getCategoryForTask(t);
-  if(!cat) return '#e8a888';
+function taskDotColor(t) {
+  const cat = getCategoryForTask(t);
+  if (!cat) return '#e8a888';
   return colorMap[cat.color]?.dot || '#e8a888';
 }
 
-function renderTodayTasks(){
-  const today=state.tasks.filter(t=>isToday(t.due));
-  const el=document.getElementById('todayTasksList');
-  if(today.length===0){el.innerHTML=`<div style="text-align:center;padding:28px 0;color:var(--text-light);font-weight:700;font-size:15px;">No tasks due today! ✨</div>`;return;}
-  if(today.every(t=>t.done)){
-    el.innerHTML=`<div class="all-done-banner">All tasks done! Nimbus is glowing 🌈</div>`;
-    updateNimbusState();renderMainNimbus(state.nimbusState);updateNimbusDisplay();return;
+function renderTodayTasks() {
+  const today = state.tasks.filter(t => isToday(t.due));
+  const el = document.getElementById('todayTasksList'); if (!el) return;
+  if (today.length === 0) { el.innerHTML = `<div style="text-align:center;padding:28px 0;color:var(--text-light);font-weight:700;font-size:15px;">No tasks due today! ✨</div>`; return; }
+  if (today.every(t => t.done)) {
+    el.innerHTML = `<div class="all-done-banner">All tasks done! Nimbus is glowing 🌈</div>`;
+    updateNimbusState(); renderMainNimbus(state.nimbusState); updateNimbusDisplay(); return;
   }
-  el.innerHTML=today.map(t=>taskHTML(t)).join('');
+  el.innerHTML = today.map(t => taskHTML(t)).join('');
 }
 
-function taskHTML(t){
-  const pc={Urgent:'priority-urgent',Medium:'priority-medium',Low:'priority-low','Study':'priority-low'}[t.priority]||'priority-medium';
-  const dot=taskDotColor(t);
-  const cat=getCategoryForTask(t);
-  const label=t.subcatName||(cat?cat.name:'')||'General';
-  const due=t.due?formatDue(t.due):'';
+function taskHTML(t) {
+  const pc = { Urgent:'priority-urgent', Medium:'priority-medium', Low:'priority-low', Study:'priority-low' }[t.priority] || 'priority-medium';
+  const dot = taskDotColor(t);
+  const cat = getCategoryForTask(t);
+  const label = t.subcatName || (cat ? cat.name : '') || 'General';
+  const due = t.due ? formatDue(t.due) : '';
   return `<div class="task-card${t.done?' done-card':''}" onclick="openTaskDetail(${t.id})">
     <div class="task-subject-dot" style="background:${dot}"></div>
     <div class="task-check${t.done?' checked':''}" onclick="event.stopPropagation();toggleTask(${t.id})"></div>
@@ -1359,410 +1150,603 @@ function taskHTML(t){
       <div class="task-title">${t.name}</div>
       <div class="task-meta">${label}${t.subcatType?' ('+t.subcatType+')':''}${t.time?' · '+t.time:''}${due?' · '+due:''}</div>
     </div>
-    ${!t.done?`<div class="priority-badge ${pc}">${t.priority}</div>`:''}
+    ${!t.done ? `<div class="priority-badge ${pc}">${t.priority}</div>` : ''}
   </div>`;
 }
 
-function formatDue(s){const d=new Date(s+'T12:00:00'),diff=Math.round((d-new Date())/86400000);if(diff<0)return'Overdue';if(diff===0)return'Today';if(diff===1)return'Tomorrow';return diff+' days';}
-
-function toggleTask(id){
-  const t=state.tasks.find(x=>x.id===id);if(!t)return;
-  t.done=!t.done;
-  if(t.done){addPoints(25);state.streak=Math.min(state.streak+1,7);renderStreak();}
-  updateNimbusState();renderMainNimbus(state.nimbusState);updateNimbusDisplay();
-  renderTodayTasks();renderAllTasks();saveState();
+function formatDue(s) {
+  const today = todayStr();
+  if (s === today) return 'Today';
+  const d = new Date(s+'T12:00:00'), now = new Date();
+  const diff = Math.round((d - now) / 86400000);
+  if (diff < 0) return 'Overdue';
+  if (diff === 1) return 'Tomorrow';
+  return diff + ' days';
 }
 
-function renderAllTasks(){
-  const el=document.getElementById('allTasksList');
-  let tasks=[...state.tasks];
-  if(currentFilter==='today') tasks=tasks.filter(t=>isToday(t.due));
-  else if(currentFilter==='upcoming') tasks=tasks.filter(t=>!isToday(t.due)&&!t.done);
-  else if(currentFilter==='done') tasks=tasks.filter(t=>t.done);
-  const done=state.tasks.filter(t=>t.done).length;
-  document.getElementById('tasksSub').textContent=`${done} of ${state.tasks.length} complete`;
-  if(!tasks.length){el.innerHTML=`<div style="text-align:center;padding:40px 0;color:var(--text-light);font-weight:700;font-size:15px;">Nothing here! ☁️</div>`;return;}
+function toggleTask(id) {
+  const t = state.tasks.find(x => x.id === id); if (!t) return;
+  t.done = !t.done;
+  if (t.done) {
+    addPoints(25);
+    maybeIncrementStreak();
+  }
+  updateNimbusState(); renderMainNimbus(state.nimbusState); updateNimbusDisplay();
+  renderTodayTasks(); renderAllTasks(); saveState();
+}
 
-  // Group by category
-  const groups={};
-  tasks.forEach(t=>{
-    const cat=getCategoryForTask(t);
-    const key=cat?cat.name:'General';
-    if(!groups[key]) groups[key]={cat,tasks:[]};
+function renderAllTasks() {
+  const el = document.getElementById('allTasksList'); if (!el) return;
+  let tasks = [...state.tasks];
+  if (currentFilter === 'today') tasks = tasks.filter(t => isToday(t.due));
+  else if (currentFilter === 'upcoming') tasks = tasks.filter(t => !isToday(t.due) && !t.done);
+  else if (currentFilter === 'done') tasks = tasks.filter(t => t.done);
+  const done = state.tasks.filter(t => t.done).length;
+  const sub = document.getElementById('tasksSub'); if (sub) sub.textContent = `${done} of ${state.tasks.length} complete`;
+  if (!tasks.length) { el.innerHTML = `<div style="text-align:center;padding:40px 0;color:var(--text-light);font-weight:700;font-size:15px;">Nothing here! ☁️</div>`; return; }
+  const groups = {};
+  tasks.forEach(t => {
+    const cat = getCategoryForTask(t);
+    const key = cat ? cat.name : 'General';
+    if (!groups[key]) groups[key] = { cat, tasks:[] };
     groups[key].tasks.push(t);
   });
-  let html='';
-  for(const [name,g] of Object.entries(groups)){
-    html+=`<div class="cat-group-header"><span class="cat-group-icon">${g.cat?.icon||'📋'}</span><span>${name}</span><div class="cat-group-line"></div></div>`;
-    html+=g.tasks.map(t=>taskHTML(t)).join('');
+  let html = '';
+  for (const [name, g] of Object.entries(groups)) {
+    html += `<div class="cat-group-header"><span class="cat-group-icon">${g.cat?.icon||'📋'}</span><span>${name}</span><div class="cat-group-line"></div></div>`;
+    html += g.tasks.map(t => taskHTML(t)).join('');
   }
-  el.innerHTML=html;
+  el.innerHTML = html;
 }
 
-function filterTasks(f,el){currentFilter=f;document.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('active'));el.classList.add('active');renderAllTasks();}
+function filterTasks(f, el) { currentFilter = f; document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active')); el.classList.add('active'); renderAllTasks(); }
 
-function buildTaskCategoryDropdown(){
-  const sel=document.getElementById('newTaskCat');if(!sel)return;
-  const cats=[];
-  if(getCat('academic')||state.categories.some(c=>c.type==='academic')) cats.push({id:'academic',name:'Academic',icon:'📚'});
-  state.categories.filter(c=>c.type==='ec').forEach(c=>cats.push({id:c.id,name:c.name,icon:c.icon}));
+function buildTaskCategoryDropdown() {
+  const sel = document.getElementById('newTaskCat'); if (!sel) return;
+  const cats = [];
+  if (state.categories.some(c => c.type === 'academic')) cats.push({id:'academic',name:'Academic',icon:'📚'});
+  state.categories.filter(c => c.type === 'ec').forEach(c => cats.push({id:c.id,name:c.name,icon:c.icon}));
   cats.push({id:'colprep',name:'College Prep',icon:'🎓'});
   cats.push({id:'personal',name:'Personal',icon:'🏠'});
-  sel.innerHTML=`<option value="">Choose a category</option>`+cats.map(c=>`<option value="${c.id}">${c.icon} ${c.name}</option>`).join('');
+  sel.innerHTML = `<option value="">Choose a category</option>` + cats.map(c => `<option value="${c.id}">${c.icon} ${c.name}</option>`).join('');
 }
 
-function updateTaskSubcats(){
-  const catId=document.getElementById('newTaskCat').value;
-  const group=document.getElementById('subcatGroup');
-  const sel=document.getElementById('newTaskSubcat');
-  if(!catId){group.style.display='none';return;}
-  let options=[];
-  if(catId==='academic'){
-    const cat=getCat('academic');
-    if(cat&&cat.subcats.length) options=cat.subcats.map(s=>({value:s.name,label:`${s.name} (${s.type})`}));
-  } else {
-    const cat=state.categories.find(c=>c.id===catId);
-    if(cat&&cat.subcats.length) options=cat.subcats.map(s=>({value:s.name,label:s.name}));
-  }
-  if(options.length){group.style.display='block';sel.innerHTML=`<option value="">Any</option>`+options.map(o=>`<option value="${o.value}">${o.label}</option>`).join('');}
-  else group.style.display='none';
+function updateTaskSubcats() {
+  const catId = document.getElementById('newTaskCat').value;
+  const group = document.getElementById('subcatGroup');
+  const sel = document.getElementById('newTaskSubcat');
+  if (!catId) { group.style.display = 'none'; return; }
+  let options = [];
+  if (catId === 'academic') { const cat = getCat('academic'); if (cat && cat.subcats.length) options = cat.subcats.map(s => ({value:s.name,label:`${s.name} (${s.type})`})); }
+  else { const cat = state.categories.find(c => c.id === catId); if (cat && cat.subcats && cat.subcats.length) options = cat.subcats.map(s => ({value:s.name,label:s.name})); }
+  if (options.length) { group.style.display = 'block'; sel.innerHTML = `<option value="">Any</option>` + options.map(o => `<option value="${o.value}">${o.label}</option>`).join(''); }
+  else group.style.display = 'none';
 }
 
-function openTaskDetail(id){
-  const t=state.tasks.find(x=>x.id===id);if(!t)return;
-  detailTaskId=id;
-  const cat=getCategoryForTask(t);
-  document.getElementById('detailTaskName').textContent=t.name;
-  document.getElementById('detailTaskMeta').textContent=`${cat?cat.name:'General'}${t.subcatName?' › '+t.subcatName:''}${t.subcatType?' ('+t.subcatType+')':''}  ·  ${t.time||''}  ·  Due: ${t.due||'Not set'}  ·  ${t.priority}`;
+function openTaskDetail(id) {
+  const t = state.tasks.find(x => x.id === id); if (!t) return;
+  detailTaskId = id;
+  const cat = getCategoryForTask(t);
+  document.getElementById('detailTaskName').textContent = t.name;
+  document.getElementById('detailTaskMeta').textContent = `${cat?cat.name:'General'}${t.subcatName?' › '+t.subcatName:''}${t.subcatType?' ('+t.subcatType+')':''}  ·  ${t.time||''}  ·  Due: ${t.due||'Not set'}  ·  ${t.priority}`;
   openModal('taskDetailModal');
 }
-function launchTimerFromDetail(){closeModal('taskDetailModal');const t=state.tasks.find(x=>x.id===detailTaskId);if(t)openTimer(t);}
-function markDetailDone(){toggleTask(detailTaskId);closeModal('taskDetailModal');}
-function deleteDetailTask(){state.tasks=state.tasks.filter(x=>x.id!==detailTaskId);closeModal('taskDetailModal');renderTodayTasks();renderAllTasks();showToast('Task deleted');saveState();}
+function launchTimerFromDetail() { closeModal('taskDetailModal'); const t = state.tasks.find(x => x.id === detailTaskId); if (t) openTimer(t); }
+function markDetailDone() { toggleTask(detailTaskId); closeModal('taskDetailModal'); }
+function deleteDetailTask() { state.tasks = state.tasks.filter(x => x.id !== detailTaskId); closeModal('taskDetailModal'); renderTodayTasks(); renderAllTasks(); showToast('Task deleted'); saveState(); }
 
-function openAddTask(){
-  ['newTaskName'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('newTaskDue').value=new Date().toISOString().split('T')[0];
-  document.querySelectorAll('#timeOptions .option-btn,#priorityOptions .option-btn').forEach(b=>b.classList.remove('selected'));
-  document.getElementById('subcatGroup').style.display='none';
+function openAddTask() {
+  document.getElementById('newTaskName').value = '';
+  document.getElementById('newTaskDue').value = todayStr();
+  document.querySelectorAll('#timeOptions .option-btn,#priorityOptions .option-btn').forEach(b => b.classList.remove('selected'));
+  document.getElementById('subcatGroup').style.display = 'none';
   buildTaskCategoryDropdown();
   openModal('addTaskModal');
 }
 
-function openEditTask(){
-  const t=state.tasks.find(x=>x.id===detailTaskId);if(!t)return;
+function openEditTask() {
+  const t = state.tasks.find(x => x.id === detailTaskId); if (!t) return;
   closeModal('taskDetailModal');
-  document.getElementById('editTaskName').value=t.name;
-  document.getElementById('editTaskDue').value=t.due||'';
-  document.querySelectorAll('#editTimeOptions .option-btn').forEach(b=>{
-    b.classList.toggle('selected',b.textContent===t.time);
-  });
-  document.querySelectorAll('#editPriorityOptions .option-btn').forEach(b=>{
-    b.classList.toggle('selected',b.textContent.replace(/[🔴🟠🟢📚]\s*/,'')===t.priority);
-  });
+  document.getElementById('editTaskName').value = t.name;
+  document.getElementById('editTaskDue').value = t.due || '';
+  document.querySelectorAll('#editTimeOptions .option-btn').forEach(b => b.classList.toggle('selected', b.textContent === t.time));
+  document.querySelectorAll('#editPriorityOptions .option-btn').forEach(b => b.classList.toggle('selected', b.textContent.replace(/[🔴🟠🟢📚]\s*/,'') === t.priority));
   openModal('editTaskModal');
 }
 
-function saveEditTask(){
-  const t=state.tasks.find(x=>x.id===detailTaskId);if(!t)return;
-  t.name=document.getElementById('editTaskName').value.trim()||t.name;
-  t.due=document.getElementById('editTaskDue').value||t.due;
-  const timeEl=document.querySelector('#editTimeOptions .option-btn.selected');
-  const priEl=document.querySelector('#editPriorityOptions .option-btn.selected');
-  if(timeEl)t.time=timeEl.textContent;
-  if(priEl)t.priority=priEl.textContent.replace(/[🔴🟠🟢📚]\s*/,'');
+function saveEditTask() {
+  const t = state.tasks.find(x => x.id === detailTaskId); if (!t) return;
+  t.name = document.getElementById('editTaskName').value.trim() || t.name;
+  t.due = document.getElementById('editTaskDue').value || t.due;
+  const timeEl = document.querySelector('#editTimeOptions .option-btn.selected');
+  const priEl = document.querySelector('#editPriorityOptions .option-btn.selected');
+  if (timeEl) t.time = timeEl.textContent;
+  if (priEl) t.priority = priEl.textContent.replace(/[🔴🟠🟢📚]\s*/,'');
   closeModal('editTaskModal');
-  renderTodayTasks();renderAllTasks();
+  renderTodayTasks(); renderAllTasks();
   showToast('Task updated! ✓');
   saveState();
 }
 
-function addTask(){
-  const name=document.getElementById('newTaskName').value.trim();
-  if(!name){showToast('Please enter a task name!');return;}
-  const catId=document.getElementById('newTaskCat').value;
-  const subcatEl=document.getElementById('newTaskSubcat');
-  const subcatName=subcatEl&&subcatEl.value?subcatEl.value:'';
-  // find subcatType
-  let subcatType='';
-  if(catId==='academic'){const cat=getCat('academic');const s=cat&&cat.subcats.find(x=>x.name===subcatName);if(s)subcatType=s.type;}
-  const t={
-    id:Date.now(),name,catId:catId||'general',subcatName,subcatType,
-    time:(document.querySelector('#timeOptions .option-btn.selected')||{textContent:'30 min'}).textContent,
-    priority:((document.querySelector('#priorityOptions .option-btn.selected')||{textContent:'Medium'}).textContent).replace(/[🔴🟠🟢📚]\s*/,''),
-    due:document.getElementById('newTaskDue').value||new Date().toISOString().split('T')[0],done:false
+function addTask() {
+  const name = document.getElementById('newTaskName').value.trim();
+  if (!name) { showToast('Please enter a task name!'); return; }
+  const catId = document.getElementById('newTaskCat').value;
+  const subcatEl = document.getElementById('newTaskSubcat');
+  const subcatName = subcatEl && subcatEl.value ? subcatEl.value : '';
+  let subcatType = '';
+  if (catId === 'academic') { const cat = getCat('academic'); const s = cat && cat.subcats.find(x => x.name === subcatName); if (s) subcatType = s.type; }
+  const t = {
+    id: Date.now(), name, catId: catId || 'general', subcatName, subcatType,
+    time: (document.querySelector('#timeOptions .option-btn.selected') || {textContent:'30 min'}).textContent,
+    priority: ((document.querySelector('#priorityOptions .option-btn.selected') || {textContent:'Medium'}).textContent).replace(/[🔴🟠🟢📚]\s*/,''),
+    due: document.getElementById('newTaskDue').value || todayStr(),
+    done: false
   };
-  state.tasks.push(t);closeModal('addTaskModal');renderTodayTasks();renderAllTasks();renderCalendar();showToast('Task added! ✓');saveState();
+  state.tasks.push(t);
+  closeModal('addTaskModal');
+  renderTodayTasks(); renderAllTasks(); renderCalendar();
+  showToast('Task added! ✓');
+  saveState();
 }
-function selectOption(el,gid){document.querySelectorAll(`#${gid} .option-btn`).forEach(b=>b.classList.remove('selected'));el.classList.add('selected');}
 
-// ─────────────────────────────────────────
-// TIMER
-// ─────────────────────────────────────────
-function openTimer(task){
-  const tm={'15 min':900,'30 min':1800,'45 min':2700,'1 hr':3600,'1.5 hr':5400,'2+ hr':7200};
-  timer.total=tm[task.time]||1800;timer.remaining=timer.total;timer.phase='focus';
-  timer.taskName=task.name;timer.taskId=task.id;timer.active=false;timer.breakCount=0;
+function selectOption(el, gid) { document.querySelectorAll(`#${gid} .option-btn`).forEach(b => b.classList.remove('selected')); el.classList.add('selected'); }
+
+// ─── TIMER ─────────────────────────────────────────────────────────────────
+function openTimer(task) {
+  const tm = {'15 min':900,'30 min':1800,'45 min':2700,'1 hr':3600,'1.5 hr':5400,'2+ hr':7200};
+  timer.total = tm[task.time] || 1800; timer.remaining = timer.total; timer.phase = 'focus';
+  timer.taskName = task.name; timer.taskId = task.id; timer.active = false; timer.breakCount = 0;
   clearInterval(timer.interval);
-  document.getElementById('timerTaskName').textContent=task.name;
-  document.getElementById('timerPhaseLabel').textContent='Focus Session';
-  document.getElementById('timerPlayBtn').textContent='▶';
+  document.getElementById('timerTaskName').textContent = task.name;
+  document.getElementById('timerPhaseLabel').textContent = 'Focus Session';
+  document.getElementById('timerPlayBtn').textContent = '▶';
   document.getElementById('breakSuggestion').classList.remove('show');
   updateTimerDisplay();
-  document.getElementById('app').classList.remove('active');
-  document.getElementById('timer-screen').classList.add('active');
+  showScreen('timer-screen');
 }
-function closeTimer(){clearInterval(timer.interval);timer.active=false;document.getElementById('timer-screen').classList.remove('active');document.getElementById('app').classList.add('active');}
-function toggleTimer(){
-  if(timer.active){clearInterval(timer.interval);timer.active=false;document.getElementById('timerPlayBtn').textContent='▶';}
-  else{timer.active=true;document.getElementById('timerPlayBtn').textContent='⏸';timer.interval=setInterval(tickTimer,1000);}
+
+function closeTimer() { clearInterval(timer.interval); timer.active = false; showScreen('app'); }
+
+function toggleTimer() {
+  if (timer.active) { clearInterval(timer.interval); timer.active = false; document.getElementById('timerPlayBtn').textContent = '▶'; }
+  else { timer.active = true; document.getElementById('timerPlayBtn').textContent = '⏸'; timer.interval = setInterval(tickTimer, 1000); }
 }
-function tickTimer(){
-  if(timer.remaining<=0){
-    clearInterval(timer.interval);timer.active=false;document.getElementById('timerPlayBtn').textContent='▶';
-    if(timer.phase==='focus'){timer.breakCount++;document.getElementById('breakSuggestion').classList.add('show');showToast('Focus done! Take a break 🌿');sendNotif('Break time!','You finished a focus session. Take a breather 🌿');}
-    else{document.getElementById('breakSuggestion').classList.remove('show');document.getElementById('timerPhaseLabel').textContent='Focus Session';timer.phase='focus';timer.remaining=timer.total;updateTimerDisplay();showToast('Break done! Back to focus ⏱');}
+
+function tickTimer() {
+  if (timer.remaining <= 0) {
+    clearInterval(timer.interval); timer.active = false; document.getElementById('timerPlayBtn').textContent = '▶';
+    if (timer.phase === 'focus') {
+      timer.breakCount++;
+      document.getElementById('breakSuggestion').classList.add('show');
+      showToast('Focus done! Take a break 🌿');
+      sendNotif('Break time!', 'You finished a focus session. Take a breather 🌿');
+    } else {
+      document.getElementById('breakSuggestion').classList.remove('show');
+      document.getElementById('timerPhaseLabel').textContent = 'Focus Session';
+      timer.phase = 'focus'; timer.remaining = timer.total; updateTimerDisplay();
+      showToast('Break done! Back to focus ⏱');
+    }
     return;
   }
-  timer.remaining--;updateTimerDisplay();
+  timer.remaining--; updateTimerDisplay();
 }
-function updateTimerDisplay(){
-  const m=Math.floor(timer.remaining/60),s=timer.remaining%60;
-  document.getElementById('timerDisplay').textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-  const pct=1-(timer.remaining/timer.total);
-  document.getElementById('timerProgress').style.strokeDashoffset=691*(1-pct);
-  document.getElementById('timerProgress').style.stroke=timer.phase==='break'?'#58b088':pct>0.8?'#f7d070':'#f5a96a';
+
+function updateTimerDisplay() {
+  const m = Math.floor(timer.remaining/60), s = timer.remaining%60;
+  document.getElementById('timerDisplay').textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  const pct = 1-(timer.remaining/timer.total);
+  document.getElementById('timerProgress').style.strokeDashoffset = 691*(1-pct);
+  document.getElementById('timerProgress').style.stroke = timer.phase==='break'?'#58b088':pct>0.8?'#f7d070':'#f5a96a';
 }
-function startBreak(min){
+
+function startBreak(min) {
   document.getElementById('breakSuggestion').classList.remove('show');
-  timer.phase='break';timer.remaining=min*60;timer.total=min*60;
-  document.getElementById('timerPhaseLabel').textContent=`${min} min Break`;
-  updateTimerDisplay();timer.active=true;document.getElementById('timerPlayBtn').textContent='⏸';
-  timer.interval=setInterval(tickTimer,1000);addPoints(10);showToast(`${min} min break started 🌿`);
+  timer.phase = 'break'; timer.remaining = min*60; timer.total = min*60;
+  document.getElementById('timerPhaseLabel').textContent = `${min} min Break`;
+  updateTimerDisplay(); timer.active = true; document.getElementById('timerPlayBtn').textContent = '⏸';
+  timer.interval = setInterval(tickTimer, 1000);
+  addPoints(10); showToast(`${min} min break started 🌿`);
 }
-function resetTimer(){clearInterval(timer.interval);timer.active=false;timer.remaining=timer.total;timer.phase='focus';document.getElementById('timerPlayBtn').textContent='▶';document.getElementById('breakSuggestion').classList.remove('show');document.getElementById('timerPhaseLabel').textContent='Focus Session';updateTimerDisplay();}
-function skipPhase(){timer.remaining=0;tickTimer();}
 
-// ─────────────────────────────────────────
-// CALENDAR
-// ─────────────────────────────────────────
-function renderCalendar(){
-  const n=new Date(),m=n.getMonth(),y=n.getFullYear();
-  document.getElementById('calMonthLabel').textContent=n.toLocaleString('default',{month:'long',year:'numeric'});
-  document.getElementById('calDayLabels').innerHTML=['Su','Mo','Tu','We','Th','Fr','Sa'].map(l=>`<div class="cal-day-label">${l}</div>`).join('');
-  const first=new Date(y,m,1).getDay(),dim=new Date(y,m+1,0).getDate(),prev=new Date(y,m,0).getDate();
-  let cells='';
-  for(let i=0;i<first;i++) cells+=`<div class="cal-day other-month">${prev-first+1+i}</div>`;
-  for(let d=1;d<=dim;d++){
-    const ds=`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-    const isT=d===n.getDate();const hasTasks=state.tasks.some(t=>t.due===ds&&!t.done);
-    cells+=`<div class="cal-day${isT?' today':''}${hasTasks?' has-event':''}">${d}</div>`;
+function resetTimer() {
+  clearInterval(timer.interval); timer.active = false; timer.remaining = timer.total; timer.phase = 'focus';
+  document.getElementById('timerPlayBtn').textContent = '▶';
+  document.getElementById('breakSuggestion').classList.remove('show');
+  document.getElementById('timerPhaseLabel').textContent = 'Focus Session';
+  updateTimerDisplay();
+}
+
+function skipPhase() { timer.remaining = 0; tickTimer(); }
+
+// ─── CALENDAR ──────────────────────────────────────────────────────────────
+function renderCalendar() {
+  const n = new Date(), m = n.getMonth(), y = n.getFullYear();
+  const el = document.getElementById('calMonthLabel'); if (el) el.textContent = n.toLocaleString('default', {month:'long',year:'numeric'});
+  const labelsEl = document.getElementById('calDayLabels'); if (labelsEl) labelsEl.innerHTML = ['Su','Mo','Tu','We','Th','Fr','Sa'].map(l => `<div class="cal-day-label">${l}</div>`).join('');
+  const first = new Date(y,m,1).getDay(), dim = new Date(y,m+1,0).getDate(), prev = new Date(y,m,0).getDate();
+  let cells = '';
+  for (let i = 0; i < first; i++) cells += `<div class="cal-day other-month">${prev-first+1+i}</div>`;
+  for (let d = 1; d <= dim; d++) {
+    const ds = `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const isT = d === n.getDate();
+    const hasTasks = state.tasks.some(t => t.due === ds && !t.done);
+    cells += `<div class="cal-day${isT?' today':''}${hasTasks?' has-event':''}">${d}</div>`;
   }
-  document.getElementById('calGrid').innerHTML=cells;
-  const upcoming=state.tasks.filter(t=>!t.done).sort((a,b)=>new Date(a.due)-new Date(b.due));
-  const mnames=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  document.getElementById('upcomingList').innerHTML=upcoming.slice(0,8).map(t=>{
-    const d=new Date(t.due+'T12:00:00');
-    const cat=getCategoryForTask(t);
+  const gridEl = document.getElementById('calGrid'); if (gridEl) gridEl.innerHTML = cells;
+  const upcoming = state.tasks.filter(t => !t.done).sort((a,b) => (a.due||'').localeCompare(b.due||''));
+  const mnames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const upEl = document.getElementById('upcomingList'); if (!upEl) return;
+  upEl.innerHTML = upcoming.slice(0,8).map(t => {
+    const d = new Date((t.due||todayStr())+'T12:00:00');
+    const cat = getCategoryForTask(t);
     return `<div class="upcoming-item"><div class="upcoming-date-box"><div class="upcoming-month">${mnames[d.getMonth()]}</div><div class="upcoming-day">${d.getDate()}</div></div><div><div class="upcoming-title">${t.name}</div><div class="upcoming-meta">${cat?cat.icon+' '+cat.name:'General'} · ${t.priority}</div></div></div>`;
-  }).join('')||`<div style="text-align:center;padding:28px 0;color:var(--text-light);font-weight:700;">No upcoming tasks! ☁️</div>`;
+  }).join('') || `<div style="text-align:center;padding:28px 0;color:var(--text-light);font-weight:700;">No upcoming tasks! ☁️</div>`;
 }
 
-// ─────────────────────────────────────────
-// NOTES
-// ─────────────────────────────────────────
-function renderNotes(){
-  document.getElementById('notesList').innerHTML=state.notes.length?state.notes.map(n=>`<div class="note-card"><div class="note-title">${n.title}</div><div class="note-preview">${n.content.substring(0,100)}${n.content.length>100?'...':''}</div><div class="note-date">${n.date}</div></div>`).join(''):`<div style="text-align:center;padding:28px 0;color:var(--text-light);font-weight:700;">No notes yet. Add one! 📝</div>`;
-}
-function openAddNote(){document.getElementById('newNoteTitle').value='';document.getElementById('newNoteContent').value='';openModal('addNoteModal');}
-function addNote(){
-  const title=document.getElementById('newNoteTitle').value.trim();
-  if(!title){showToast('Please add a title!');return;}
-  state.notes.push({id:Date.now(),title,content:document.getElementById('newNoteContent').value.trim(),date:new Date().toLocaleDateString()});
-  closeModal('addNoteModal');renderNotes();showToast('Note saved! 📝');saveState();
+// ─── NOTES ─────────────────────────────────────────────────────────────────
+function renderNotes() {
+  const el = document.getElementById('notesList'); if (!el) return;
+  el.innerHTML = state.notes.length
+    ? state.notes.map(n => `<div class="note-card"><div class="note-title">${n.title}</div><div class="note-preview">${n.content.substring(0,100)}${n.content.length>100?'...':''}</div><div class="note-date">${n.date}</div></div>`).join('')
+    : `<div style="text-align:center;padding:28px 0;color:var(--text-light);font-weight:700;">No notes yet. Add one! 📝</div>`;
 }
 
-// ─────────────────────────────────────────
-// CHECK-IN
-// ─────────────────────────────────────────
-function openCheckin(){
-  document.getElementById('workloadSlider').value=state.workload;
-  document.getElementById('overwhelmSlider').value=state.overwhelm;
-  document.getElementById('workloadVal').textContent=state.workload;
-  document.getElementById('overwhelmVal').textContent=state.overwhelm;
-  selectMood(state.mood);openModal('checkinModal');
-}
-function selectMood(idx){selectedMood=idx;document.querySelectorAll('#moodRow .mood-option').forEach((el,i)=>el.classList.toggle('selected',i===idx));}
-function submitCheckin(){
-  state.mood=selectedMood;
-  state.workload=parseInt(document.getElementById('workloadSlider').value);
-  state.overwhelm=parseInt(document.getElementById('overwhelmSlider').value);
-  updateNimbusState();renderMainNimbus(state.nimbusState);updateNimbusDisplay();
-  closeModal('checkinModal');addPoints(15);showToast('Nimbus updated! ☁️');saveState();
+function openAddNote() { document.getElementById('newNoteTitle').value = ''; document.getElementById('newNoteContent').value = ''; openModal('addNoteModal'); }
+
+function addNote() {
+  const title = document.getElementById('newNoteTitle').value.trim();
+  if (!title) { showToast('Please add a title!'); return; }
+  state.notes.push({ id:Date.now(), title, content:document.getElementById('newNoteContent').value.trim(), date:new Date().toLocaleDateString() });
+  closeModal('addNoteModal'); renderNotes(); showToast('Note saved! 📝'); saveState();
 }
 
-// ─────────────────────────────────────────
-// NOTIFICATIONS
-// ─────────────────────────────────────────
-function loadNotifSettings(){
-  const n=state.notifs;
-  const nb=document.getElementById('notifBreak');if(nb){nb.checked=n.break;document.getElementById('breakFreqRow').style.display=n.break?'flex':'none';}
-  const nt=document.getElementById('notifTasks');if(nt) nt.checked=n.tasks;
-  const nc=document.getElementById('notifCheckin');if(nc){nc.checked=n.checkin;document.getElementById('checkinTimeRow').style.display=n.checkin?'flex':'none';}
-  const bf=document.getElementById('breakFreq');if(bf) bf.value=n.breakFreq||60;
-  const ct=document.getElementById('checkinTime');if(ct) ct.value=n.checkinTime||'08:00';
+// ─── CHECK-IN ──────────────────────────────────────────────────────────────
+function openCheckin() {
+  document.getElementById('workloadSlider').value = state.workload;
+  document.getElementById('overwhelmSlider').value = state.overwhelm;
+  document.getElementById('workloadVal').textContent = state.workload;
+  document.getElementById('overwhelmVal').textContent = state.overwhelm;
+  updateAllSliders();
+  selectMood(state.mood);
+  // Show date in modal
+  const lbl = document.getElementById('checkinDateLabel');
+  if (lbl) {
+    const n = new Date();
+    lbl.textContent = n.toLocaleDateString('en-US', {weekday:'long', month:'long', day:'numeric'});
+  }
+  openModal('checkinModal');
 }
 
-function saveNotifSettings(){
-  const nb=document.getElementById('notifBreak');
-  const nt=document.getElementById('notifTasks');
-  const nc=document.getElementById('notifCheckin');
-  state.notifs={
-    break:nb?.checked||false,
-    breakFreq:parseInt(document.getElementById('breakFreq')?.value||60),
-    tasks:nt?.checked||false,
-    checkin:nc?.checked||false,
-    checkinTime:document.getElementById('checkinTime')?.value||'08:00'
+function selectMood(idx) { selectedMood = idx; document.querySelectorAll('#moodRow .mood-option').forEach((el,i) => el.classList.toggle('selected', i === idx)); }
+
+function submitCheckin() {
+  state.mood = selectedMood;
+  state.workload = parseInt(document.getElementById('workloadSlider').value);
+  state.overwhelm = parseInt(document.getElementById('overwhelmSlider').value);
+  // FIX: record today's date so we know check-in is done
+  state.lastCheckinDate = todayStr();
+  updateNimbusState(); renderMainNimbus(state.nimbusState); updateNimbusDisplay();
+  // FIX: update nudge and banner
+  const nudge = document.getElementById('checkinNudge');
+  if (nudge) nudge.style.display = 'none';
+  updateCheckinBanner();
+  closeModal('checkinModal');
+  addPoints(15);
+  showToast('Nimbus updated! ☁️');
+  saveState();
+}
+
+// ─── NOTIFICATIONS ─────────────────────────────────────────────────────────
+function loadNotifSettings() {
+  const n = state.notifs || {};
+  const nb = document.getElementById('notifBreak'); if (nb) { nb.checked = !!n.break; document.getElementById('breakFreqRow').style.display = n.break ? 'flex' : 'none'; }
+  const nt = document.getElementById('notifTasks'); if (nt) nt.checked = !!n.tasks;
+  const nc = document.getElementById('notifCheckin'); if (nc) { nc.checked = !!n.checkin; document.getElementById('checkinTimeRow').style.display = n.checkin ? 'flex' : 'none'; }
+  const bf = document.getElementById('breakFreq'); if (bf) bf.value = n.breakFreq || 60;
+  const ct = document.getElementById('checkinTime'); if (ct) ct.value = n.checkinTime || '08:00';
+}
+
+function saveNotifSettings() {
+  const nb = document.getElementById('notifBreak');
+  const nt = document.getElementById('notifTasks');
+  const nc = document.getElementById('notifCheckin');
+  state.notifs = {
+    break: nb?.checked || false,
+    breakFreq: parseInt(document.getElementById('breakFreq')?.value || 60),
+    tasks: nt?.checked || false,
+    checkin: nc?.checked || false,
+    checkinTime: document.getElementById('checkinTime')?.value || '08:00'
   };
-  document.getElementById('breakFreqRow').style.display=state.notifs.break?'flex':'none';
-  document.getElementById('checkinTimeRow').style.display=state.notifs.checkin?'flex':'none';
+  document.getElementById('breakFreqRow').style.display = state.notifs.break ? 'flex' : 'none';
+  document.getElementById('checkinTimeRow').style.display = state.notifs.checkin ? 'flex' : 'none';
   setupNotifications();
   saveState();
 }
 
-function setupNotifications(){
+function setupNotifications() {
   stopAllNotifs();
-  if(!('Notification' in window)) return;
-  if(Notification.permission==='default'){
-    Notification.requestPermission();
+  const hasAny = state.notifs && (state.notifs.break || state.notifs.tasks || state.notifs.checkin);
+  if (!hasAny) return;
+  if (!('Notification' in window)) { showToast('Notifications not supported in this browser.'); return; }
+  if (Notification.permission === 'denied') { showToast('Notifications blocked — allow them in browser settings.'); return; }
+  if (Notification.permission === 'default') {
+    Notification.requestPermission().then(p => {
+      if (p === 'granted') { _startNotifIntervals(); showToast('Notifications enabled! ☁️'); }
+      else showToast('Notifications not enabled.');
+    });
+    return;
   }
-  if(Notification.permission!=='granted') return;
-
-  if(state.notifs.break){
-    const ms=state.notifs.breakFreq*60*1000;
-    const id=setInterval(()=>sendNotif('☁️ Nimbus says: take a break!','You\'ve been working hard. Step away for a few minutes.'),ms);
-    notifIntervals.push(id);
-  }
-  if(state.notifs.tasks){
-    // Check for due tasks every hour
-    const id=setInterval(()=>{
-      const overdue=state.tasks.filter(t=>!t.done&&t.due&&new Date(t.due+'T23:59:00')<new Date());
-      if(overdue.length) sendNotif(`📋 ${overdue.length} task${overdue.length>1?'s':''} overdue!`,overdue.slice(0,2).map(t=>t.name).join(', '));
-      const today2=state.tasks.filter(t=>!t.done&&isToday(t.due));
-      if(today2.length) sendNotif(`☁️ You have ${today2.length} task${today2.length>1?'s':''} due today`,today2.slice(0,2).map(t=>t.name).join(', '));
-    },3600000);
-    notifIntervals.push(id);
-  }
-  if(state.notifs.checkin){
-    // Schedule daily check-in reminder
-    scheduleCheckinNotif();
-  }
+  _startNotifIntervals();
 }
 
-function scheduleCheckinNotif(){
-  const [h,mi]=state.notifs.checkinTime.split(':').map(Number);
-  const now=new Date(),target=new Date();
-  target.setHours(h,mi,0,0);
-  if(target<=now) target.setDate(target.getDate()+1);
-  const ms=target-now;
-  const id=setTimeout(()=>{
-    sendNotif('☁️ Daily Check-In','How are you feeling today? Nimbus wants to know!');
-    const daily=setInterval(()=>sendNotif('☁️ Daily Check-In','How are you feeling today? Nimbus wants to know!'),86400000);
+function _startNotifIntervals() {
+  if (state.notifs.break) {
+    const ms = (state.notifs.breakFreq || 60) * 60 * 1000;
+    notifIntervals.push(setInterval(() =>
+      sendNotif('☁️ Time for a break!', 'You\'ve been working hard. Step away for a few minutes.'), ms));
+  }
+  if (state.notifs.tasks) {
+    const checkTasks = () => {
+      const due = state.tasks.filter(t => !t.done && isToday(t.due));
+      if (due.length) sendNotif(`📋 ${due.length} task${due.length>1?'s':''} due today`, due.slice(0,3).map(t=>t.name).join(', '));
+    };
+    setTimeout(checkTasks, 3000);
+    notifIntervals.push(setInterval(checkTasks, 3600000));
+  }
+  if (state.notifs.checkin) scheduleCheckinNotif();
+}
+
+function scheduleCheckinNotif() {
+  const [h, mi] = (state.notifs.checkinTime || '08:00').split(':').map(Number);
+  const now = new Date(), target = new Date();
+  target.setHours(h, mi, 0, 0);
+  if (target <= now) target.setDate(target.getDate()+1);
+  const ms = target - now;
+  const id = setTimeout(() => {
+    if (!hasCheckedInToday()) sendNotif('☁️ Daily Check-In', 'How are you feeling today? Nimbus wants to know!');
+    const daily = setInterval(() => {
+      if (!hasCheckedInToday()) sendNotif('☁️ Daily Check-In', 'How are you feeling today? Nimbus wants to know!');
+    }, 86400000);
     notifIntervals.push(daily);
-  },ms);
+  }, ms);
   notifIntervals.push(id);
 }
 
-function sendNotif(title,body){
-  if(Notification.permission==='granted') new Notification(title,{body,icon:'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><ellipse cx="32" cy="40" rx="26" ry="16" fill="%23fff8f3"/><ellipse cx="22" cy="30" rx="14" ry="13" fill="%23fff5ef"/><ellipse cx="36" cy="27" rx="18" ry="16" fill="%23fff8f3"/></svg>'});
+function sendNotif(title, body) {
+  if (Notification.permission === 'granted') new Notification(title, { body });
 }
-function stopAllNotifs(){notifIntervals.forEach(id=>{clearInterval(id);clearTimeout(id);});notifIntervals=[];}
 
-// ─────────────────────────────────────────
-// NIMBUS CLICK
-// ─────────────────────────────────────────
-function nimbusClicked(){
-  const msgs=["You've got this! ☁️","One task at a time. You're doing great!","Nimbus believes in you! 🌤️","Take a deep breath. You're okay.","Focus up! Nimbus is cheering for you!"];
+function stopAllNotifs() { notifIntervals.forEach(id => { clearInterval(id); clearTimeout(id); }); notifIntervals = []; }
+
+// ─── NIMBUS CLICK ──────────────────────────────────────────────────────────
+function nimbusClicked() {
+  const msgs = ["You've got this! ☁️","One task at a time. You're doing great!","Nimbus believes in you! 🌤️","Take a deep breath. You're okay.","Focus up! Nimbus is cheering for you!"];
   showToast(msgs[Math.floor(Math.random()*msgs.length)]);
-  const w=document.getElementById('nimbusWrap');
-  w.style.transform='scale(1.1) rotate(-4deg)';setTimeout(()=>w.style.transform='scale(1)',300);
+  const w = document.getElementById('nimbusWrap');
+  if (w) { w.style.transform = 'scale(1.1) rotate(-4deg)'; setTimeout(() => w.style.transform = 'scale(1)', 300); }
 }
 
-// ─────────────────────────────────────────
-// NAVIGATION
-// ─────────────────────────────────────────
-function switchTab(tab,el){
-  ['home-screen','tasks-screen','calendar-screen','notes-screen','settings-screen'].forEach(id=>document.getElementById(id).style.display='none');
-  const map={home:'home-screen',tasks:'tasks-screen',calendar:'calendar-screen',notes:'notes-screen',settings:'settings-screen'};
-  document.getElementById(map[tab]).style.display='flex';
-  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));el.classList.add('active');
-  if(tab==='tasks')renderAllTasks();
-  if(tab==='calendar')renderCalendar();
-  if(tab==='notes')renderNotes();
-  if(tab==='settings'){loadNotifSettings();updateSettingsInfo();}
+// ─── NAVIGATION ────────────────────────────────────────────────────────────
+function switchTab(tab, el) {
+  ['home-screen','tasks-screen','calendar-screen','notes-screen','settings-screen'].forEach(id => document.getElementById(id).style.display = 'none');
+  const map = { home:'home-screen', tasks:'tasks-screen', calendar:'calendar-screen', notes:'notes-screen', settings:'settings-screen' };
+  document.getElementById(map[tab]).style.display = '';
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active')); el.classList.add('active');
+  if (tab === 'tasks') { buildTaskCategoryDropdown(); renderAllTasks(); }
+  if (tab === 'calendar') renderCalendar();
+  if (tab === 'notes') renderNotes();
+  if (tab === 'settings') { loadNotifSettings(); updateSettingsInfo(); }
 }
 
-// ─────────────────────────────────────────
-// MODALS + TOAST + SLIDERS
-// ─────────────────────────────────────────
-function openModal(id){document.getElementById(id).classList.add('show');}
-function closeModal(id){document.getElementById(id).classList.remove('show');}
-function closeModalOutside(e,id){if(e.target===document.getElementById(id))closeModal(id);}
-function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2800);}
-function updateSlider(input,valId){
-  const pct=((input.value-input.min)/(input.max-input.min))*100;
-  input.style.setProperty('--pct',pct+'%');
-  if(valId)document.getElementById(valId).textContent=input.value;
-}
-function updateAllSliders(){document.querySelectorAll('input[type=range]').forEach(s=>{const pct=((s.value-s.min)/(s.max-s.min))*100;s.style.setProperty('--pct',pct+'%');});}
+// ─── MODALS + TOAST + SLIDERS ──────────────────────────────────────────────
+function openModal(id) { document.getElementById(id).classList.add('show'); }
+function closeModal(id) { document.getElementById(id).classList.remove('show'); }
+function closeModalOutside(e, id) { if (e.target === document.getElementById(id)) closeModal(id); }
 
-// ─────────────────────────────────────────
-// SAVE / LOAD
-// ─────────────────────────────────────────
-async function saveState(){
+let toastTimer = null;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+function updateSlider(input, valId) {
+  const pct = ((input.value - input.min) / (input.max - input.min)) * 100;
+  input.style.setProperty('--pct', pct+'%');
+  if (valId) { const el = document.getElementById(valId); if (el) el.textContent = input.value; }
+}
+
+function updateAllSliders() {
+  document.querySelectorAll('input[type=range]').forEach(s => {
+    const pct = ((s.value - s.min) / (s.max - s.min)) * 100;
+    s.style.setProperty('--pct', pct+'%');
+  });
+}
+
+// ─── SAVE / LOAD ───────────────────────────────────────────────────────────
+// FIX: Save the complete state object, not a subset.
+// The key insight is that ALL fields (tasks, categories, notifs, lastCheckinDate, streak, etc.)
+// must be serialized and restored exactly as-is.
+
+async function saveState() {
   saveStateLocal();
-  if(sb&&state.userId&&state.userId!=='demo'&&SUPABASE_URL!=='YOUR_SUPABASE_URL'){
-    try{await sb.from('user_data').upsert({user_id:state.userId,data:state,updated_at:new Date()});}catch(e){}
+  if (sb && state.userId && state.userId !== 'demo' && !state.userId.startsWith('demo-')) {
+    try {
+      // Strip auth fields from the data blob — they live in the Supabase auth system,
+      // not in user_data.data. Storing them here causes corruption on restore.
+      const { userId, email, ...dataToSave } = state;
+      const { error } = await sb.from('user_data').upsert({
+        user_id: state.userId,
+        data: dataToSave,
+        updated_at: new Date().toISOString()
+      }, { onConflict: 'user_id' });
+      if (error) console.warn('Supabase save error:', error);
+    } catch(e) { console.warn('Cloud save failed:', e); }
   }
 }
-function saveStateLocal(){try{localStorage.setItem('nimbus_v3',JSON.stringify(state));}catch(e){}}
-function loadStateLocal(){try{const s=localStorage.getItem('nimbus_v3');if(s){Object.assign(state,JSON.parse(s));return true;}}catch(e){}return false;}
-async function loadStateFromCloud(){
-  if(!sb||!state.userId||SUPABASE_URL==='YOUR_SUPABASE_URL') return;
-  try{
-    const{data,error}=await sb.from('user_data').select('data').eq('user_id',state.userId).maybeSingle();
-    if(error){console.log('Load error:',error);return;}
-    if(data?.data){
-      const loaded=data.data;
-      const savedUserId=state.userId;
-      const savedEmail=state.email;
-      Object.assign(state,loaded);
-      state.userId=savedUserId;
-      state.email=savedEmail;
-      state.tasks=loaded.tasks||[];
-      state.notes=loaded.notes||[];
-      state.categories=loaded.categories||[];
-    }
-  }catch(e){console.log('Cloud load failed:',e);}
+
+function saveStateLocal() {
+  try { localStorage.setItem('nimbus_v3', JSON.stringify(state)); } catch(e) {}
 }
 
-// ─────────────────────────────────────────
-// BOOT
-// ─────────────────────────────────────────
-window.addEventListener('DOMContentLoaded',()=>{
+function loadStateLocal() {
+  try {
+    const s = localStorage.getItem('nimbus_v3');
+    if (s) {
+      const parsed = JSON.parse(s);
+      // Preserve auth fields that come from Supabase session, not localStorage
+      const savedUserId = state.userId;
+      const savedEmail = state.email;
+      Object.assign(state, parsed);
+      // Always restore auth from the live session, not localStorage
+      if (savedUserId) state.userId = savedUserId;
+      if (savedEmail) state.email = savedEmail;
+      // Ensure nested structures exist
+      if (!state.notifs) state.notifs = { break:false, breakFreq:60, tasks:false, checkin:false, checkinTime:'08:00' };
+      if (!Array.isArray(state.tasks)) state.tasks = [];
+      if (!Array.isArray(state.notes)) state.notes = [];
+      if (!Array.isArray(state.categories)) state.categories = [];
+      if (state.lastCheckinDate === undefined) state.lastCheckinDate = null;
+      if (state.lastStreakDate === undefined) state.lastStreakDate = null;
+      return true;
+    }
+  } catch(e) {}
+  return false;
+}
+
+async function loadStateFromCloud() {
+  if (!sb || !state.userId) return;
+  try {
+    const { data, error } = await sb.from('user_data').select('data').eq('user_id', state.userId).maybeSingle();
+    if (error) { console.warn('Cloud load error:', error); return; }
+    if (data && data.data) {
+      const loaded = data.data;
+      // Auth fields are never stored in data blob — preserve them from live session
+      const savedUserId = state.userId;
+      const savedEmail = state.email;
+      Object.assign(state, loaded);
+      state.userId = savedUserId;
+      state.email = savedEmail;
+      // Ensure arrays and nested objects are properly typed
+      if (!Array.isArray(state.tasks)) state.tasks = [];
+      if (!Array.isArray(state.notes)) state.notes = [];
+      if (!Array.isArray(state.categories)) state.categories = [];
+      if (!state.notifs) state.notifs = { break:false, breakFreq:60, tasks:false, checkin:false, checkinTime:'08:00' };
+      if (state.lastCheckinDate === undefined) state.lastCheckinDate = null;
+      if (state.lastStreakDate === undefined) state.lastStreakDate = null;
+      // Sync to localStorage so next page load is instant
+      saveStateLocal();
+    }
+  } catch(e) { console.warn('Cloud load failed:', e); }
+}
+
+// ─── RESEND CONFIRMATION ───────────────────────────────────────────────────
+async function resendConfirmation() {
+  const btn = document.getElementById('resendBtn');
+  const email = document.getElementById('confirmEmailAddr').textContent.trim();
+  if (!email || !sb) return;
+  if (btn) { btn.textContent = 'Sending...'; btn.disabled = true; }
+  const { error } = await sb.auth.resend({ type: 'signup', email });
+  if (btn) {
+    btn.textContent = error ? 'Try again' : 'Sent! ✓';
+    btn.disabled = false;
+    setTimeout(() => { btn.textContent = 'Resend Email'; }, 4000);
+  }
+  if (!error) showToast('Confirmation email resent! Check your inbox.');
+  else showToast('Could not resend. Please wait a moment and try again.');
+}
+
+// ─── BOOT ──────────────────────────────────────────────────────────────────
+window.addEventListener('DOMContentLoaded', async () => {
+  // Init loading cloud SVG
+  const lc = document.getElementById('loadingCloud');
+  if (lc) lc.innerHTML = buildCloud('neutral', 110, 92, 0.66);
+
   renderAuth('login');
-  // Check if already logged in via Supabase session
-  if(sb&&SUPABASE_URL!=='YOUR_SUPABASE_URL'){
-    sb.auth.getSession().then(({data:{session}})=>{
-      if(session){
-        state.userId=session.user.id;state.email=session.user.email;
-        loadStateFromCloud().then(()=>{
-          if(state.name) startApp(); else startOnboarding();
-        });
+
+  if (!sb) {
+    // No Supabase — demo mode only
+    if (loadStateLocal() && state.name && state.userId) { startApp(); }
+    else { hideLoading(); showScreen('auth-screen'); }
+    return;
+  }
+
+  // Listen for ALL auth state changes — this fires when:
+  // 1. User logs in normally
+  // 2. User clicks the confirmation email link and lands back on the site
+  // 3. Session is restored from a cookie on page load
+  sb.auth.onAuthStateChange(async (event, session) => {
+    console.log('Auth event:', event, session?.user?.email);
+
+    if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED' || event === 'USER_UPDATED') {
+      if (!session) return;
+      state.userId = session.user.id;
+      state.email = session.user.email;
+
+      if (event === 'SIGNED_IN') {
+        // Could be: normal login OR returning from email confirmation link
+        // Check if email is confirmed
+        if (!session.user.email_confirmed_at) {
+          // Not confirmed yet — show the wait screen
+          hideLoading();
+          showConfirmEmailScreen(session.user.email);
+          return;
+        }
+
+        // Email IS confirmed — load their data and continue
+        showLoading();
+        await loadStateFromCloud();
+
+        // If cloud has no name, check localStorage for pending signup data
+        if (!state.name) {
+          loadStateLocal();
+          if (!state.name) {
+            // Try pending signup cache (name/phone saved before confirmation)
+            try {
+              const p = JSON.parse(localStorage.getItem('nimbus_pending_signup') || 'null');
+              if (p && p.name) { state.name = p.name; state.phone = p.phone || ''; }
+            } catch(e) {}
+          }
+        }
+        localStorage.removeItem('nimbus_pending_signup');
+        hideLoading();
+        if (state.name) { startApp(); }
+        else { startOnboarding(); }
       }
-    });
-  } else if(loadStateLocal()&&state.name){
+      // TOKEN_REFRESHED / USER_UPDATED — session already running, no action needed
+    }
+
+    if (event === 'SIGNED_OUT') {
+      // Already handled by logOut()
+    }
+  });
+
+  // Also check for an existing session immediately (handles page refresh while logged in)
+  const { data: { session } } = await sb.auth.getSession();
+  if (session && session.user.email_confirmed_at) {
+    // onAuthStateChange will fire with SIGNED_IN shortly — but let's also handle it
+    // here in case it already fired before our listener was registered
+    state.userId = session.user.id;
+    state.email = session.user.email;
+    showLoading();
+    await loadStateFromCloud();
+    if (!state.name) loadStateLocal();
+    if (state.name) { startApp(); return; }
+    else { hideLoading(); startOnboarding(); return; }
+  } else if (session && !session.user.email_confirmed_at) {
+    hideLoading();
+    showConfirmEmailScreen(session.user.email);
+    return;
+  }
+
+  // No session — try localStorage for demo mode
+  if (loadStateLocal() && state.name && state.userId && state.userId.startsWith('demo')) {
     startApp();
+  } else {
+    hideLoading();
+    showScreen('auth-screen');
   }
 });
 </script>
