@@ -1531,10 +1531,10 @@ function updateAllSliders() {
 async function saveState() {
   saveStateLocal();
   if (!sb || !state.userId || state.userId === 'demo' || state.userId.startsWith('demo-')) {
-    showDebug('Local save only — userId=' + state.userId);
+    showDebug('Local only — userId=' + state.userId);
     return;
   }
-  showDebug('Saving... userId=' + state.userId + ' tasks=' + state.tasks.length);
+  showDebug('Saving... tasks=' + state.tasks.length + ' points=' + state.points);
   try {
     const payload = {
       tasks:           state.tasks,
@@ -1554,33 +1554,22 @@ async function saveState() {
       lastStreakDate:  state.lastStreakDate,
       onboardStep:     state.onboardStep
     };
-
-    // First try update (row exists), then insert (first save)
-    const { data: existing } = await sb
-      .from('user_data')
-      .select('user_id')
-      .eq('user_id', state.userId)
-      .maybeSingle();
-
-    let error;
-    if (existing) {
-      // Row exists — update it
-      const res = await sb
-        .from('user_data')
-        .update({ state_data: payload, updated_at: new Date().toISOString() })
-        .eq('user_id', state.userId);
-      error = res.error;
-    } else {
-      // First save — insert
-      const res = await sb
-        .from('user_data')
-        .insert({ user_id: state.userId, state_data: payload, updated_at: new Date().toISOString() });
-      error = res.error;
-    }
-
-    if (error) {
-      showDebug('❌ SAVE FAILED: ' + error.message + ' | code=' + error.code + ' | hint=' + (error.hint||''));
-      showToast('⚠️ Save failed: ' + error.message);
+    const session = (await sb.auth.getSession()).data.session;
+    if (!session) { showDebug('No session — cannot save'); return; }
+    const res = await fetch(SUPABASE_URL + '/rest/v1/user_data', {
+      method: 'POST',
+      headers: {
+        'apikey':        SUPABASE_KEY,
+        'Authorization': 'Bearer ' + session.access_token,
+        'Content-Type':  'application/json',
+        'Prefer':        'resolution=merge-duplicates'
+      },
+      body: JSON.stringify({ user_id: state.userId, data: payload, updated_at: new Date().toISOString() })
+    });
+    if (!res.ok) {
+      const txt = await res.text();
+      showDebug('❌ SAVE FAILED: ' + res.status + ' — ' + txt.slice(0,120));
+      showToast('⚠️ Save failed');
     } else {
       showDebug('✅ Saved OK — tasks=' + state.tasks.length + ' points=' + state.points);
     }
@@ -1630,16 +1619,25 @@ function loadStateLocal() {
 
 async function loadStateFromCloud() {
   if (!sb || !state.userId || state.userId === 'demo' || state.userId.startsWith('demo-')) return;
-  showDebug('Loading from Supabase... userId=' + state.userId);
+  showDebug('Loading... userId=' + state.userId);
   try {
-    const { data, error } = await sb
-      .from('user_data')
-      .select('state_data')
-      .eq('user_id', state.userId)
-      .maybeSingle();
-    if (error) { showDebug('❌ LOAD FAILED: ' + error.message); return; }
-    if (!data || !data.data) { showDebug('⚠️ No data found in DB for this user'); return; }
-    const d = data.state_data;
+    const session = (await sb.auth.getSession()).data.session;
+    if (!session) { showDebug('No session for load'); return; }
+    const res = await fetch(
+      SUPABASE_URL + '/rest/v1/user_data?user_id=eq.' + encodeURIComponent(state.userId) + '&select=data&limit=1',
+      {
+        headers: {
+          'apikey':        SUPABASE_KEY,
+          'Authorization': 'Bearer ' + session.access_token,
+          'Accept':        'application/json'
+        }
+      }
+    );
+    if (!res.ok) { const txt = await res.text(); showDebug('❌ LOAD FAILED: ' + res.status + ' — ' + txt.slice(0,120)); return; }
+    const rows = await res.json();
+    if (!rows || rows.length === 0) { showDebug('⚠️ No saved data for this user yet'); return; }
+    const d = rows[0].data;
+    if (!d) { showDebug('⚠️ Row exists but data is empty'); return; }
     showDebug('✅ Loaded — tasks=' + (d.tasks||[]).length + ' points=' + d.points + ' name=' + d.name);
     const savedUserId = state.userId;
     const savedEmail  = state.email;
@@ -1664,7 +1662,6 @@ async function loadStateFromCloud() {
     saveStateLocal();
   } catch(e) { showDebug('❌ LOAD EXCEPTION: ' + e.message); }
 }
-
 // ─── RESEND CONFIRMATION (unused but kept for future) ──────────────────────
 async function resendConfirmation() {}
 
