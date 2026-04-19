@@ -341,23 +341,6 @@ input[type=range]::-webkit-slider-thumb{
   </div>
 </div>
 
-<!-- CONFIRM EMAIL -->
-<div id="confirm-email-screen" class="screen" style="align-items:center;justify-content:center;padding:24px;background:linear-gradient(150deg,#feecd8 0%,#fde8f0 40%,#ece8fc 100%);">
-  <div class="auth-card" style="text-align:center;">
-    <div style="font-size:56px;margin-bottom:12px;">📬</div>
-    <div class="auth-title">Check your inbox!</div>
-    <div class="auth-sub" style="margin-bottom:8px;">We sent a confirmation email to:</div>
-    <div style="font-size:15px;font-weight:800;color:var(--orange-deep);margin-bottom:18px;word-break:break-all;" id="confirmEmailAddr"></div>
-    <div style="font-size:13px;color:var(--text-mid);font-weight:600;line-height:1.6;margin-bottom:20px;">
-      Click the link in that email to confirm your account. Once confirmed, you'll be taken straight into Nimbus to complete setup. ☁️
-    </div>
-    <div style="background:rgba(245,185,140,0.12);border:1.5px solid rgba(245,185,140,0.3);border-radius:var(--r-md);padding:12px 16px;margin-bottom:18px;font-size:13px;color:var(--text-mid);font-weight:600;">
-      💡 <strong>Tip:</strong> Check your spam folder if you don't see it within a minute.
-    </div>
-    <button class="btn-primary" onclick="resendConfirmation()" id="resendBtn" style="margin-bottom:8px;">Resend Email</button>
-    <button class="btn-secondary" onclick="showScreen('auth-screen');renderAuth('login')">← Back to Sign In</button>
-  </div>
-</div>
 
 
 <div id="onboarding" class="screen">
@@ -700,26 +683,17 @@ function hideLoading() {
   document.getElementById('loading-screen').classList.remove('active');
 }
 
-// Temp store for signup data before confirmation
-let pendingSignup = { name:'', email:'', phone:'' };
-
 async function doLogin() {
   const email = document.getElementById('authEmail').value.trim();
   const pass = document.getElementById('authPass').value;
   if (!email || !pass) { showAuthErr('Please fill in all fields.'); return; }
-  if (!sb) { state.email = email; state.userId = 'demo-'+Date.now(); afterAuth(); return; }
+  if (!sb) { state.email = email; state.userId = 'demo-' + Date.now(); afterAuth(); return; }
   showLoading();
   const { data, error } = await sb.auth.signInWithPassword({ email, password: pass });
   if (error) {
     hideLoading(); showScreen('auth-screen');
-    // Give user-friendly messages
-    if (error.message.toLowerCase().includes('confirm')) {
-      showAuthErr('Please confirm your email first — check your inbox!');
-    } else if (error.message.toLowerCase().includes('invalid')) {
-      showAuthErr('Wrong email or password. Try again.');
-    } else {
-      showAuthErr(error.message);
-    }
+    if (error.message.toLowerCase().includes('invalid')) showAuthErr('Wrong email or password. Try again.');
+    else showAuthErr(error.message);
     return;
   }
   state.userId = data.user.id;
@@ -738,33 +712,19 @@ async function doSignup() {
   if (!name) { showAuthErr('Please enter your name.'); return; }
   if (!email || !pass) { showAuthErr('Please fill in email and password.'); return; }
   if (pass.length < 6) { showAuthErr('Password must be at least 6 characters.'); return; }
-  if (!sb) { state.name = name; state.email = email; state.phone = phone; state.userId = 'demo-'+Date.now(); startOnboarding(); return; }
-
+  if (!sb) { state.name = name; state.email = email; state.phone = phone; state.userId = 'demo-' + Date.now(); startOnboarding(); return; }
   showLoading();
-  const { data, error } = await sb.auth.signUp({
-    email, password: pass,
-    options: { data: { name, phone } }
-  });
+  const { data, error } = await sb.auth.signUp({ email, password: pass, options: { data: { name, phone } } });
   if (error) { hideLoading(); showScreen('auth-screen'); showAuthErr(error.message); return; }
-
-  // Store signup info — user hasn't confirmed yet so we can't save to Supabase
-  // We save to localStorage so when they confirm + return, we resume onboarding
-  pendingSignup = { name, email, phone };
-  localStorage.setItem('nimbus_pending_signup', JSON.stringify(pendingSignup));
-
+  state.userId = data.user.id;
+  state.name = name; state.email = email; state.phone = phone;
   hideLoading();
-  showConfirmEmailScreen(email);
-}
-
-function showConfirmEmailScreen(email) {
-  showScreen('confirm-email-screen');
-  const el = document.getElementById('confirmEmailAddr');
-  if (el) el.textContent = email || '';
+  startOnboarding();
 }
 
 function skipAuth() {
   state.userId = 'demo'; state.email = 'demo@nimbus.app';
-  if (loadStateLocal() && state.name) { startApp(); }
+  if (loadStateLocal() && state.name) startApp();
   else startOnboarding();
 }
 
@@ -772,17 +732,8 @@ function showAuthErr(msg) { const e = document.getElementById('authErr'); e.text
 
 function afterAuth() {
   hideLoading();
-  // Clear any pending signup since we're fully authenticated
-  localStorage.removeItem('nimbus_pending_signup');
-  if (state.name) { startApp(); }
-  else {
-    // Restore pending signup name/phone if it was stored before confirmation
-    try {
-      const p = JSON.parse(localStorage.getItem('nimbus_pending_signup') || 'null');
-      if (p && p.name) { state.name = p.name; state.phone = p.phone || ''; }
-    } catch(e) {}
-    startOnboarding();
-  }
+  if (state.name) startApp();
+  else startOnboarding();
 }
 
 function logOut() {
@@ -802,7 +753,7 @@ function logOut() {
 }
 
 function showScreen(id) {
-  ['loading-screen','auth-screen','confirm-email-screen','onboarding','app','timer-screen'].forEach(s => {
+  ['loading-screen','auth-screen','onboarding','app','timer-screen'].forEach(s => {
     const el = document.getElementById(s);
     if (el) el.classList.remove('active');
   });
@@ -1642,106 +1593,34 @@ async function loadStateFromCloud() {
   } catch(e) { console.warn('Cloud load failed:', e); }
 }
 
-// ─── RESEND CONFIRMATION ───────────────────────────────────────────────────
-async function resendConfirmation() {
-  const btn = document.getElementById('resendBtn');
-  const email = document.getElementById('confirmEmailAddr').textContent.trim();
-  if (!email || !sb) return;
-  if (btn) { btn.textContent = 'Sending...'; btn.disabled = true; }
-  const { error } = await sb.auth.resend({ type: 'signup', email });
-  if (btn) {
-    btn.textContent = error ? 'Try again' : 'Sent! ✓';
-    btn.disabled = false;
-    setTimeout(() => { btn.textContent = 'Resend Email'; }, 4000);
-  }
-  if (!error) showToast('Confirmation email resent! Check your inbox.');
-  else showToast('Could not resend. Please wait a moment and try again.');
-}
+// ─── RESEND CONFIRMATION (unused but kept for future) ──────────────────────
+async function resendConfirmation() {}
 
 // ─── BOOT ──────────────────────────────────────────────────────────────────
 window.addEventListener('DOMContentLoaded', async () => {
-  // Init loading cloud SVG
   const lc = document.getElementById('loadingCloud');
   if (lc) lc.innerHTML = buildCloud('neutral', 110, 92, 0.66);
-
   renderAuth('login');
 
   if (!sb) {
-    // No Supabase — demo mode only
-    if (loadStateLocal() && state.name && state.userId) { startApp(); }
+    if (loadStateLocal() && state.name && state.userId) startApp();
     else { hideLoading(); showScreen('auth-screen'); }
     return;
   }
 
-  // Listen for ALL auth state changes — this fires when:
-  // 1. User logs in normally
-  // 2. User clicks the confirmation email link and lands back on the site
-  // 3. Session is restored from a cookie on page load
-  sb.auth.onAuthStateChange(async (event, session) => {
-    console.log('Auth event:', event, session?.user?.email);
-
-    if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED' || event === 'USER_UPDATED') {
-      if (!session) return;
-      state.userId = session.user.id;
-      state.email = session.user.email;
-
-      if (event === 'SIGNED_IN') {
-        // Could be: normal login OR returning from email confirmation link
-        // Check if email is confirmed
-        if (!session.user.email_confirmed_at) {
-          // Not confirmed yet — show the wait screen
-          hideLoading();
-          showConfirmEmailScreen(session.user.email);
-          return;
-        }
-
-        // Email IS confirmed — load their data and continue
-        showLoading();
-        await loadStateFromCloud();
-
-        // If cloud has no name, check localStorage for pending signup data
-        if (!state.name) {
-          loadStateLocal();
-          if (!state.name) {
-            // Try pending signup cache (name/phone saved before confirmation)
-            try {
-              const p = JSON.parse(localStorage.getItem('nimbus_pending_signup') || 'null');
-              if (p && p.name) { state.name = p.name; state.phone = p.phone || ''; }
-            } catch(e) {}
-          }
-        }
-        localStorage.removeItem('nimbus_pending_signup');
-        hideLoading();
-        if (state.name) { startApp(); }
-        else { startOnboarding(); }
-      }
-      // TOKEN_REFRESHED / USER_UPDATED — session already running, no action needed
-    }
-
-    if (event === 'SIGNED_OUT') {
-      // Already handled by logOut()
-    }
-  });
-
-  // Also check for an existing session immediately (handles page refresh while logged in)
+  // Check for existing session (user already logged in / page refresh)
   const { data: { session } } = await sb.auth.getSession();
-  if (session && session.user.email_confirmed_at) {
-    // onAuthStateChange will fire with SIGNED_IN shortly — but let's also handle it
-    // here in case it already fired before our listener was registered
+  if (session) {
     state.userId = session.user.id;
     state.email = session.user.email;
-    showLoading();
     await loadStateFromCloud();
     if (!state.name) loadStateLocal();
-    if (state.name) { startApp(); return; }
-    else { hideLoading(); startOnboarding(); return; }
-  } else if (session && !session.user.email_confirmed_at) {
     hideLoading();
-    showConfirmEmailScreen(session.user.email);
-    return;
+    if (state.name) { startApp(); return; }
+    else { startOnboarding(); return; }
   }
 
-  // No session — try localStorage for demo mode
+  // No session — try demo/localStorage
   if (loadStateLocal() && state.name && state.userId && state.userId.startsWith('demo')) {
     startApp();
   } else {
