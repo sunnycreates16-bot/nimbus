@@ -1531,10 +1531,10 @@ function updateAllSliders() {
 async function saveState() {
   saveStateLocal();
   if (!sb || !state.userId || state.userId === 'demo' || state.userId.startsWith('demo-')) {
-    showDebug('No Supabase / demo mode — saved locally only. userId=' + state.userId);
+    showDebug('Local save only — userId=' + state.userId);
     return;
   }
-  showDebug('Saving to Supabase... userId=' + state.userId + ' tasks=' + state.tasks.length);
+  showDebug('Saving... userId=' + state.userId + ' tasks=' + state.tasks.length);
   try {
     const payload = {
       tasks:           state.tasks,
@@ -1554,19 +1554,38 @@ async function saveState() {
       lastStreakDate:  state.lastStreakDate,
       onboardStep:     state.onboardStep
     };
-    const { data, error } = await sb.from('user_data').upsert(
-      { user_id: state.userId, data: payload, updated_at: new Date().toISOString() },
-      { onConflict: 'user_id' }
-    ).select();
+
+    // First try update (row exists), then insert (first save)
+    const { data: existing } = await sb
+      .from('user_data')
+      .select('user_id')
+      .eq('user_id', state.userId)
+      .maybeSingle();
+
+    let error;
+    if (existing) {
+      // Row exists — update it
+      const res = await sb
+        .from('user_data')
+        .update({ data: payload, updated_at: new Date().toISOString() })
+        .eq('user_id', state.userId);
+      error = res.error;
+    } else {
+      // First save — insert
+      const res = await sb
+        .from('user_data')
+        .insert({ user_id: state.userId, data: payload, updated_at: new Date().toISOString() });
+      error = res.error;
+    }
+
     if (error) {
-      showDebug('❌ SAVE FAILED: ' + error.message + ' | code=' + error.code);
+      showDebug('❌ SAVE FAILED: ' + error.message + ' | code=' + error.code + ' | hint=' + (error.hint||''));
       showToast('⚠️ Save failed: ' + error.message);
     } else {
-      showDebug('✅ Saved OK — ' + (data ? data.length : 0) + ' row(s)');
+      showDebug('✅ Saved OK — tasks=' + state.tasks.length + ' points=' + state.points);
     }
   } catch(e) {
-    showDebug('❌ SAVE EXCEPTION: ' + e.message);
-    showToast('⚠️ Save failed — check connection');
+    showDebug('❌ EXCEPTION: ' + e.message);
   }
 }
 
