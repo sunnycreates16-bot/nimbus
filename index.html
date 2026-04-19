@@ -1567,14 +1567,14 @@ async function saveState() {
       // Row exists — update it
       const res = await sb
         .from('user_data')
-        .update({ data: payload, updated_at: new Date().toISOString() })
+        .update({ state_data: payload, updated_at: new Date().toISOString() })
         .eq('user_id', state.userId);
       error = res.error;
     } else {
       // First save — insert
       const res = await sb
         .from('user_data')
-        .insert({ user_id: state.userId, data: payload, updated_at: new Date().toISOString() });
+        .insert({ user_id: state.userId, state_data: payload, updated_at: new Date().toISOString() });
       error = res.error;
     }
 
@@ -1634,12 +1634,12 @@ async function loadStateFromCloud() {
   try {
     const { data, error } = await sb
       .from('user_data')
-      .select('data')
+      .select('state_data')
       .eq('user_id', state.userId)
       .maybeSingle();
     if (error) { showDebug('❌ LOAD FAILED: ' + error.message); return; }
     if (!data || !data.data) { showDebug('⚠️ No data found in DB for this user'); return; }
-    const d = data.data;
+    const d = data.state_data;
     showDebug('✅ Loaded — tasks=' + (d.tasks||[]).length + ' points=' + d.points + ' name=' + d.name);
     const savedUserId = state.userId;
     const savedEmail  = state.email;
