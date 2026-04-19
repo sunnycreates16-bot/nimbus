@@ -229,7 +229,7 @@ input[type=range]::-webkit-slider-thumb{
 .break-option:hover{background:rgba(255,255,255,0.2);}
 
 /* TABS */
-#tasks-screen{padding:52px 14px 100px;overflow-y:auto;}
+#tasks-screen{padding:52px 14px 100px;overflow-y:auto;min-height:100vh;}
 .tab-header{font-size:26px;font-weight:900;color:var(--text-dark);margin-bottom:4px;}
 .tab-sub{font-size:14px;color:var(--text-mid);font-weight:600;margin-bottom:16px;}
 .add-task-btn{width:100%;padding:14px;border-radius:var(--r-md);border:2px dashed rgba(245,185,140,0.55);background:rgba(245,185,140,0.06);color:var(--orange-deep);font-family:'Nunito',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:13px;}
@@ -241,7 +241,7 @@ input[type=range]::-webkit-slider-thumb{
 .cat-group-icon{font-size:16px;}
 .cat-group-line{flex:1;height:1px;background:rgba(240,200,160,0.3);}
 
-#calendar-screen{padding:52px 14px 100px;overflow-y:auto;}
+#calendar-screen{padding:52px 14px 100px;overflow-y:auto;min-height:100vh;}
 .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:4px;}
 .cal-day-label{font-size:10px;font-weight:800;color:var(--text-light);text-align:center;padding:4px 0;text-transform:uppercase;}
 .cal-day{aspect-ratio:1;border-radius:9px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--text-mid);cursor:pointer;position:relative;transition:all 0.2s;}
@@ -257,14 +257,14 @@ input[type=range]::-webkit-slider-thumb{
 .upcoming-title{font-size:15px;font-weight:700;color:var(--text-dark);}
 .upcoming-meta{font-size:12px;color:var(--text-light);font-weight:600;margin-top:2px;}
 
-#notes-screen{padding:52px 14px 100px;overflow-y:auto;}
+#notes-screen{padding:52px 14px 100px;overflow-y:auto;min-height:100vh;}
 .note-card{background:var(--card-bg);border:1.5px solid var(--card-border);border-radius:var(--r-md);padding:15px;margin-bottom:10px;cursor:pointer;transition:all 0.2s;}
 .note-card:hover{border-color:var(--orange-light);}
 .note-title{font-size:15px;font-weight:800;color:var(--text-dark);margin-bottom:4px;}
 .note-preview{font-size:13px;color:var(--text-mid);font-weight:600;}
 .note-date{font-size:11px;color:var(--text-light);font-weight:700;margin-top:7px;}
 
-#settings-screen{padding:52px 14px 100px;overflow-y:auto;}
+#settings-screen{padding:52px 14px 100px;overflow-y:auto;min-height:100vh;}
 .settings-section{margin-bottom:20px;}
 .settings-section-label{font-size:12px;font-weight:800;color:var(--text-light);text-transform:uppercase;letter-spacing:0.7px;margin-bottom:10px;}
 .settings-row{display:flex;align-items:center;justify-content:space-between;background:var(--card-bg);border:1.5px solid var(--card-border);border-radius:var(--r-md);padding:14px 16px;margin-bottom:7px;}
@@ -402,7 +402,7 @@ input[type=range]::-webkit-slider-thumb{
   </div>
 
   <!-- TASKS -->
-  <div id="tasks-screen" class="screen" style="display:none;">
+  <div id="tasks-screen" style="display:none;">
     <div class="tab-header">My Tasks</div>
     <div class="tab-sub" id="tasksSub">All your work, organized</div>
     <button class="add-task-btn" onclick="openAddTask()"><span>＋</span> Add New Task</button>
@@ -416,7 +416,7 @@ input[type=range]::-webkit-slider-thumb{
   </div>
 
   <!-- CALENDAR -->
-  <div id="calendar-screen" class="screen" style="display:none;">
+  <div id="calendar-screen" style="display:none;">
     <div class="tab-header">Calendar</div>
     <div class="card" style="margin-bottom:14px;">
       <div id="calMonthLabel" style="font-size:16px;font-weight:800;color:var(--text-dark);margin-bottom:12px;"></div>
@@ -428,7 +428,7 @@ input[type=range]::-webkit-slider-thumb{
   </div>
 
   <!-- NOTES -->
-  <div id="notes-screen" class="screen" style="display:none;">
+  <div id="notes-screen" style="display:none;">
     <div class="tab-header">Notes & Resources</div>
     <button class="add-task-btn" onclick="openAddNote()"><span>＋</span> New Note</button>
     <div class="section-header">Stress Resources</div>
@@ -449,7 +449,7 @@ input[type=range]::-webkit-slider-thumb{
   </div>
 
   <!-- SETTINGS -->
-  <div id="settings-screen" class="screen" style="display:none;">
+  <div id="settings-screen" style="display:none;">
     <div class="tab-header">Settings</div>
     <div class="tab-sub" id="settingsUserSub">Your account</div>
     <div class="settings-section">
@@ -920,9 +920,12 @@ function renderMainNimbus(mood) { const el = document.getElementById('nimbusSVG'
 // ─── APP START ─────────────────────────────────────────────────────────────
 function startApp() {
   showScreen('app');
-  // FIX: show all sub-screens properly
-  ['tasks-screen','calendar-screen','notes-screen','settings-screen'].forEach(id => document.getElementById(id).style.display = 'none');
-  document.getElementById('home-screen').style.display = '';
+  ['tasks-screen','calendar-screen','notes-screen','settings-screen'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = 'none';
+  });
+  const home = document.getElementById('home-screen');
+  if (home) home.style.display = 'block';
 
   updateNimbusState();
   renderMainNimbus(state.nimbusState);
@@ -939,7 +942,6 @@ function startApp() {
   setupNotifications();
   updateCheckinBanner();
 
-  // FIX: show daily check-in nudge if not done today
   const nudge = document.getElementById('checkinNudge');
   if (nudge) nudge.style.display = hasCheckedInToday() ? 'none' : 'block';
 }
@@ -1480,10 +1482,15 @@ function nimbusClicked() {
 
 // ─── NAVIGATION ────────────────────────────────────────────────────────────
 function switchTab(tab, el) {
-  ['home-screen','tasks-screen','calendar-screen','notes-screen','settings-screen'].forEach(id => document.getElementById(id).style.display = 'none');
+  ['home-screen','tasks-screen','calendar-screen','notes-screen','settings-screen'].forEach(id => {
+    const s = document.getElementById(id);
+    if (s) s.style.display = 'none';
+  });
   const map = { home:'home-screen', tasks:'tasks-screen', calendar:'calendar-screen', notes:'notes-screen', settings:'settings-screen' };
-  document.getElementById(map[tab]).style.display = '';
-  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active')); el.classList.add('active');
+  const target = document.getElementById(map[tab]);
+  if (target) target.style.display = 'block';
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
   if (tab === 'tasks') { buildTaskCategoryDropdown(); renderAllTasks(); }
   if (tab === 'calendar') renderCalendar();
   if (tab === 'notes') renderNotes();
